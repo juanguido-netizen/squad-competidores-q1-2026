@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0b0f1a;--surface:#141927;--surface2:#1a2035;--border:rgba(255,255,255,.08);--text:#e2e8f0;--muted:#94a3b8;--accent:#6366f1;--accent2:#a78bfa;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899}
+:root{--bg:#f8fafc;--surface:#ffffff;--surface2:#f1f5f9;--border:rgba(0,0,0,.08);--text:#1e293b;--muted:#64748b;--accent:#6366f1;--accent2:#7c3aed;--green:#059669;--amber:#d97706;--red:#dc2626;--blue:#2563eb;--pink:#db2777}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
 .container{max-width:960px;margin:0 auto;padding:0 2rem}
 header{padding:4rem 0 3rem;text-align:center;border-bottom:1px solid var(--border)}
@@ -21,9 +21,9 @@ section{padding:4rem 0;border-bottom:1px solid var(--border)}
 section h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:1rem;line-height:1.2}
 section h3{font-size:1.15rem;font-weight:700;margin:2rem 0 .75rem;color:var(--text)}
 section p{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;margin-bottom:1rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;margin-bottom:1rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.5rem 0}
-.insight{background:rgba(99,102,241,.08);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--text)}
+.insight{background:rgba(99,102,241,.05);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--text)}
 .insight strong{color:var(--accent2)}
 /* Level cards */
 .level-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;position:relative;overflow:hidden}
@@ -46,21 +46,21 @@ section p{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
 .init-table th{text-align:left;color:var(--muted);font-weight:600;padding:.6rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
 .init-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
 .init-table tr:last-child td{border-bottom:none}
-.init-table tr:hover{background:rgba(99,102,241,.04)}
+.init-table tr:hover{background:rgba(99,102,241,.03)}
 .priority{display:inline-block;font-size:.65rem;font-weight:700;padding:.15rem .4rem;border-radius:4px}
-.p1{background:rgba(16,185,129,.2);color:#10b981}
-.p2{background:rgba(245,158,11,.2);color:#f59e0b}
-.p3{background:rgba(99,102,241,.2);color:#a78bfa}
-.tag-owner{display:inline-block;font-size:.7rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,.06);padding:.15rem .4rem;border-radius:4px}
+.p1{background:rgba(5,150,105,.12);color:#059669}
+.p2{background:rgba(217,119,6,.12);color:#d97706}
+.p3{background:rgba(99,102,241,.12);color:#6366f1}
+.tag-owner{display:inline-block;font-size:.7rem;font-weight:500;color:var(--muted);background:rgba(0,0,0,.04);padding:.15rem .4rem;border-radius:4px}
 /* Gantt */
 .gantt{margin:2rem 0;overflow-x:auto}
 .gantt-table{width:100%;min-width:700px;border-collapse:collapse;font-size:.8rem}
 .gantt-table th{text-align:center;color:var(--muted);font-weight:600;padding:.5rem .25rem;border-bottom:1px solid var(--border);font-size:.7rem}
 .gantt-table th:first-child{text-align:left;min-width:220px}
-.gantt-table td{padding:.35rem .25rem;border-bottom:1px solid rgba(255,255,255,.03);height:28px;position:relative}
+.gantt-table td{padding:.35rem .25rem;border-bottom:1px solid rgba(0,0,0,.04);height:28px;position:relative}
 .gantt-table td:first-child{font-size:.8rem;color:var(--text);padding-left:.5rem}
-.gantt-bar{position:absolute;top:4px;bottom:4px;border-radius:4px;opacity:.85}
-.gantt-cat{font-weight:700;color:var(--accent);font-size:.75rem;padding:.65rem .5rem;background:rgba(99,102,241,.05);border-bottom:1px solid var(--border)}
+.gantt-bar{position:absolute;top:4px;bottom:4px;border-radius:4px;opacity:.75}
+.gantt-cat{font-weight:700;color:var(--accent);font-size:.75rem;padding:.65rem .5rem;background:rgba(99,102,241,.04);border-bottom:1px solid var(--border)}
 /* Next steps */
 .steps-table{width:100%;border-collapse:collapse;font-size:.875rem;margin:1rem 0}
 .steps-table th{text-align:left;color:var(--muted);font-weight:600;padding:.5rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase}
@@ -118,15 +118,15 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="comp-header"><span class="comp-dot dot-green"></span><h3 style="margin:0">Empretienda</h3></div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Owner</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>Entrevistar 2 merchants churneados y 2 migrados</td><td><span class="tag-owner">Santi</span></td><td>Data</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Actualizar todas las LPs que hablan de Empretienda (Insti, Afiliados, Perfo)</td><td><span class="tag-owner">Santi</span></td><td>Insti</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Pautar kws tipo &ldquo;Empretienda ca&iacute;da&rdquo;, &ldquo;Empretienda no anda&rdquo; y b&uacute;squedas en tendencia (Demand Gen)</td><td><span class="tag-owner">Marti</span></td><td>Performance</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Checklist descargable &ldquo;c&oacute;mo migrar de Empretienda r&aacute;pido y sin perder nada&rdquo;</td><td><span class="tag-owner">Santi</span></td><td>Tools</td><td><span class="priority p1">P1 &middot; Quick Win</span></td><td>Febrero</td></tr>
-<tr><td>Comparativa en YouTube: creando tienda paso a paso en ambas plataformas</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Comparativa en TikTok con afiliados fidelizados</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Bootcamp / Curso &ldquo;C&oacute;mo migrar de Empretienda/Shopify a Tiendanube&rdquo;</td><td><span class="tag-owner">Equipo</span></td><td>Multiple</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr><td>Entrevistar 2 merchants churneados y 2 migrados</td><td>Data</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Actualizar todas las LPs que hablan de Empretienda (Insti, Afiliados, Perfo)</td><td>Insti</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Pautar kws tipo &ldquo;Empretienda ca&iacute;da&rdquo;, &ldquo;Empretienda no anda&rdquo; y b&uacute;squedas en tendencia (Demand Gen)</td><td>Performance</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Checklist descargable &ldquo;c&oacute;mo migrar de Empretienda r&aacute;pido y sin perder nada&rdquo;</td><td>Tools</td><td><span class="priority p1">P1 &middot; Quick Win</span></td><td>Febrero</td></tr>
+<tr><td>Comparativa en YouTube: creando tienda paso a paso en ambas plataformas</td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Comparativa en TikTok con afiliados fidelizados</td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Bootcamp / Curso &ldquo;C&oacute;mo migrar de Empretienda/Shopify a Tiendanube&rdquo;</td><td>Multiple</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
 </tbody>
 </table>
 </div>
@@ -137,14 +137,14 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="comp-header"><span class="comp-dot dot-amber"></span><h3 style="margin:0">Shopify</h3></div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Owner</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>3 meses con precio especial para merchants que migran de Shopify</td><td><span class="tag-owner">Equipo</span></td><td>Ecosystem</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Pautar art&iacute;culo Shopify vs Tiendanube en TikTok o Meta</td><td><span class="tag-owner">Marti</span></td><td>Performance</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Comparativa Shopify vs Tiendanube en YouTube</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Landing page espec&iacute;fica para migradores de Shopify (hoy va a gen&eacute;rica)</td><td><span class="tag-owner">Marti</span></td><td>Performance</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; &mdash; empresa argentina para el Mundial</td><td><span class="tag-owner">Equipo</span></td><td>Social/PR</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
-<tr><td>Historias de &eacute;xito de grandes marcas (Habanna, Luccciano's) para atacar segmento sophisticated</td><td><span class="tag-owner">Equipo</span></td><td>Contenido</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr><td>3 meses con precio especial para merchants que migran de Shopify</td><td>Ecosystem</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Pautar art&iacute;culo Shopify vs Tiendanube en TikTok o Meta</td><td>Performance</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Comparativa Shopify vs Tiendanube en YouTube</td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Landing page espec&iacute;fica para migradores de Shopify (hoy va a gen&eacute;rica)</td><td>Performance</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; &mdash; empresa argentina para el Mundial</td><td>Social/PR</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr><td>Historias de &eacute;xito de grandes marcas (Habanna, Luccciano's) para atacar segmento sophisticated</td><td>Contenido</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
 </tbody>
 </table>
 </div>
@@ -155,16 +155,36 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="comp-header"><span class="comp-dot dot-blue"></span><h3 style="margin:0">Tienda Negocio</h3></div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Owner</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>Test de comparativa con perfiles de TikTok</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Interactuar desde cuenta de TikTok de TN en videos que hablen de Tienda Negocio</td><td><span class="tag-owner">Juani</span></td><td>Social</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Investigar con Data/Renzo cu&aacute;ntas de las &ldquo;40,000 tiendas&rdquo; son realmente activas/pagas</td><td><span class="tag-owner">Juani</span></td><td>Data</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Test de comparativa con perfiles de TikTok</td><td>Afiliados</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Interactuar desde cuenta de TikTok de TN en videos que hablen de Tienda Negocio</td><td>Social</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Investigar cu&aacute;ntas de las &ldquo;40,000 tiendas&rdquo; son realmente activas/pagas</td><td>Data</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
 </tbody>
 </table>
 </div>
 <div class="insight"><strong>Precauci&oacute;n:</strong> Existe el riesgo de &ldquo;Efecto Visibilidad&rdquo; &mdash; hacer un art&iacute;culo comparativo formal podr&iacute;a terminar d&aacute;ndoles entidad y tr&aacute;fico a un competidor que todav&iacute;a es peque&ntilde;o. La estrategia es intervenir en hilos existentes, no crear contenido nuevo sobre ellos.</div>
 </div>
+
+<!-- MERCADO LIBRE -->
+<div class="comp-section">
+<div class="comp-header"><span class="comp-dot" style="background:#ffe600"></span><h3 style="margin:0">Mercado Libre / Mercado Shops</h3></div>
+<div class="card" style="overflow-x:auto">
+<table class="init-table">
+<thead><tr><th>Iniciativa</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<tbody>
+<tr><td>Tutoriales en YouTube y blog sobre c&oacute;mo integrar Mercado Libre con Tiendanube en 2026</td><td>Contenido</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Revisar leads y trials que venden por Marketplace: flujo especializado + beneficio ERP primeros 3 meses</td><td>Data / Ecosystem</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Conectar con mentores de MELI para que sumen a TN en la estrategia omnicanal de sus clientes</td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Entrenamiento Nube sobre omnicanalidad (con un mentor de MELI, un tech partner, etc)</td><td>Multiple</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Fidelizar ERPs que trabajen con Mercado Libre y hacer acciones en conjunto</td><td>Ecosystem</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Activar acuerdo con Mariano Sirena como afiliado (curso Omnicanalidad)</td><td>Afiliados</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+</tbody>
+</table>
+</div>
+<div class="insight"><strong>Contexto:</strong> El cierre de Mercado Shops (31/12/2025) liber&oacute; 40K+ merchants. &ldquo;Mi P&aacute;gina&rdquo; de MELI tiene comisiones de 13-36%. El &aacute;ngulo es omnicanalidad: TN + ML juntos, no TN en reemplazo de ML.</div>
+</div>
+
 </section>
 
 <!-- GANTT -->
@@ -215,7 +235,7 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 </tr>
 
 <!-- Quick Wins -->
-<tr><td colspan="12" class="gantt-cat" style="color:var(--green);background:rgba(16,185,129,.05)">B) Quick Wins (P1)</td></tr>
+<tr><td colspan="12" class="gantt-cat" style="color:var(--green);background:rgba(5,150,105,.04)">B) Quick Wins (P1)</td></tr>
 <tr>
 <td>Actualizar LPs comparativas</td>
 <td></td><td></td><td></td>
@@ -242,7 +262,7 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 </tr>
 
 <!-- Extra-BAU -->
-<tr><td colspan="12" class="gantt-cat" style="color:var(--amber);background:rgba(245,158,11,.05)">C) Extra-BAU (P2)</td></tr>
+<tr><td colspan="12" class="gantt-cat" style="color:var(--amber);background:rgba(217,119,6,.04)">C) Extra-BAU (P2)</td></tr>
 <tr>
 <td>Comparativas YouTube (Empretienda + Shopify)</td>
 <td></td><td></td><td></td><td></td><td></td><td></td>
@@ -275,7 +295,7 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 </tr>
 
 <!-- Propuestas -->
-<tr><td colspan="12" class="gantt-cat" style="color:var(--accent2);background:rgba(167,139,250,.05)">D) Propuestas Estrat&eacute;gicas (P3)</td></tr>
+<tr><td colspan="12" class="gantt-cat" style="color:var(--accent2);background:rgba(124,58,237,.04)">D) Propuestas Estrat&eacute;gicas (P3)</td></tr>
 <tr>
 <td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; (pre-Mundial)</td>
 <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -310,29 +330,29 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <h3>Transversales Q1</h3>
 <div class="card" style="overflow-x:auto">
 <table class="steps-table">
-<thead><tr><th>Acci&oacute;n</th><th>Responsable</th><th>Timing</th></tr></thead>
+<thead><tr><th>Acci&oacute;n</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td><strong>Tracking UTMs:</strong> Implementar estructura de UTMs espec&iacute;fica (&ldquo;Squad Competidores&rdquo;) para medir sesiones, trials y payments derivados</td><td>Equipo</td><td>Febrero</td></tr>
-<tr><td><strong>Creativos:</strong> Integrar pedidos de piezas comparativas en la planificaci&oacute;n de Q1</td><td>Marti + Cami</td><td>Febrero</td></tr>
-<tr><td><strong>Entrevistas:</strong> Solicitar a Data el listado de usuarios que hicieron churn hacia competidores para entrevistas cualitativas</td><td>Santi</td><td>Febrero</td></tr>
-<tr><td><strong>Landings:</strong> Actualizar todas las landings de comparativas (incluyendo la de afiliados) antes de fin de febrero</td><td>Equipo</td><td>Feb 28</td></tr>
-<tr><td><strong>Bonificaci&oacute;n:</strong> Evaluar bonificaci&oacute;n del Plan Esencial para igualar Empretienda durante primeros 2-3 meses</td><td>Ecosystem</td><td>Marzo</td></tr>
-<tr><td><strong>Data:</strong> Dimensionar amenaza real de Tienda Negocio (tiendas activas/pagas vs declaradas)</td><td>Data / Renzo</td><td>Marzo</td></tr>
+<tr><td><strong>Tracking UTMs:</strong> Implementar estructura de UTMs espec&iacute;fica (&ldquo;Squad Competidores&rdquo;) para medir sesiones, trials y payments derivados</td><td>Febrero</td></tr>
+<tr><td><strong>Creativos:</strong> Integrar pedidos de piezas comparativas en la planificaci&oacute;n de Q1</td><td>Febrero</td></tr>
+<tr><td><strong>Entrevistas:</strong> Solicitar a Data el listado de usuarios que hicieron churn hacia competidores para entrevistas cualitativas</td><td>Febrero</td></tr>
+<tr><td><strong>Landings:</strong> Actualizar todas las landings de comparativas (incluyendo la de afiliados) antes de fin de febrero</td><td>Feb 28</td></tr>
+<tr><td><strong>Bonificaci&oacute;n:</strong> Evaluar bonificaci&oacute;n del Plan Esencial para igualar Empretienda durante primeros 2-3 meses</td><td>Marzo</td></tr>
+<tr><td><strong>Data:</strong> Dimensionar amenaza real de Tienda Negocio (tiendas activas/pagas vs declaradas)</td><td>Marzo</td></tr>
 </tbody>
 </table>
 </div>
 
 <h3>Blockers identificados</h3>
 <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
-<div class="card" style="border-color:rgba(239,68,68,.2)">
+<div class="card" style="border-color:rgba(220,38,38,.15)">
 <h4 style="color:var(--red);font-size:.9rem;margin-bottom:.5rem">Empretienda</h4>
 <p style="font-size:.85rem;margin:0">Dificultad para comunicar que &ldquo;pagar m&aacute;s&rdquo; ahorra tiempo y dinero a largo plazo. Riesgo de atraer usuarios que solo quieren probar y terminan en churn r&aacute;pido.</p>
 </div>
-<div class="card" style="border-color:rgba(239,68,68,.2)">
+<div class="card" style="border-color:rgba(220,38,38,.15)">
 <h4 style="color:var(--red);font-size:.9rem;margin-bottom:.5rem">Shopify</h4>
 <p style="font-size:.85rem;margin:0">Restricciones legales para nombrar la marca en pauta (Search). CPC muy elevado para competir por la keyword &ldquo;Shopify&rdquo;. Inversi&oacute;n agresiva de Shopify en AR (~USD 60k/mes).</p>
 </div>
-<div class="card" style="border-color:rgba(239,68,68,.2)">
+<div class="card" style="border-color:rgba(220,38,38,.15)">
 <h4 style="color:var(--red);font-size:.9rem;margin-bottom:.5rem">Tienda Negocio</h4>
 <p style="font-size:.85rem;margin:0">Efecto Visibilidad: crear contenido comparativo formal puede darles entidad a un competidor que todav&iacute;a es peque&ntilde;o. Mejor intervenir en hilos existentes.</p>
 </div>

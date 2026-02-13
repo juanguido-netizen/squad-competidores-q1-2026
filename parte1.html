@@ -9,7 +9,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0b0f1a;--surface:#141927;--surface2:#1a2035;--border:rgba(255,255,255,.08);--text:#e2e8f0;--muted:#94a3b8;--accent:#6366f1;--accent2:#a78bfa;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899}
+:root{--bg:#f8fafc;--surface:#ffffff;--surface2:#f1f5f9;--border:rgba(0,0,0,.08);--text:#1e293b;--muted:#64748b;--accent:#6366f1;--accent2:#7c3aed;--green:#059669;--amber:#d97706;--red:#dc2626;--blue:#2563eb;--pink:#db2777}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
 .container{max-width:960px;margin:0 auto;padding:0 2rem}
 /* Header */
@@ -36,6 +36,9 @@ section p,.prose{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
 .red-text{color:var(--red)}
 .blue-text{color:var(--blue)}
 .pink-text{color:var(--pink)}
+.stat-card{box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.card{box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.comp-block{box-shadow:0 1px 3px rgba(0,0,0,.04)}
 /* Competitor blocks */
 .comp-block{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.75rem;margin:1.5rem 0}
 .comp-block h3{margin-top:0;display:flex;align-items:center;gap:.5rem}
@@ -45,9 +48,9 @@ section p,.prose{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
 .dot-amber{background:#f59e0b}
 /* Tags */
 .tag{display:inline-block;font-size:.7rem;font-weight:600;padding:.2rem .55rem;border-radius:9999px;margin-right:.25rem;margin-bottom:.25rem}
-.tag-strength{background:rgba(16,185,129,.15);color:#10b981}
-.tag-opp{background:rgba(99,102,241,.15);color:#a78bfa}
-.tag-risk{background:rgba(239,68,68,.15);color:#ef4444}
+.tag-strength{background:rgba(5,150,105,.1);color:#059669}
+.tag-opp{background:rgba(99,102,241,.1);color:#6366f1}
+.tag-risk{background:rgba(220,38,38,.1);color:#dc2626}
 /* Lists */
 ul{padding-left:1.25rem;margin:.75rem 0}
 li{color:var(--muted);font-size:.9rem;margin-bottom:.35rem}
@@ -66,16 +69,37 @@ li strong{color:var(--text)}
 .funnel-bar{height:36px;border-radius:6px;display:flex;align-items:center;padding:0 .75rem;font-size:.8rem;font-weight:600;color:#fff;min-width:40px;transition:width .6s ease}
 .funnel-label{font-size:.8rem;color:var(--muted);white-space:nowrap;min-width:100px}
 /* Insight box */
-.insight{background:rgba(99,102,241,.08);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--text)}
+.insight{background:rgba(99,102,241,.05);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--text)}
 .insight strong{color:var(--accent2)}
 /* Footer */
 footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opacity:.6}
 /* Responsive */
 @media(max-width:640px){.container{padding:0 1rem}section{padding:3rem 0}.card-grid{grid-template-columns:1fr}.comp-block{padding:1.25rem}}
+/* SWOT grid */
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.25rem 0}
+.swot-card{border-radius:.5rem;padding:1rem;font-size:.85rem}
+.swot-card h5{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.swot-card ul{padding-left:1rem;margin:0}
+.swot-card li{font-size:.82rem;margin-bottom:.3rem;color:var(--text)}
+.swot-s{background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.15)}
+.swot-s h5{color:#059669}
+.swot-w{background:rgba(99,102,241,.05);border:1px solid rgba(99,102,241,.12)}
+.swot-w h5{color:#6366f1}
+.swot-o{background:rgba(37,99,235,.05);border:1px solid rgba(37,99,235,.12)}
+.swot-o h5{color:#2563eb}
+.swot-t{background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.12)}
+.swot-t h5{color:#dc2626}
+/* Past initiatives */
+.past-init{background:var(--surface2);border:1px solid var(--border);border-radius:.5rem;padding:1rem;margin:1rem 0}
+.past-init h5{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem;color:var(--muted)}
+.past-init ul{padding-left:1rem;margin:0}
+.past-init li{font-size:.82rem;margin-bottom:.3rem;color:var(--muted)}
+.past-init li strong{color:var(--text)}
+@media(max-width:640px){.swot-grid{grid-template-columns:1fr}}
 /* Bar chart horizontal inline */
 .hbar{display:flex;align-items:center;gap:.75rem;margin:.35rem 0}
 .hbar-label{font-size:.8rem;color:var(--muted);min-width:130px;text-align:right}
-.hbar-track{flex:1;background:rgba(255,255,255,.05);border-radius:4px;height:24px;position:relative;overflow:hidden}
+.hbar-track{flex:1;background:rgba(0,0,0,.04);border-radius:4px;height:24px;position:relative;overflow:hidden}
 .hbar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 .5rem;font-size:.7rem;font-weight:600;color:#fff;transition:width .6s ease}
 </style>
 </head>
@@ -115,6 +139,42 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 </div>
 
 <div class="insight"><strong>Contexto clave:</strong> El cierre de Mercado Shops (31 dic 2025) liber&oacute; 40K+ merchants. Tiendanube captur&oacute; una parte, pero quedan merchants insatisfechos con &ldquo;Mi P&aacute;gina&rdquo; (comisiones 13-36%). Los merchants en Shopify sufren facturaci&oacute;n en USD y los de Empretienda encuentran l&iacute;mites de escalabilidad.</div>
+
+<h3>Tama&ntilde;o de mercado: tiendas activas por plataforma</h3>
+<p>Dimensionamiento del ecosistema competitivo en Argentina (datos p&uacute;blicos disponibles).</p>
+
+<div class="card">
+<div class="hbar" style="margin:.75rem 0"><span class="hbar-label" style="font-weight:600;color:#6366f1">Tiendanube</span><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:#6366f1">65,000 tiendas activas</div></div></div>
+<div class="hbar" style="margin:.75rem 0"><span class="hbar-label" style="font-weight:600;color:#ffe600;text-shadow:0 0 2px rgba(0,0,0,.3)">Mercado Shops</span><div class="hbar-track"><div class="hbar-fill" style="width:62%;background:#ffe600;color:#1e293b">40,000+ (cerr&oacute; dic 2025)</div></div></div>
+<div class="hbar" style="margin:.75rem 0"><span class="hbar-label" style="font-weight:600;color:#2563eb">Tienda Negocio</span><div class="hbar-track"><div class="hbar-fill" style="width:62%;background:#2563eb">40,000 declaradas (a validar)</div></div></div>
+<div class="hbar" style="margin:.75rem 0"><span class="hbar-label" style="font-weight:600;color:#d97706">Shopify AR</span><div class="hbar-track"><div class="hbar-fill" style="width:4.5%;background:#d97706">~2,900</div></div></div>
+<div class="hbar" style="margin:.75rem 0"><span class="hbar-label" style="font-weight:600;color:#059669">Empretienda</span><div class="hbar-track"><div class="hbar-fill" style="width:12%;background:#059669;font-size:.65rem">Sin dato p&uacute;blico</div></div></div>
+</div>
+
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+<div class="stat-card">
+<div class="num accent-text" style="font-size:1.3rem">65K</div>
+<div class="label">Tiendanube AR<br><span style="font-size:.7rem">Dato interno</span></div>
+</div>
+<div class="stat-card">
+<div class="num" style="font-size:1.3rem;color:#d97706">~2.9K</div>
+<div class="label">Shopify AR<br><span style="font-size:.7rem">BuiltWith, mayo 2025</span></div>
+</div>
+<div class="stat-card">
+<div class="num" style="font-size:1.3rem;color:#d97706">5.54M</div>
+<div class="label">Shopify Global<br><span style="font-size:.7rem">Earnings Q4 2024</span></div>
+</div>
+<div class="stat-card">
+<div class="num" style="font-size:1.3rem;color:#2563eb">40K?</div>
+<div class="label">Tienda Negocio<br><span style="font-size:.7rem">Sitio oficial, a validar</span></div>
+</div>
+<div class="stat-card">
+<div class="num" style="font-size:1.3rem;color:#059669">N/D</div>
+<div class="label">Empretienda<br><span style="font-size:.7rem">Adquirida por Ual&aacute; 2024</span></div>
+</div>
+</div>
+
+<div class="insight"><strong>Key takeaway:</strong> Tiendanube lidera ampliamente en Argentina con 65K tiendas activas. Shopify tiene solo ~2,900 en AR (aunque 5.54M a nivel global). Las &ldquo;40K tiendas&rdquo; de Tienda Negocio son declaradas por ellos y requieren validaci&oacute;n. Empretienda (Ual&aacute;) no publica datos, lo que representa un gap de inteligencia.</div>
 </section>
 
 <!-- 02 MARKET SHARE -->
@@ -133,15 +193,15 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="label">Tiendanube (estable)</div>
 </div>
 <div class="stat-card">
-<div class="num" style="color:#10b981">~28%</div>
+<div class="num" style="color:#059669">~28%</div>
 <div class="label">Empretienda (estable)</div>
 </div>
 <div class="stat-card">
-<div class="num" style="color:#f59e0b">9.9%&rarr;15.4%</div>
+<div class="num" style="color:#d97706">9.9%&rarr;15.4%</div>
 <div class="label">Shopify (creciendo)</div>
 </div>
 <div class="stat-card">
-<div class="num" style="color:#ec4899">~4%</div>
+<div class="num" style="color:#db2777">~4%</div>
 <div class="label">Tienda Negocio (estable)</div>
 </div>
 </div>
@@ -185,16 +245,16 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 
 <h3>Percepci&oacute;n comparativa clave</h3>
 <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
-<div class="stat-card" style="border-color:rgba(99,102,241,.3)">
+<div class="stat-card" style="border-color:rgba(99,102,241,.2)">
 <div class="num" style="color:#6366f1;font-size:1.3rem">TN lidera en</div>
 <div class="label" style="font-size:.85rem;color:var(--text)">&ldquo;Fuerte en moda&rdquo;, &ldquo;Marca cercana&rdquo;, &ldquo;Conoce la realidad local&rdquo;, &ldquo;Segura y confiable&rdquo;</div>
 </div>
-<div class="stat-card" style="border-color:rgba(245,158,11,.3)">
-<div class="num" style="color:#f59e0b;font-size:1.3rem">Shopify avanza en</div>
+<div class="stat-card" style="border-color:rgba(217,119,6,.2)">
+<div class="num" style="color:#d97706;font-size:1.3rem">Shopify avanza en</div>
 <div class="label" style="font-size:.85rem;color:var(--text)">&ldquo;Innovadora&rdquo;, &ldquo;Tecnolog&iacute;a robusta&rdquo;, &ldquo;Marca l&iacute;der&rdquo;. Percibida como m&aacute;s econ&oacute;mica.</div>
 </div>
-<div class="stat-card" style="border-color:rgba(16,185,129,.3)">
-<div class="num" style="color:#10b981;font-size:1.3rem">Empretienda lidera en</div>
+<div class="stat-card" style="border-color:rgba(5,150,105,.2)">
+<div class="num" style="color:#059669;font-size:1.3rem">Empretienda lidera en</div>
 <div class="label" style="font-size:.85rem;color:var(--text)">&ldquo;Me inspira a emprender&rdquo; (+7 BIP). Crece en uso declarado de 6% a 12%.</div>
 </div>
 </div>
@@ -210,77 +270,277 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <!-- EMPRETIENDA -->
 <div class="comp-block">
 <h3><span class="comp-dot dot-green"></span> Empretienda</h3>
-<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem"><strong>Responsable:</strong> Santiago Basso &nbsp;|&nbsp; <strong>Estado:</strong> Percibida como herramienta para principiantes. &ldquo;M&aacute;s f&aacute;cil que Tiendanube.&rdquo;</p>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Percibida como herramienta para principiantes. &ldquo;M&aacute;s f&aacute;cil que Tiendanube.&rdquo; Adquirida por Ual&aacute; en 2024.</p>
 
 <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
-<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">567</div><div class="label">Trials Ene 2026</div></div>
-<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">8.5%</div><div class="label">CVR NP/Trial (e-comm sellers)</div></div>
-<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">56.6%</div><div class="label">Factura hasta 1M ARS</div></div>
-<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">28%</div><div class="label">Branded Search Share</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#059669">567</div><div class="label">Trials Ene 2026</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#059669">8.5%</div><div class="label">CVR NP/Trial (e-comm sellers)</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#059669">56.6%</div><div class="label">Factura hasta 1M ARS</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#059669">28%</div><div class="label">Branded Search Share</div></div>
 </div>
 
-<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0">
-<span class="tag tag-strength">Plan &uacute;nico econ&oacute;mico</span>
-<span class="tag tag-strength">Prueba gratis extensa</span>
-<span class="tag tag-strength">Simplicidad percibida</span>
-<span class="tag tag-opp">Producto estancado</span>
-<span class="tag tag-opp">Sin productos nativos (pagos/env&iacute;os)</span>
-<span class="tag tag-opp">Sin escalabilidad</span>
-<span class="tag tag-risk">Dif&iacute;cil comunicar que pagar m&aacute;s conviene</span>
+<div class="swot-grid">
+<div class="swot-card swot-s">
+<h5>Strengths (ellos vs TN)</h5>
+<ul>
+<li>Plan &uacute;nico m&aacute;s barato que nuestro plan m&aacute;s barato</li>
+<li>30 d&iacute;as de prueba gratis (vs 7 de TN)</li>
+<li>Discurso aceitado: &ldquo;m&aacute;s f&aacute;cil para crear una tienda online&rdquo;</li>
+<li>Menos opciones = menos agobiante para principiantes</li>
+</ul>
+</div>
+<div class="swot-card swot-w">
+<h5>TN gana en</h5>
+<ul>
+<li>M&aacute;s integraciones, funcionalidades, medios de pago y env&iacute;o</li>
+<li>Recursos m&aacute;s completos: blog, herramientas, descargables, YT</li>
+<li>Much&iacute;sima m&aacute;s estructura y soporte</li>
+<li>65 plantillas de dise&ntilde;o vs 10</li>
+<li>Estad&iacute;sticas m&aacute;s detalladas</li>
+<li>Tienda online m&aacute;s escalable</li>
+</ul>
+</div>
+<div class="swot-card swot-o">
+<h5>Oportunidades</h5>
+<ul>
+<li>Afiliados que eduquen sobre lo f&aacute;cil que es TN y por qu&eacute; pagar m&aacute;s conviene</li>
+<li>Bonificaci&oacute;n del Plan Esencial para igualar precio durante 2-3 meses</li>
+<li>Flujo &ldquo;ya llegaste a tu techo, ahora vend&eacute; con los grandes&rdquo;</li>
+<li>Video comparativo: creando tienda en ambas plataformas al mismo tiempo</li>
+<li>Destacar innovaci&oacute;n constante de TN (ET no tiene tantas cosas nuevas)</li>
+<li>Campa&ntilde;as de n&uacute;meros: &ldquo;XX personas ya se pasaron a TN&rdquo;</li>
+<li>Historia de &eacute;xito de Strawberry Style u otro caso de migraci&oacute;n</li>
+<li>Landing con &ldquo;contador&rdquo; de tiempo ahorrado usando TN</li>
+<li>Checklist descargable &ldquo;c&oacute;mo migrar de ET r&aacute;pido y sin perder nada&rdquo;</li>
+</ul>
+</div>
+<div class="swot-card swot-t">
+<h5>Riesgos / Blockers</h5>
+<ul>
+<li>Ponernos al nivel de &ldquo;probar si vender online es lo tuyo&rdquo; puede aumentar churn y traer sellers de baja calidad</li>
+<li>Todo lo que ofrezcamos de planes pagos puede &ldquo;perder&rdquo; frente a un plan m&aacute;s barato</li>
+<li>&iquest;Cu&aacute;nto podemos hacer sobre ET sin darle visibilidad/importancia?</li>
+</ul>
+</div>
 </div>
 
 <p style="font-size:.85rem;color:var(--muted)"><strong>Perfil t&iacute;pico:</strong> Emprendedor principiante, facturaci&oacute;n baja (&lt;1M ARS), rubros Moda/Accesorios/Salud &amp; Belleza. Busca probar sin riesgo. Fit natural con <strong style="color:var(--green)">Plan Esencial</strong> de Tiendanube.</p>
+
+<div class="past-init">
+<h5>Iniciativas pasadas y activas</h5>
+<ul>
+<li><strong>Performance:</strong> Campa&ntilde;as en Google Search activas pautando keyword &ldquo;Empretienda&rdquo;</li>
+<li><strong>Landing:</strong> Landing espec&iacute;fica de comparativa (tiendanube.com/site/compara-empretienda) &mdash; hace rato no se actualiza</li>
+<li><strong>YouTube:</strong> Video comparativo publicado (hace 8 meses), foco en videos comparativos</li>
+<li><strong>Afiliados:</strong> Masterclass Q4 2025 con Strawberry Style (historia de migraci&oacute;n)</li>
+<li><strong>Instagram:</strong> Contenido 2024 con Romana Deco (migr&oacute; de ET a plan Escala)</li>
+<li><strong>Blog:</strong> Art&iacute;culo comparativo que se actualiza peri&oacute;dicamente; se la nombra en art&iacute;culos de plataformas sin darle mucha entidad</li>
+</ul>
+</div>
 </div>
 
 <!-- SHOPIFY -->
 <div class="comp-block">
 <h3><span class="comp-dot dot-amber"></span> Shopify</h3>
-<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem"><strong>Responsable:</strong> Martina Torres &nbsp;|&nbsp; <strong>Estado:</strong> Est&aacute;ndar global, inversi&oacute;n agresiva en Performance (~USD 60k/mes en Google AR).</p>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Est&aacute;ndar global, inversi&oacute;n agresiva en Performance (~USD 60k/mes en Google AR). 5.54M tiendas activas a nivel mundial.</p>
 
 <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
-<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">318</div><div class="label">Trials Ene 2026</div></div>
-<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">15.4%</div><div class="label">Branded Search Share (dic)</div></div>
-<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">8.2%</div><div class="label">Factura +30M ARS</div></div>
-<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">14%</div><div class="label">&ldquo;Marca que usa&rdquo; (tracking)</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#d97706">318</div><div class="label">Trials Ene 2026</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#d97706">15.4%</div><div class="label">Branded Search Share (dic)</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#d97706">8.2%</div><div class="label">Factura +30M ARS</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#d97706">14%</div><div class="label">&ldquo;Marca que usa&rdquo; (tracking)</div></div>
 </div>
 
-<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0">
-<span class="tag tag-strength">Venta internacional / multimoneda</span>
-<span class="tag tag-strength">App Store global</span>
-<span class="tag tag-strength">Productos digitales</span>
-<span class="tag tag-strength">Percepci&oacute;n innovadora</span>
-<span class="tag tag-opp">Anuncios en neutro/ingl&eacute;s</span>
-<span class="tag tag-opp">Soporte solo en ingl&eacute;s</span>
-<span class="tag tag-opp">Apps b&aacute;sicas cobradas aparte en USD</span>
-<span class="tag tag-risk">CPC muy elevado para keyword &ldquo;Shopify&rdquo;</span>
+<div class="swot-grid">
+<div class="swot-card swot-s">
+<h5>Strengths (ellos vs TN)</h5>
+<ul>
+<li>Est&aacute;ndar global para negocios que buscan sofisticaci&oacute;n y alcance internacional</li>
+<li>App Store inigualable: miles de apps vs cientos en TN</li>
+<li>Buena app mobile, muy promocionada</li>
+<li>Claridad en la comunicaci&oacute;n de sus atributos</li>
+<li>Productos digitales nativos</li>
+<li>3 meses a 1 USD con d&oacute;lar estable</li>
+<li>Programa de afiliados global y autosuficiente</li>
+<li>Tiendas m&aacute;s r&aacute;pidas en score de Google</li>
+<li>Mucha plata para inversi&oacute;n en medios (~USD 60k/mes en AR)</li>
+</ul>
+</div>
+<div class="swot-card swot-w">
+<h5>TN gana en</h5>
+<ul>
+<li>Moneda local: planes en pesos vs d&oacute;lares</li>
+<li>Soporte humano en espa&ntilde;ol</li>
+<li>Integrados con servicios y apps locales argentinas</li>
+<li>Integraci&oacute;n nativa con Meta y Google Shopping</li>
+<li>Mayor cantidad de plantillas de dise&ntilde;o</li>
+<li>Muchas funciones y apps de Shopify cuestan USD adicionales al plan</li>
+<li>Curva de aprendizaje m&aacute;s lenta para funciones avanzadas en Shopify</li>
+<li>Anuncios y landings de Shopify en neutro o ingl&eacute;s, sin localizar para AR</li>
+</ul>
+</div>
+<div class="swot-card swot-o">
+<h5>Oportunidades</h5>
+<ul>
+<li>Secci&oacute;n premium en programa de afiliados para atraer merchants de Shopify</li>
+<li>Contenido para Performance y Blog que lleve adelante nuestro ecosistema completo</li>
+<li>Personalizar anuncios Search + crear landing espec&iacute;fica para Shopify</li>
+<li>Campa&ntilde;as locales: &ldquo;Unite a los XX emprendedores en Rosario que ya usan TN&rdquo;</li>
+<li>Mostrar m&aacute;s casos de &eacute;xito de grandes marcas (Havanna, Luccciano&rsquo;s)</li>
+<li>Webinars orientados a resolver problem&aacute;ticas puntuales de negocios argentinos</li>
+<li>Video comparativo tipo &ldquo;juego&rdquo; para reforzar atributo local</li>
+<li>Campa&ntilde;a para el Mundial: &ldquo;Pride Nacional&rdquo;</li>
+<li>Plan bonificado primeros 3 meses para que pagues lo mismo que Shopify</li>
+<li>Campa&ntilde;a de performance que lleve tr&aacute;fico al art&iacute;culo comparativo del blog</li>
+</ul>
+</div>
+<div class="swot-card swot-t">
+<h5>Riesgos / Blockers</h5>
+<ul>
+<li>Riesgo de parecer &ldquo;Anti-Shopify&rdquo;</li>
+<li>CAC alto en keywords de Shopify (restricciones legales para nombrar marca en pauta)</li>
+<li>Riesgo de que el discurso de grandes perfiles/agencias no sea cre&iacute;ble</li>
+<li>Presupuesto masivo de Shopify en medios en Argentina</li>
+<li>Ecosistema dropshipping atado a Shopify (Dropi integra principalmente con Shopify)</li>
+</ul>
+</div>
 </div>
 
 <p style="font-size:.85rem;color:var(--muted)"><strong>Perfil t&iacute;pico:</strong> Merchant m&aacute;s sofisticado, facturaci&oacute;n media-alta, rubros Tecnolog&iacute;a/Accesorios/Clothing. Busca escalar a nivel profesional. Fit natural con <strong style="color:var(--amber)">Plan Impulso</strong> de Tiendanube.</p>
+
+<div class="past-init">
+<h5>Iniciativas pasadas y activas</h5>
+<ul>
+<li><strong>Performance:</strong> Campa&ntilde;as en Google Search pautando keyword &ldquo;Empretienda&rdquo; (y tambi&eacute;n Shopify). En MM se pauta &ldquo;Shopify Plus&rdquo;</li>
+<li><strong>Meta:</strong> En 2025 hubo campa&ntilde;a con audiencia de intereses de Shopify y otros competidores</li>
+<li><strong>YouTube:</strong> Videos comparativos, principalmente con foco en LATAM (no solo AR)</li>
+<li><strong>Dropshipping:</strong> La mayor&iacute;a de los perfiles de dropshipping con los que trabajamos siguen usando Shopify. Dropi homologado como app pero su principal integraci&oacute;n es Shopify</li>
+<li><strong>Blog:</strong> Bastantes comparativas con TN y otras plataformas</li>
+</ul>
+</div>
 </div>
 
 <!-- TIENDA NEGOCIO -->
 <div class="comp-block">
 <h3><span class="comp-dot dot-blue"></span> Tienda Negocio</h3>
-<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem"><strong>Responsable:</strong> Juan Guido &nbsp;|&nbsp; <strong>Estado:</strong> Competidor &ldquo;clon&rdquo; que copia el branding de TN. Precios 50% menores. Muy activo en TikTok.</p>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Competidor &ldquo;clon&rdquo; que copia el branding de TN. Precios 50% menores. Muy activo en TikTok.</p>
 
 <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
-<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">~52</div><div class="label">Menciones en free text</div></div>
-<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">30 d&iacute;as</div><div class="label">Prueba gratis (vs 7 de TN)</div></div>
-<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">~4%</div><div class="label">Branded Search Share</div></div>
-<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">40K?</div><div class="label">Tiendas declaradas (a validar)</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#2563eb">~52</div><div class="label">Menciones en free text</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#2563eb">30 d&iacute;as</div><div class="label">Prueba gratis (vs 7 de TN)</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#2563eb">~4%</div><div class="label">Branded Search Share</div></div>
+<div class="stat-card"><div class="num" style="font-size:1.5rem;color:#2563eb">40K?</div><div class="label">Tiendas declaradas (a validar)</div></div>
 </div>
 
-<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0">
-<span class="tag tag-strength">Precios agresivos en pesos</span>
-<span class="tag tag-strength">Atenci&oacute;n personalizada</span>
-<span class="tag tag-strength">Activo en TikTok con influencers</span>
-<span class="tag tag-opp">Sin productos nativos (Pagos, Log&iacute;stica)</span>
-<span class="tag tag-opp">Baja integraci&oacute;n Meta/Google Shopping</span>
-<span class="tag tag-risk">Riesgo de darles visibilidad al responder</span>
+<div class="swot-grid">
+<div class="swot-card swot-s">
+<h5>Strengths (ellos vs TN)</h5>
+<ul>
+<li>Todos los planes ~50% m&aacute;s baratos que Tiendanube</li>
+<li>Prueba de 30 d&iacute;as gratis de cualquier plan pago</li>
+<li>Al tener menos clientes, la atenci&oacute;n es m&aacute;s personalizada</li>
+<li>Muy activo en TikTok con influencers y contenido comparativo</li>
+</ul>
+</div>
+<div class="swot-card swot-w">
+<h5>TN gana en</h5>
+<ul>
+<li>+200 integraciones disponibles</li>
+<li>Productos nativos de pago, env&iacute;o y marketing (PagoNube, Env&iacute;oNube, Marketing Nube)</li>
+<li>Escalabilidad: con TN pod&eacute;s escalar tu negocio desde el inicio</li>
+<li>Integraci&oacute;n nativa con Meta y Google Shopping</li>
+<li>Mayor reconocimiento, presencia y experiencia en el mercado argentino</li>
+</ul>
+</div>
+<div class="swot-card swot-o">
+<h5>Oportunidades</h5>
+<ul>
+<li>Video tutorial en YouTube comparando Tiendanube vs Tienda Negocio</li>
+<li>Art&iacute;culo de comparativa Tiendanube vs Tienda Negocio</li>
+<li>Encontrar 2 casos que hayan migrado y sumarlos a un challenge o webinar</li>
+<li>Interactuar desde cuenta de TikTok de TN en videos que hablen de Tienda Negocio</li>
+</ul>
+</div>
+<div class="swot-card swot-t">
+<h5>Riesgos / Blockers</h5>
+<ul>
+<li>Si hacemos acciones nombrando a Tienda Negocio, le damos m&aacute;s entidad de la que merece</li>
+<li>&iquest;Qu&eacute; m&eacute;trica tomamos para validar cu&aacute;ndo vale la pena actuar?</li>
+<li>En TikTok, los comentarios recomiendan m&aacute;s Tienda Negocio por precio y simplicidad</li>
+</ul>
+</div>
 </div>
 
 <p style="font-size:.85rem;color:var(--muted)"><strong>Dato clave:</strong> Se posicionan activamente contra TN: &ldquo;Si us&aacute;s Tiendanube o Empretienda, este video te va a interesar&rdquo;. Necesitamos investigar cu&aacute;ntas de sus &ldquo;40,000 tiendas&rdquo; son realmente activas/pagas.</p>
+
+<div class="past-init">
+<h5>Iniciativas pasadas y activas</h5>
+<ul>
+<li><strong>Performance:</strong> No tuvimos ni tenemos una iniciativa espec&iacute;fica. Lo activo (indirectamente) es nuestra campa&ntilde;a de PMAX en Google que imprime y convierte en t&eacute;rminos de Tienda Negocio</li>
+<li><strong>Estrategia:</strong> No los nombramos para no darles entidad</li>
+<li><strong>TikTok:</strong> Hay comparativas de emprendedores/mentores donde los comentarios recomiendan m&aacute;s Tienda Negocio por precio y simplicidad</li>
+</ul>
 </div>
+</div>
+
+<!-- MERCADO LIBRE -->
+<div class="comp-block">
+<h3><span class="comp-dot" style="background:#ffe600"></span> Mercado Libre / Mercado Shops</h3>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem">Marketplace dominante en Argentina. Mercado Shops cerr&oacute; el 31/12/2025, liberando 40K+ merchants. El foco no es competir directamente sino captar sellers insatisfechos e impulsar la omnicanalidad.</p>
+
+<div class="swot-grid">
+<div class="swot-card swot-s">
+<h5>Strengths (ellos vs TN)</h5>
+<ul>
+<li>No involucra dise&ntilde;o ni branding: el producto es el foco</li>
+<li>Las tiendas no tienen que gestionar el tr&aacute;fico, es propio del marketplace</li>
+<li>Masividad y confianza del ecosistema MELI</li>
+</ul>
+</div>
+<div class="swot-card swot-w">
+<h5>TN gana en</h5>
+<ul>
+<li>Mejores comisiones y rentabilidad (MELI cobra 13-36%)</li>
+<li>Permite mayor diferenciaci&oacute;n vs competencia (tu propia marca)</li>
+<li>Permite mayor personalizaci&oacute;n de la marca y experiencia</li>
+<li>Acceso a datos del comprador (MELI no los comparte)</li>
+</ul>
+</div>
+<div class="swot-card swot-o">
+<h5>Oportunidades</h5>
+<ul>
+<li>Conectar con mentores de MELI para que sumen TN en la estrategia omnicanal de sus clientes/alumnos</li>
+<li>Curso de Omnicanalidad (Mariano Sirena como afiliado)</li>
+<li>Fidelizar ERPs que trabajen con MELI y hacer acciones en conjunto</li>
+<li>Flujo especializado para leads que venden en Marketplace con beneficio ERP en primeros 3 meses</li>
+<li>Tutoriales en YouTube y blog sobre c&oacute;mo integrar Mercado Libre con Tiendanube</li>
+<li>Entrenamiento Nube sobre omnicanalidad (con mentor de MELI + tech partner)</li>
+</ul>
+</div>
+<div class="swot-card swot-t">
+<h5>Riesgos / Blockers</h5>
+<ul>
+<li>Muchos emprendedores no saben o no quieren gestionar su propio tr&aacute;fico</li>
+<li>Muchos expertos no se mueven de su exclusividad y fidelizaci&oacute;n con MELI</li>
+<li>Merchants insatisfechos con &ldquo;Mi P&aacute;gina&rdquo; (comisiones 13-36%) podr&iacute;an buscar alternativas m&aacute;s simples</li>
+</ul>
+</div>
+</div>
+
+<p style="font-size:.85rem;color:var(--muted)"><strong>Contexto:</strong> El cierre de Mercado Shops (31 dic 2025) liber&oacute; 40K+ merchants. &ldquo;Mi P&aacute;gina&rdquo; de MELI tiene comisiones de 13-36%. Los sellers que ya manejan tr&aacute;fico propio son candidatos naturales a Tiendanube.</p>
+
+<div class="past-init">
+<h5>Iniciativas pasadas y activas</h5>
+<ul>
+<li><strong>Performance:</strong> Campa&ntilde;as de Search de Mercado Shops + Meta con base de clientes de MShops (2024)</li>
+<li><strong>Afiliados:</strong> Acuerdo con Mariano Sirena como afiliado, pero sin ejecuci&oacute;n a&uacute;n</li>
+<li><strong>Alianzas:</strong> Alianza con Astroselling, descuentos para afiliados y posibilidad de webinars</li>
+<li><strong>Blog:</strong> Art&iacute;culo comparativa TN vs ML, art&iacute;culo sobre rentabilidad, productos m&aacute;s vendidos, seguridad, consejos, comisiones, c&oacute;mo hacer Ads en ML</li>
+<li><strong>YouTube:</strong> Videos sobre c&oacute;mo migrar de MShops a TN, c&oacute;mo vender en ML AR, c&oacute;mo integrar TN con ML, dropshipping vs ML, mejores productos para vender</li>
+</ul>
+</div>
+</div>
+
 </section>
 
 <!-- 05 FACTURACION -->
@@ -344,9 +604,9 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="hbar"><span class="hbar-label">Tienda f&iacute;sica</span><div class="hbar-track"><div class="hbar-fill" style="width:16%;background:#64748b">194</div></div></div>
 <div class="hbar"><span class="hbar-label">WhatsApp</span><div class="hbar-track"><div class="hbar-fill" style="width:13%;background:#10b981">161</div></div></div>
 <div class="hbar"><span class="hbar-label">TikTok</span><div class="hbar-track"><div class="hbar-fill" style="width:15%;background:#06b6d4">113+79</div></div></div>
-<div class="hbar"><span class="hbar-label" style="color:var(--green);font-weight:600">Empretienda</span><div class="hbar-track"><div class="hbar-fill" style="width:7%;background:#10b981;font-weight:700">87</div></div></div>
-<div class="hbar"><span class="hbar-label" style="color:var(--amber);font-weight:600">Shopify</span><div class="hbar-track"><div class="hbar-fill" style="width:5%;background:#f59e0b;font-weight:700">60</div></div></div>
-<div class="hbar"><span class="hbar-label" style="color:var(--blue);font-weight:600">Tienda Negocio</span><div class="hbar-track"><div class="hbar-fill" style="width:4.5%;background:#3b82f6;font-weight:700">52+15</div></div></div>
+<div class="hbar"><span class="hbar-label" style="color:var(--green);font-weight:600">Empretienda</span><div class="hbar-track"><div class="hbar-fill" style="width:7%;background:#059669;font-weight:700">87</div></div></div>
+<div class="hbar"><span class="hbar-label" style="color:var(--amber);font-weight:600">Shopify</span><div class="hbar-track"><div class="hbar-fill" style="width:5%;background:#d97706;font-weight:700">60</div></div></div>
+<div class="hbar"><span class="hbar-label" style="color:var(--blue);font-weight:600">Tienda Negocio</span><div class="hbar-track"><div class="hbar-fill" style="width:4.5%;background:#2563eb;font-weight:700">52+15</div></div></div>
 <div class="hbar"><span class="hbar-label">Tiendanube</span><div class="hbar-track"><div class="hbar-fill" style="width:6%;background:#6366f1">50+26</div></div></div>
 <div class="hbar"><span class="hbar-label">WooCommerce</span><div class="hbar-track"><div class="hbar-fill" style="width:2.5%;background:#94a3b8">20+10</div></div></div>
 </div>
@@ -375,11 +635,11 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 
 <script>
 const chartFont={family:'Inter',size:11};
-Chart.defaults.color='#94a3b8';
+Chart.defaults.color='#64748b';
 Chart.defaults.font.family='Inter';
 Chart.defaults.plugins.legend.labels.boxWidth=12;
 Chart.defaults.plugins.legend.labels.padding=16;
-const gridColor='rgba(255,255,255,.06)';
+const gridColor='rgba(0,0,0,.06)';
 
 // 02 - Market Share
 new Chart(document.getElementById('chartMarketShare'),{
@@ -387,10 +647,10 @@ type:'line',
 data:{
 labels:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
 datasets:[
-{label:'Tiendanube',data:[55.3,51.2,50.5,50.3,51.9,53.5,52.1,49.9,50.0,52.2,54.2,49.8],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,.1)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
-{label:'Empretienda',data:[27.1,31.3,33.8,33.6,31.1,28.4,27.7,28.3,28.4,29.6,25.1,28.1],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
-{label:'Shopify',data:[9.9,11.4,8.3,8.3,9.3,10.4,12.4,12.7,12.7,10.8,13.8,15.4],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
-{label:'Tienda Negocio',data:[2.0,1.9,3.7,4.5,4.2,4.6,4.5,5.7,5.7,4.0,4.1,3.8],borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3}
+{label:'Tiendanube',data:[55.3,51.2,50.5,50.3,51.9,53.5,52.1,49.9,50.0,52.2,54.2,49.8],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,.08)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
+{label:'Empretienda',data:[27.1,31.3,33.8,33.6,31.1,28.4,27.7,28.3,28.4,29.6,25.1,28.1],borderColor:'#059669',backgroundColor:'rgba(5,150,105,.08)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
+{label:'Shopify',data:[9.9,11.4,8.3,8.3,9.3,10.4,12.4,12.7,12.7,10.8,13.8,15.4],borderColor:'#d97706',backgroundColor:'rgba(217,119,6,.08)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
+{label:'Tienda Negocio',data:[2.0,1.9,3.7,4.5,4.2,4.6,4.5,5.7,5.7,4.0,4.1,3.8],borderColor:'#db2777',backgroundColor:'rgba(219,39,119,.08)',fill:true,tension:.3,borderWidth:2,pointRadius:3}
 ]},
 options:{responsive:true,interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,max:60,grid:{color:gridColor},ticks:{callback:v=>v+'%'}},x:{grid:{color:gridColor}}},plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y+'%'}}}}
 });
@@ -401,8 +661,8 @@ type:'bar',
 data:{
 labels:['Hasta 1M ARS','1M-10M ARS','10M-30M ARS','+30M ARS'],
 datasets:[
-{label:'Empretienda',data:[56.6,13.6,3.7,3.7],backgroundColor:'rgba(16,185,129,.7)',borderRadius:4},
-{label:'Shopify',data:[39.9,14.5,7.9,8.2],backgroundColor:'rgba(245,158,11,.7)',borderRadius:4}
+{label:'Empretienda',data:[56.6,13.6,3.7,3.7],backgroundColor:'rgba(5,150,105,.65)',borderRadius:4},
+{label:'Shopify',data:[39.9,14.5,7.9,8.2],backgroundColor:'rgba(217,119,6,.65)',borderRadius:4}
 ]},
 options:{responsive:true,scales:{y:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y+'%'}}}}
 });
@@ -413,8 +673,8 @@ type:'bar',
 data:{
 labels:['Accessories','Clothing','Health&Beauty','Technology','Home&Deco','Gift Items','Children&Toys','Food&Bev','Sports','Books/Art','Pet Supplies','Other'],
 datasets:[
-{label:'Empretienda (Ene 26)',data:[41.1,36.2,18.3,18.9,18.3,17.8,12.2,8.5,10.4,8.1,5.1,20.3],backgroundColor:'rgba(16,185,129,.65)',borderRadius:4},
-{label:'Shopify (Ene 26)',data:[46.2,35.5,26.4,38.7,24.2,21.1,14.5,8.8,19.5,13.2,10.7,10.7],backgroundColor:'rgba(245,158,11,.65)',borderRadius:4}
+{label:'Empretienda (Ene 26)',data:[41.1,36.2,18.3,18.9,18.3,17.8,12.2,8.5,10.4,8.1,5.1,20.3],backgroundColor:'rgba(5,150,105,.55)',borderRadius:4},
+{label:'Shopify (Ene 26)',data:[46.2,35.5,26.4,38.7,24.2,21.1,14.5,8.8,19.5,13.2,10.7,10.7],backgroundColor:'rgba(217,119,6,.55)',borderRadius:4}
 ]},
 options:{indexAxis:'y',responsive:true,scales:{x:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.x+'%'}},legend:{position:'top'}}}
 });
@@ -425,8 +685,8 @@ type:'bar',
 data:{
 labels:['Online Store','Social Media','Point of Sale','Marketplaces','(Skipped)','(No channel)'],
 datasets:[
-{label:'Q Trials (Ene 26)',data:[27489,21233,8070,12693,2565,7029],backgroundColor:'rgba(99,102,241,.5)',borderRadius:4,yAxisID:'y'},
-{label:'CVR NP/Trial',data:[7.0,6.1,5.8,5.5,10.8,0.0],backgroundColor:'rgba(167,139,250,.8)',borderRadius:4,yAxisID:'y1',type:'line',borderColor:'#a78bfa',pointRadius:5,pointBackgroundColor:'#a78bfa',tension:.3,borderWidth:2}
+{label:'Q Trials (Ene 26)',data:[27489,21233,8070,12693,2565,7029],backgroundColor:'rgba(99,102,241,.4)',borderRadius:4,yAxisID:'y'},
+{label:'CVR NP/Trial',data:[7.0,6.1,5.8,5.5,10.8,0.0],backgroundColor:'rgba(124,58,237,.7)',borderRadius:4,yAxisID:'y1',type:'line',borderColor:'#7c3aed',pointRadius:5,pointBackgroundColor:'#7c3aed',tension:.3,borderWidth:2}
 ]},
 options:{responsive:true,interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,grid:{color:gridColor},position:'left',title:{display:true,text:'Trials',color:'#94a3b8'}},y1:{beginAtZero:true,max:15,grid:{display:false},position:'right',title:{display:true,text:'CVR %',color:'#94a3b8'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>{if(ctx.datasetIndex===1)return'CVR: '+ctx.parsed.y+'%';return'Trials: '+ctx.parsed.y.toLocaleString()}}}}}
 });
@@ -437,10 +697,10 @@ type:'line',
 data:{
 labels:['Ago 25','Sep 25','Oct 25','Nov 25','Dic 25','Ene 26','Feb 26'],
 datasets:[
-{label:'Empretienda',data:[179,310,286,2,128,567,206],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.1)',fill:true,tension:.3,borderWidth:2.5,pointRadius:4},
-{label:'Shopify',data:[48,77,66,4,66,318,109],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:4},
-{label:'WooCommerce',data:[52,119,97,1,50,164,39],borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.1)',fill:true,tension:.3,borderWidth:1.5,pointRadius:3},
-{label:'Wix',data:[12,25,24,0,9,23,5],borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,.05)',fill:false,tension:.3,borderWidth:1.5,pointRadius:3,borderDash:[4,4]}
+{label:'Empretienda',data:[179,310,286,2,128,567,206],borderColor:'#059669',backgroundColor:'rgba(5,150,105,.08)',fill:true,tension:.3,borderWidth:2.5,pointRadius:4},
+{label:'Shopify',data:[48,77,66,4,66,318,109],borderColor:'#d97706',backgroundColor:'rgba(217,119,6,.08)',fill:true,tension:.3,borderWidth:2,pointRadius:4},
+{label:'WooCommerce',data:[52,119,97,1,50,164,39],borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.06)',fill:true,tension:.3,borderWidth:1.5,pointRadius:3},
+{label:'Wix',data:[12,25,24,0,9,23,5],borderColor:'#db2777',backgroundColor:'rgba(219,39,119,.04)',fill:false,tension:.3,borderWidth:1.5,pointRadius:3,borderDash:[4,4]}
 ]},
 options:{responsive:true,interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{color:gridColor}}}}
 });
