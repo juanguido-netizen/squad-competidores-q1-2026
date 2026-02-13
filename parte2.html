@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Squad Competidores &mdash; Parte 2: Roadmap Q1 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0f1a;--surface:#141927;--surface2:#1a2035;--border:rgba(255,255,255,.08);--text:#e2e8f0;--muted:#94a3b8;--accent:#6366f1;--accent2:#a78bfa;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+header{padding:4rem 0 3rem;text-align:center;border-bottom:1px solid var(--border)}
+.badge{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+header h1{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;margin-bottom:.25rem}
+header .sub{font-size:1rem;color:var(--muted)}
+.authors{font-size:.8rem;color:var(--muted);margin-top:.75rem}
+section{padding:4rem 0;border-bottom:1px solid var(--border)}
+.section-num{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+section h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:1rem;line-height:1.2}
+section h3{font-size:1.15rem;font-weight:700;margin:2rem 0 .75rem;color:var(--text)}
+section p{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;margin-bottom:1rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.5rem 0}
+.insight{background:rgba(99,102,241,.08);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--text)}
+.insight strong{color:var(--accent2)}
+/* Level cards */
+.level-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;position:relative;overflow:hidden}
+.level-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.level-card.l1::before{background:var(--green)}
+.level-card.l2::before{background:var(--amber)}
+.level-card.l3::before{background:var(--accent)}
+.level-card h4{font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.level-card .level-sub{font-size:.8rem;color:var(--muted);margin-bottom:.75rem}
+.level-card p{font-size:.85rem;color:var(--muted)}
+/* Comp blocks */
+.comp-section{margin:2rem 0}
+.comp-header{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
+.comp-dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot-green{background:#10b981}
+.dot-amber{background:#f59e0b}
+.dot-blue{background:#3b82f6}
+/* Initiative table */
+.init-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+.init-table th{text-align:left;color:var(--muted);font-weight:600;padding:.6rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.init-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+.init-table tr:last-child td{border-bottom:none}
+.init-table tr:hover{background:rgba(99,102,241,.04)}
+.priority{display:inline-block;font-size:.65rem;font-weight:700;padding:.15rem .4rem;border-radius:4px}
+.p1{background:rgba(16,185,129,.2);color:#10b981}
+.p2{background:rgba(245,158,11,.2);color:#f59e0b}
+.p3{background:rgba(99,102,241,.2);color:#a78bfa}
+.tag-owner{display:inline-block;font-size:.7rem;font-weight:500;color:var(--muted);background:rgba(255,255,255,.06);padding:.15rem .4rem;border-radius:4px}
+/* Gantt */
+.gantt{margin:2rem 0;overflow-x:auto}
+.gantt-table{width:100%;min-width:700px;border-collapse:collapse;font-size:.8rem}
+.gantt-table th{text-align:center;color:var(--muted);font-weight:600;padding:.5rem .25rem;border-bottom:1px solid var(--border);font-size:.7rem}
+.gantt-table th:first-child{text-align:left;min-width:220px}
+.gantt-table td{padding:.35rem .25rem;border-bottom:1px solid rgba(255,255,255,.03);height:28px;position:relative}
+.gantt-table td:first-child{font-size:.8rem;color:var(--text);padding-left:.5rem}
+.gantt-bar{position:absolute;top:4px;bottom:4px;border-radius:4px;opacity:.85}
+.gantt-cat{font-weight:700;color:var(--accent);font-size:.75rem;padding:.65rem .5rem;background:rgba(99,102,241,.05);border-bottom:1px solid var(--border)}
+/* Next steps */
+.steps-table{width:100%;border-collapse:collapse;font-size:.875rem;margin:1rem 0}
+.steps-table th{text-align:left;color:var(--muted);font-weight:600;padding:.5rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase}
+.steps-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--text)}
+.steps-table tr:last-child td{border-bottom:none}
+footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opacity:.6}
+@media(max-width:640px){.container{padding:0 1rem}section{padding:3rem 0}.card-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<span class="badge">Acquisition Growth &middot; Argentina</span>
+<h1>Squad Competidores</h1>
+<p class="sub">Parte 2 &mdash; Roadmap y plan de acci&oacute;n Q1 2026</p>
+<p class="authors">Q1 2026 &nbsp; Santiago Basso &middot; Martina Torres &middot; Juan Guido</p>
+</div>
+</header>
+
+<main class="container">
+
+<!-- FRAMEWORK -->
+<section>
+<div class="section-num">07 &mdash; Framework de acci&oacute;n</div>
+<h2>Tres niveles de acciones seg&uacute;n complejidad e impacto</h2>
+<p>Despu&eacute;s del diagn&oacute;stico, las acciones se clasifican en 3 niveles para gestionar expectativas y priorizar.</p>
+
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+<div class="level-card l1">
+<h4>Nivel 1 &mdash; Quick Wins</h4>
+<p class="level-sub">Dentro del BAU de Acquisition Growth</p>
+<p>Acciones de bajo costo y alto impacto que podemos implementar direccionando lo que ya hacemos. Actualizar landings, pautar keywords, checklists descargables.</p>
+</div>
+<div class="level-card l2">
+<h4>Nivel 2 &mdash; Acciones Extra-BAU</h4>
+<p class="level-sub">Dentro de Acq. Growth + Cross-equipos</p>
+<p><strong>2a)</strong> Pruebas piloto que requieren priorizaci&oacute;n extra (comparativas en YouTube/TikTok, landing espec&iacute;ficas).<br><strong>2b)</strong> Coordinaci&oacute;n con Social, Afiliados, Ecosistema.</p>
+</div>
+<div class="level-card l3">
+<h4>Nivel 3 &mdash; Propuestas Estrat&eacute;gicas</h4>
+<p class="level-sub">Long term / Fuera de nuestro scope</p>
+<p>Propuestas que exceden el alcance del squad pero tienen potencial alto: bonificaciones de plan, campa&ntilde;as institucionales, bootcamps de migraci&oacute;n.</p>
+</div>
+</div>
+</section>
+
+<!-- INICIATIVAS POR COMPETIDOR -->
+<section>
+<div class="section-num">08 &mdash; Iniciativas por Competidor</div>
+<h2>Plan de acci&oacute;n detallado</h2>
+
+<!-- EMPRETIENDA -->
+<div class="comp-section">
+<div class="comp-header"><span class="comp-dot dot-green"></span><h3 style="margin:0">Empretienda</h3></div>
+<div class="card" style="overflow-x:auto">
+<table class="init-table">
+<thead><tr><th>Iniciativa</th><th>Owner</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<tbody>
+<tr><td>Entrevistar 2 merchants churneados y 2 migrados</td><td><span class="tag-owner">Santi</span></td><td>Data</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Actualizar todas las LPs que hablan de Empretienda (Insti, Afiliados, Perfo)</td><td><span class="tag-owner">Santi</span></td><td>Insti</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Pautar kws tipo &ldquo;Empretienda ca&iacute;da&rdquo;, &ldquo;Empretienda no anda&rdquo; y b&uacute;squedas en tendencia (Demand Gen)</td><td><span class="tag-owner">Marti</span></td><td>Performance</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Checklist descargable &ldquo;c&oacute;mo migrar de Empretienda r&aacute;pido y sin perder nada&rdquo;</td><td><span class="tag-owner">Santi</span></td><td>Tools</td><td><span class="priority p1">P1 &middot; Quick Win</span></td><td>Febrero</td></tr>
+<tr><td>Comparativa en YouTube: creando tienda paso a paso en ambas plataformas</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Comparativa en TikTok con afiliados fidelizados</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Bootcamp / Curso &ldquo;C&oacute;mo migrar de Empretienda/Shopify a Tiendanube&rdquo;</td><td><span class="tag-owner">Equipo</span></td><td>Multiple</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- SHOPIFY -->
+<div class="comp-section">
+<div class="comp-header"><span class="comp-dot dot-amber"></span><h3 style="margin:0">Shopify</h3></div>
+<div class="card" style="overflow-x:auto">
+<table class="init-table">
+<thead><tr><th>Iniciativa</th><th>Owner</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<tbody>
+<tr><td>3 meses con precio especial para merchants que migran de Shopify</td><td><span class="tag-owner">Equipo</span></td><td>Ecosystem</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Pautar art&iacute;culo Shopify vs Tiendanube en TikTok o Meta</td><td><span class="tag-owner">Marti</span></td><td>Performance</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Comparativa Shopify vs Tiendanube en YouTube</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Landing page espec&iacute;fica para migradores de Shopify (hoy va a gen&eacute;rica)</td><td><span class="tag-owner">Marti</span></td><td>Performance</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr><td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; &mdash; empresa argentina para el Mundial</td><td><span class="tag-owner">Equipo</span></td><td>Social/PR</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr><td>Historias de &eacute;xito de grandes marcas (Habanna, Luccciano's) para atacar segmento sophisticated</td><td><span class="tag-owner">Equipo</span></td><td>Contenido</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<!-- TIENDA NEGOCIO -->
+<div class="comp-section">
+<div class="comp-header"><span class="comp-dot dot-blue"></span><h3 style="margin:0">Tienda Negocio</h3></div>
+<div class="card" style="overflow-x:auto">
+<table class="init-table">
+<thead><tr><th>Iniciativa</th><th>Owner</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<tbody>
+<tr><td>Test de comparativa con perfiles de TikTok</td><td><span class="tag-owner">Juani</span></td><td>Afiliados</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Interactuar desde cuenta de TikTok de TN en videos que hablen de Tienda Negocio</td><td><span class="tag-owner">Juani</span></td><td>Social</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr><td>Investigar con Data/Renzo cu&aacute;ntas de las &ldquo;40,000 tiendas&rdquo; son realmente activas/pagas</td><td><span class="tag-owner">Juani</span></td><td>Data</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+</tbody>
+</table>
+</div>
+<div class="insight"><strong>Precauci&oacute;n:</strong> Existe el riesgo de &ldquo;Efecto Visibilidad&rdquo; &mdash; hacer un art&iacute;culo comparativo formal podr&iacute;a terminar d&aacute;ndoles entidad y tr&aacute;fico a un competidor que todav&iacute;a es peque&ntilde;o. La estrategia es intervenir en hilos existentes, no crear contenido nuevo sobre ellos.</div>
+</div>
+</section>
+
+<!-- GANTT -->
+<section>
+<div class="section-num">09 &mdash; Gantt</div>
+<h2>Cronograma Q1 2026</h2>
+<p>Desde el kick-off del squad hasta la implementaci&oacute;n de las primeras acciones.</p>
+
+<div class="gantt" style="margin-top:2rem">
+<table class="gantt-table">
+<thead>
+<tr>
+<th style="text-align:left">Actividad</th>
+<th>19/1</th><th>27/1</th><th>3/2</th><th>10/2</th><th>17/2</th><th>24/2</th><th>3/3</th><th>10/3</th><th>17/3</th><th>24/3</th><th>31/3</th>
+</tr>
+</thead>
+<tbody>
+<!-- Discovery -->
+<tr><td colspan="12" class="gantt-cat">A) Discovery</td></tr>
+<tr>
+<td>Kick-off + Facts & Assumptions</td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent);border-radius:4px"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Desk Research (competidores, pricing, ads)</td>
+<td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--accent)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>An&aacute;lisis de data (trials, CVR, facturaci&oacute;n)</td>
+<td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Entrevistas merchants churneados/migrados</td>
+<td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--accent)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Entrega diagn&oacute;stico al l&iacute;der</td>
+<td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:20%;width:60%;background:var(--accent2);border-radius:9999px"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+<!-- Quick Wins -->
+<tr><td colspan="12" class="gantt-cat" style="color:var(--green);background:rgba(16,185,129,.05)">B) Quick Wins (P1)</td></tr>
+<tr>
+<td>Actualizar LPs comparativas</td>
+<td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--green)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Pautar kws Empretienda + Shopify</td>
+<td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--green)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Checklist migraci&oacute;n descargable</td>
+<td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--green)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Social listening TikTok (Tienda Negocio)</td>
+<td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:500%;background:var(--green)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+<!-- Extra-BAU -->
+<tr><td colspan="12" class="gantt-cat" style="color:var(--amber);background:rgba(245,158,11,.05)">C) Extra-BAU (P2)</td></tr>
+<tr>
+<td>Comparativas YouTube (Empretienda + Shopify)</td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--amber)"></div></td>
+<td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Comparativas TikTok con afiliados</td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--amber)"></div></td>
+<td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Landing espec&iacute;fica Shopify &rarr; TN</td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--amber)"></div></td>
+<td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Precio especial 3 meses (Shopify migradores)</td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--amber)"></div></td>
+<td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Investigar tiendas activas Tienda Negocio</td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--amber)"></div></td>
+<td></td><td></td><td></td><td></td>
+</tr>
+
+<!-- Propuestas -->
+<tr><td colspan="12" class="gantt-cat" style="color:var(--accent2);background:rgba(167,139,250,.05)">D) Propuestas Estrat&eacute;gicas (P3)</td></tr>
+<tr>
+<td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; (pre-Mundial)</td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent2)"></div></td>
+<td></td>
+</tr>
+<tr>
+<td>Bootcamp de migraci&oacute;n</td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent2)"></div></td>
+<td></td>
+</tr>
+<tr>
+<td>Historias de &eacute;xito grandes marcas</td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent2)"></div></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="insight"><strong>Milestones:</strong> Entrega de diagn&oacute;stico al l&iacute;der (sem 17/2) &rarr; Sesi&oacute;n de priorizaci&oacute;n Quick Wins (sem 24/2) &rarr; Ejecuci&oacute;n Quick Wins (marzo) &rarr; Lanzamiento Extra-BAU (marzo) &rarr; Documentaci&oacute;n propuestas P3 (fin de Q1).</div>
+</section>
+
+<!-- PROXIMOS PASOS -->
+<section>
+<div class="section-num">10 &mdash; Pr&oacute;ximos Pasos</div>
+<h2>Lo que viene</h2>
+<p>Acciones transversales y pr&oacute;ximos hitos del squad.</p>
+
+<h3>Transversales Q1</h3>
+<div class="card" style="overflow-x:auto">
+<table class="steps-table">
+<thead><tr><th>Acci&oacute;n</th><th>Responsable</th><th>Timing</th></tr></thead>
+<tbody>
+<tr><td><strong>Tracking UTMs:</strong> Implementar estructura de UTMs espec&iacute;fica (&ldquo;Squad Competidores&rdquo;) para medir sesiones, trials y payments derivados</td><td>Equipo</td><td>Febrero</td></tr>
+<tr><td><strong>Creativos:</strong> Integrar pedidos de piezas comparativas en la planificaci&oacute;n de Q1</td><td>Marti + Cami</td><td>Febrero</td></tr>
+<tr><td><strong>Entrevistas:</strong> Solicitar a Data el listado de usuarios que hicieron churn hacia competidores para entrevistas cualitativas</td><td>Santi</td><td>Febrero</td></tr>
+<tr><td><strong>Landings:</strong> Actualizar todas las landings de comparativas (incluyendo la de afiliados) antes de fin de febrero</td><td>Equipo</td><td>Feb 28</td></tr>
+<tr><td><strong>Bonificaci&oacute;n:</strong> Evaluar bonificaci&oacute;n del Plan Esencial para igualar Empretienda durante primeros 2-3 meses</td><td>Ecosystem</td><td>Marzo</td></tr>
+<tr><td><strong>Data:</strong> Dimensionar amenaza real de Tienda Negocio (tiendas activas/pagas vs declaradas)</td><td>Data / Renzo</td><td>Marzo</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Blockers identificados</h3>
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
+<div class="card" style="border-color:rgba(239,68,68,.2)">
+<h4 style="color:var(--red);font-size:.9rem;margin-bottom:.5rem">Empretienda</h4>
+<p style="font-size:.85rem;margin:0">Dificultad para comunicar que &ldquo;pagar m&aacute;s&rdquo; ahorra tiempo y dinero a largo plazo. Riesgo de atraer usuarios que solo quieren probar y terminan en churn r&aacute;pido.</p>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.2)">
+<h4 style="color:var(--red);font-size:.9rem;margin-bottom:.5rem">Shopify</h4>
+<p style="font-size:.85rem;margin:0">Restricciones legales para nombrar la marca en pauta (Search). CPC muy elevado para competir por la keyword &ldquo;Shopify&rdquo;. Inversi&oacute;n agresiva de Shopify en AR (~USD 60k/mes).</p>
+</div>
+<div class="card" style="border-color:rgba(239,68,68,.2)">
+<h4 style="color:var(--red);font-size:.9rem;margin-bottom:.5rem">Tienda Negocio</h4>
+<p style="font-size:.85rem;margin:0">Efecto Visibilidad: crear contenido comparativo formal puede darles entidad a un competidor que todav&iacute;a es peque&ntilde;o. Mejor intervenir en hilos existentes.</p>
+</div>
+</div>
+
+</section>
+
+</main>
+
+<footer>
+<div class="container">Squad Competidores &mdash; Acquisition Growth &mdash; Tiendanube Argentina &mdash; Q1 2026<br>Documento generado el 13 de febrero de 2026.</div>
+</footer>
+
+</body>
+</html>

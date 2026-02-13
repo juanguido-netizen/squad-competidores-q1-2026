@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Squad Competidores &mdash; Parte 1: Diagn&oacute;stico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0f1a;--surface:#141927;--surface2:#1a2035;--border:rgba(255,255,255,.08);--text:#e2e8f0;--muted:#94a3b8;--accent:#6366f1;--accent2:#a78bfa;--green:#10b981;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+/* Header */
+header{padding:4rem 0 3rem;text-align:center;border-bottom:1px solid var(--border)}
+.badge{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+header h1{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;margin-bottom:.25rem}
+header .sub{font-size:1rem;color:var(--muted)}
+.authors{font-size:.8rem;color:var(--muted);margin-top:.75rem}
+/* Sections */
+section{padding:4rem 0;border-bottom:1px solid var(--border)}
+.section-num{font-size:.75rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem}
+section h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:1rem;line-height:1.2}
+section h3{font-size:1.15rem;font-weight:700;margin:2rem 0 .75rem;color:var(--text)}
+section p,.prose{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;margin-bottom:1rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.5rem 0}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;text-align:center}
+.stat-card .num{font-size:2rem;font-weight:800;line-height:1.2}
+.stat-card .label{font-size:.8rem;color:var(--muted);margin-top:.25rem}
+.accent-text{color:var(--accent)}
+.green-text{color:var(--green)}
+.amber-text{color:var(--amber)}
+.red-text{color:var(--red)}
+.blue-text{color:var(--blue)}
+.pink-text{color:var(--pink)}
+/* Competitor blocks */
+.comp-block{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.75rem;margin:1.5rem 0}
+.comp-block h3{margin-top:0;display:flex;align-items:center;gap:.5rem}
+.comp-dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0}
+.dot-blue{background:#3b82f6}
+.dot-green{background:#10b981}
+.dot-amber{background:#f59e0b}
+/* Tags */
+.tag{display:inline-block;font-size:.7rem;font-weight:600;padding:.2rem .55rem;border-radius:9999px;margin-right:.25rem;margin-bottom:.25rem}
+.tag-strength{background:rgba(16,185,129,.15);color:#10b981}
+.tag-opp{background:rgba(99,102,241,.15);color:#a78bfa}
+.tag-risk{background:rgba(239,68,68,.15);color:#ef4444}
+/* Lists */
+ul{padding-left:1.25rem;margin:.75rem 0}
+li{color:var(--muted);font-size:.9rem;margin-bottom:.35rem}
+li strong{color:var(--text)}
+/* Charts */
+.chart-wrap{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;margin:1.5rem 0;position:relative}
+.chart-wrap canvas{max-height:360px}
+/* Tables */
+.data-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
+.data-table th{text-align:left;color:var(--muted);font-weight:600;padding:.5rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
+.data-table td{padding:.5rem .75rem;border-bottom:1px solid var(--border);color:var(--text)}
+.data-table tr:last-child td{border-bottom:none}
+/* Funnel */
+.funnel{display:flex;flex-direction:column;gap:.5rem;margin:1.5rem 0;max-width:600px}
+.funnel-step{display:flex;align-items:center;gap:1rem}
+.funnel-bar{height:36px;border-radius:6px;display:flex;align-items:center;padding:0 .75rem;font-size:.8rem;font-weight:600;color:#fff;min-width:40px;transition:width .6s ease}
+.funnel-label{font-size:.8rem;color:var(--muted);white-space:nowrap;min-width:100px}
+/* Insight box */
+.insight{background:rgba(99,102,241,.08);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--text)}
+.insight strong{color:var(--accent2)}
+/* Footer */
+footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opacity:.6}
+/* Responsive */
+@media(max-width:640px){.container{padding:0 1rem}section{padding:3rem 0}.card-grid{grid-template-columns:1fr}.comp-block{padding:1.25rem}}
+/* Bar chart horizontal inline */
+.hbar{display:flex;align-items:center;gap:.75rem;margin:.35rem 0}
+.hbar-label{font-size:.8rem;color:var(--muted);min-width:130px;text-align:right}
+.hbar-track{flex:1;background:rgba(255,255,255,.05);border-radius:4px;height:24px;position:relative;overflow:hidden}
+.hbar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 .5rem;font-size:.7rem;font-weight:600;color:#fff;transition:width .6s ease}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<span class="badge">Acquisition Growth &middot; Argentina</span>
+<h1>Squad Competidores</h1>
+<p class="sub">Parte 1 &mdash; Diagn&oacute;stico: an&aacute;lisis competitivo, perfil de migradores y oportunidades.</p>
+<p class="authors">Q1 2026 &nbsp; Santiago Basso &middot; Martina Torres &middot; Juan Guido</p>
+</div>
+</header>
+
+<main class="container">
+
+<!-- 01 CONTEXTO -->
+<section>
+<div class="section-num">01 &mdash; Contexto</div>
+<h2>&iquest;Por qu&eacute; un Squad de Competidores?</h2>
+<p>El squad nace dentro de una estrategia m&aacute;s amplia de captar usuarios que ya est&aacute;n vendiendo por alg&uacute;n canal. Existe un universo de emprendedores argentinos que ya operan en plataformas de e-commerce (Empretienda, Shopify, Tienda Negocio, WooCommerce) y que podr&iacute;an migrar a Tiendanube si encontramos los triggers correctos.</p>
+<p>Funciona en paralelo con el squad de <strong>Social Sellers</strong> (usuarios que venden por redes sociales), como parte de una estrategia de captar usuarios que ya est&aacute;n vendiendo.</p>
+
+<div class="card-grid">
+<div class="stat-card">
+<div class="num accent-text">1,678</div>
+<div class="label">Trials desde Empretienda (acumulado ago 2025 - feb 2026)</div>
+</div>
+<div class="stat-card">
+<div class="num blue-text">688</div>
+<div class="label">Trials desde Shopify (acumulado ago 2025 - feb 2026)</div>
+</div>
+<div class="stat-card">
+<div class="num amber-text">~52</div>
+<div class="label">Menciones de Tienda Negocio en free text de onboarding</div>
+</div>
+</div>
+
+<div class="insight"><strong>Contexto clave:</strong> El cierre de Mercado Shops (31 dic 2025) liber&oacute; 40K+ merchants. Tiendanube captur&oacute; una parte, pero quedan merchants insatisfechos con &ldquo;Mi P&aacute;gina&rdquo; (comisiones 13-36%). Los merchants en Shopify sufren facturaci&oacute;n en USD y los de Empretienda encuentran l&iacute;mites de escalabilidad.</div>
+</section>
+
+<!-- 02 MARKET SHARE -->
+<section>
+<div class="section-num">02 &mdash; Market Share</div>
+<h2>Branded Searches en Argentina (2025)</h2>
+<p>Evoluci&oacute;n mensual del share of voice en b&uacute;squedas de marca. Tiendanube lidera pero Shopify duplic&oacute; su participaci&oacute;n en el a&ntilde;o.</p>
+
+<div class="chart-wrap">
+<canvas id="chartMarketShare"></canvas>
+</div>
+
+<div class="card-grid">
+<div class="stat-card">
+<div class="num" style="color:#6366f1">~50%</div>
+<div class="label">Tiendanube (estable)</div>
+</div>
+<div class="stat-card">
+<div class="num" style="color:#10b981">~28%</div>
+<div class="label">Empretienda (estable)</div>
+</div>
+<div class="stat-card">
+<div class="num" style="color:#f59e0b">9.9%&rarr;15.4%</div>
+<div class="label">Shopify (creciendo)</div>
+</div>
+<div class="stat-card">
+<div class="num" style="color:#ec4899">~4%</div>
+<div class="label">Tienda Negocio (estable)</div>
+</div>
+</div>
+
+<div class="insight"><strong>Alerta:</strong> Shopify pas&oacute; de 9.9% a 15.4% en branded searches durante 2025, un crecimiento de +55%. Tienda Negocio se triplic&oacute; de 2% a un pico de 5.7% antes de estabilizarse.</div>
+</section>
+
+<!-- 03 BRAND TRACKING -->
+<section>
+<div class="section-num">03 &mdash; Percepci&oacute;n de Marca</div>
+<h2>Brand Tracking 2025: C&oacute;mo nos ven los merchants</h2>
+<p>Datos del estudio de Brand Tracking realizado por Offerwise (600 casos, Argentina). Tiendanube lidera el D2C en todas las dimensiones, pero Shopify avanza en diferenciaci&oacute;n.</p>
+
+<h3>Embudo de consumo</h3>
+<div class="card" style="overflow-x:auto">
+<table class="data-table">
+<thead><tr><th>Marca</th><th>Conoce</th><th>Ya us&oacute;</th><th>Marca que usa</th><th>Preferida</th><th>Consideraci&oacute;n T2B</th></tr></thead>
+<tbody>
+<tr><td><strong>Tiendanube</strong></td><td>97%</td><td>82%</td><td style="color:#10b981;font-weight:700">65%</td><td style="color:#10b981;font-weight:700">67%</td><td style="color:#10b981;font-weight:700">68%</td></tr>
+<tr><td><strong>Shopify</strong></td><td>83%</td><td>34%</td><td>14% <span style="color:#10b981;font-size:.7rem">&uarr;4pp</span></td><td>6%</td><td>54%</td></tr>
+<tr><td><strong>Empretienda</strong></td><td>74%</td><td>29%</td><td>12% <span style="color:#10b981;font-size:.7rem">&uarr;6pp</span></td><td>4%</td><td>52%</td></tr>
+<tr><td><strong>Wix</strong></td><td>63%</td><td>21%</td><td>8%</td><td>1%</td><td>46%</td></tr>
+<tr><td><strong>WooCommerce</strong></td><td>78%</td><td>28%</td><td>9%</td><td>3%</td><td>44%</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Factores de decisi&oacute;n al elegir plataforma</h3>
+<p>Qu&eacute; valoran los emprendedores (ordenado por importancia seg&uacute;n el tracking):</p>
+
+<div class="card">
+<div class="hbar"><span class="hbar-label">Relaci&oacute;n calidad-precio</span><div class="hbar-track"><div class="hbar-fill" style="width:95%;background:var(--accent)">1&ordm;</div></div></div>
+<div class="hbar"><span class="hbar-label">Marca reconocida</span><div class="hbar-track"><div class="hbar-fill" style="width:88%;background:var(--accent)">2&ordm;</div></div></div>
+<div class="hbar"><span class="hbar-label">Marcas conocidas la usan</span><div class="hbar-track"><div class="hbar-fill" style="width:82%;background:var(--accent)">3&ordm;</div></div></div>
+<div class="hbar"><span class="hbar-label">Soporte dedicado</span><div class="hbar-track"><div class="hbar-fill" style="width:78%;background:var(--accent)">4&ordm;</div></div></div>
+<div class="hbar"><span class="hbar-label">Facilidad integraci&oacute;n apps</span><div class="hbar-track"><div class="hbar-fill" style="width:72%;background:var(--blue)">5&ordm;</div></div></div>
+<div class="hbar"><span class="hbar-label">Atenci&oacute;n local / espa&ntilde;ol</span><div class="hbar-track"><div class="hbar-fill" style="width:68%;background:var(--blue)">6&ordm;</div></div></div>
+<div class="hbar"><span class="hbar-label">Estabilidad plataforma</span><div class="hbar-track"><div class="hbar-fill" style="width:65%;background:var(--blue)">7&ordm;</div></div></div>
+<div class="hbar"><span class="hbar-label">Facilidad de uso</span><div class="hbar-track"><div class="hbar-fill" style="width:62%;background:var(--blue)">8&ordm;</div></div></div>
+</div>
+
+<h3>Percepci&oacute;n comparativa clave</h3>
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<div class="stat-card" style="border-color:rgba(99,102,241,.3)">
+<div class="num" style="color:#6366f1;font-size:1.3rem">TN lidera en</div>
+<div class="label" style="font-size:.85rem;color:var(--text)">&ldquo;Fuerte en moda&rdquo;, &ldquo;Marca cercana&rdquo;, &ldquo;Conoce la realidad local&rdquo;, &ldquo;Segura y confiable&rdquo;</div>
+</div>
+<div class="stat-card" style="border-color:rgba(245,158,11,.3)">
+<div class="num" style="color:#f59e0b;font-size:1.3rem">Shopify avanza en</div>
+<div class="label" style="font-size:.85rem;color:var(--text)">&ldquo;Innovadora&rdquo;, &ldquo;Tecnolog&iacute;a robusta&rdquo;, &ldquo;Marca l&iacute;der&rdquo;. Percibida como m&aacute;s econ&oacute;mica.</div>
+</div>
+<div class="stat-card" style="border-color:rgba(16,185,129,.3)">
+<div class="num" style="color:#10b981;font-size:1.3rem">Empretienda lidera en</div>
+<div class="label" style="font-size:.85rem;color:var(--text)">&ldquo;Me inspira a emprender&rdquo; (+7 BIP). Crece en uso declarado de 6% a 12%.</div>
+</div>
+</div>
+
+<div class="insight"><strong>Qu&eacute; valoran los merchants para el futuro:</strong> Competitividad en precio (53%), relaci&oacute;n cercana y humana (49%), infraestructura s&oacute;lida (48%), innovaci&oacute;n con IA (42%). Tiendanube tiene ventaja en cercen&iacute;a pero debe reforzar la percepci&oacute;n de innovaci&oacute;n.</div>
+</section>
+
+<!-- 04 PERFILES -->
+<section>
+<div class="section-num">04 &mdash; Perfiles de Competidores</div>
+<h2>Diagn&oacute;stico por Competidor</h2>
+
+<!-- EMPRETIENDA -->
+<div class="comp-block">
+<h3><span class="comp-dot dot-green"></span> Empretienda</h3>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem"><strong>Responsable:</strong> Santiago Basso &nbsp;|&nbsp; <strong>Estado:</strong> Percibida como herramienta para principiantes. &ldquo;M&aacute;s f&aacute;cil que Tiendanube.&rdquo;</p>
+
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">567</div><div class="label">Trials Ene 2026</div></div>
+<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">8.5%</div><div class="label">CVR NP/Trial (e-comm sellers)</div></div>
+<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">56.6%</div><div class="label">Factura hasta 1M ARS</div></div>
+<div class="stat-card"><div class="num green-text" style="font-size:1.5rem">28%</div><div class="label">Branded Search Share</div></div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0">
+<span class="tag tag-strength">Plan &uacute;nico econ&oacute;mico</span>
+<span class="tag tag-strength">Prueba gratis extensa</span>
+<span class="tag tag-strength">Simplicidad percibida</span>
+<span class="tag tag-opp">Producto estancado</span>
+<span class="tag tag-opp">Sin productos nativos (pagos/env&iacute;os)</span>
+<span class="tag tag-opp">Sin escalabilidad</span>
+<span class="tag tag-risk">Dif&iacute;cil comunicar que pagar m&aacute;s conviene</span>
+</div>
+
+<p style="font-size:.85rem;color:var(--muted)"><strong>Perfil t&iacute;pico:</strong> Emprendedor principiante, facturaci&oacute;n baja (&lt;1M ARS), rubros Moda/Accesorios/Salud &amp; Belleza. Busca probar sin riesgo. Fit natural con <strong style="color:var(--green)">Plan Esencial</strong> de Tiendanube.</p>
+</div>
+
+<!-- SHOPIFY -->
+<div class="comp-block">
+<h3><span class="comp-dot dot-amber"></span> Shopify</h3>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem"><strong>Responsable:</strong> Martina Torres &nbsp;|&nbsp; <strong>Estado:</strong> Est&aacute;ndar global, inversi&oacute;n agresiva en Performance (~USD 60k/mes en Google AR).</p>
+
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">318</div><div class="label">Trials Ene 2026</div></div>
+<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">15.4%</div><div class="label">Branded Search Share (dic)</div></div>
+<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">8.2%</div><div class="label">Factura +30M ARS</div></div>
+<div class="stat-card"><div class="num amber-text" style="font-size:1.5rem">14%</div><div class="label">&ldquo;Marca que usa&rdquo; (tracking)</div></div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0">
+<span class="tag tag-strength">Venta internacional / multimoneda</span>
+<span class="tag tag-strength">App Store global</span>
+<span class="tag tag-strength">Productos digitales</span>
+<span class="tag tag-strength">Percepci&oacute;n innovadora</span>
+<span class="tag tag-opp">Anuncios en neutro/ingl&eacute;s</span>
+<span class="tag tag-opp">Soporte solo en ingl&eacute;s</span>
+<span class="tag tag-opp">Apps b&aacute;sicas cobradas aparte en USD</span>
+<span class="tag tag-risk">CPC muy elevado para keyword &ldquo;Shopify&rdquo;</span>
+</div>
+
+<p style="font-size:.85rem;color:var(--muted)"><strong>Perfil t&iacute;pico:</strong> Merchant m&aacute;s sofisticado, facturaci&oacute;n media-alta, rubros Tecnolog&iacute;a/Accesorios/Clothing. Busca escalar a nivel profesional. Fit natural con <strong style="color:var(--amber)">Plan Impulso</strong> de Tiendanube.</p>
+</div>
+
+<!-- TIENDA NEGOCIO -->
+<div class="comp-block">
+<h3><span class="comp-dot dot-blue"></span> Tienda Negocio</h3>
+<p style="color:var(--muted);font-size:.85rem;margin-bottom:1rem"><strong>Responsable:</strong> Juan Guido &nbsp;|&nbsp; <strong>Estado:</strong> Competidor &ldquo;clon&rdquo; que copia el branding de TN. Precios 50% menores. Muy activo en TikTok.</p>
+
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">~52</div><div class="label">Menciones en free text</div></div>
+<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">30 d&iacute;as</div><div class="label">Prueba gratis (vs 7 de TN)</div></div>
+<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">~4%</div><div class="label">Branded Search Share</div></div>
+<div class="stat-card"><div class="num blue-text" style="font-size:1.5rem">40K?</div><div class="label">Tiendas declaradas (a validar)</div></div>
+</div>
+
+<div style="display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0">
+<span class="tag tag-strength">Precios agresivos en pesos</span>
+<span class="tag tag-strength">Atenci&oacute;n personalizada</span>
+<span class="tag tag-strength">Activo en TikTok con influencers</span>
+<span class="tag tag-opp">Sin productos nativos (Pagos, Log&iacute;stica)</span>
+<span class="tag tag-opp">Baja integraci&oacute;n Meta/Google Shopping</span>
+<span class="tag tag-risk">Riesgo de darles visibilidad al responder</span>
+</div>
+
+<p style="font-size:.85rem;color:var(--muted)"><strong>Dato clave:</strong> Se posicionan activamente contra TN: &ldquo;Si us&aacute;s Tiendanube o Empretienda, este video te va a interesar&rdquo;. Necesitamos investigar cu&aacute;ntas de sus &ldquo;40,000 tiendas&rdquo; son realmente activas/pagas.</p>
+</div>
+</section>
+
+<!-- 05 FACTURACION -->
+<section>
+<div class="section-num">05 &mdash; Facturaci&oacute;n Esperada</div>
+<h2>Distribuci&oacute;n de facturaci&oacute;n: &iquest;qu&eacute; plan les corresponde?</h2>
+<p>Comparativa de los rangos de facturaci&oacute;n declarados por los trials que vienen de Empretienda vs. Shopify (datos Enero 2026, excluyendo &ldquo;skipped&rdquo;).</p>
+
+<div class="chart-wrap">
+<canvas id="chartBilling"></canvas>
+</div>
+
+<div class="insight"><strong>Conclusi&oacute;n:</strong> Los merchants de <strong>Empretienda</strong> son mayoritariamente peque&ntilde;os (&lt;1M ARS) &rarr; fit con <strong>Plan Esencial</strong>. Los de <strong>Shopify</strong> tienen una distribuci&oacute;n m&aacute;s pareja y mayor peso en facturaciones altas (+30M) &rarr; fit con <strong>Plan Impulso</strong>. Shopify tiene el doble de proporci&oacute;n de merchants con facturaci&oacute;n &gt;30M ARS (8.2% vs 3.7%).</div>
+</section>
+
+<!-- 06 PRODUCTOS -->
+<section>
+<div class="section-num">06 &mdash; Qu&eacute; Venden</div>
+<h2>Verticales de producto por competidor</h2>
+<p>Qu&eacute; productos venden los trials que llegan desde cada plataforma (Enero 2026). Las categor&iacute;as no son excluyentes.</p>
+
+<div class="chart-wrap">
+<canvas id="chartProducts"></canvas>
+</div>
+
+<div class="insight"><strong>Insights:</strong> Empretienda es fuertemente <strong>Moda</strong> (Clothing 36%, Accessories 41%). Shopify tiene m&aacute;s peso en <strong>Tecnolog&iacute;a</strong> (39%), <strong>Sports</strong> (20%) y <strong>Books/Art</strong> (13%) &mdash; rubros con ticket promedio m&aacute;s alto. Ambos comparten Health &amp; Beauty como vertical relevante.</div>
+</section>
+
+<!-- 07 STATUS Y CVR -->
+<section>
+<div class="section-num">07 &mdash; Status de Venta &amp; CVR</div>
+<h2>De d&oacute;nde vienen y c&oacute;mo convierten</h2>
+
+<h3>Trials de Empretienda por status de venta (Enero 2026)</h3>
+<div class="card">
+<div class="hbar"><span class="hbar-label">Selling on social</span><div class="hbar-track"><div class="hbar-fill" style="width:66%;background:#a78bfa">377 trials &middot; CVR 9.8%</div></div></div>
+<div class="hbar"><span class="hbar-label">Selling on e-commerce</span><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:#6366f1">567 trials &middot; CVR 8.5%</div></div></div>
+<div class="hbar"><span class="hbar-label">Selling on marketplaces</span><div class="hbar-track"><div class="hbar-fill" style="width:40%;background:#3b82f6">224 trials &middot; CVR 8.5%</div></div></div>
+<div class="hbar"><span class="hbar-label">Selling offline</span><div class="hbar-track"><div class="hbar-fill" style="width:35%;background:#10b981">197 trials &middot; CVR 9.6%</div></div></div>
+</div>
+
+<h3>CVR por Canal de Venta (General, Enero 2026)</h3>
+<div class="chart-wrap">
+<canvas id="chartCVR"></canvas>
+</div>
+
+<div class="insight"><strong>Key insight:</strong> El canal &ldquo;Question group skipped&rdquo; tiene el CVR m&aacute;s alto (10.8%), lo que sugiere que los usuarios m&aacute;s experimentados saltean las preguntas del onboarding. <strong>Online Store</strong> (7.0%) y <strong>Social Media</strong> (6.1%) son los canales con mayor volumen y buena conversi&oacute;n.</div>
+</section>
+
+<!-- 08 FREE TEXT -->
+<section>
+<div class="section-num">08 &mdash; D&oacute;nde Venden Hoy</div>
+<h2>Free text: plataformas mencionadas en onboarding</h2>
+<p>Respuestas de texto libre cuando se les pregunta &ldquo;&iquest;En qu&eacute; plataforma vend&eacute;s hoy?&rdquo;. Top menciones (acumulado):</p>
+
+<div class="card">
+<div class="hbar"><span class="hbar-label">Facebook</span><div class="hbar-track"><div class="hbar-fill" style="width:100%;background:#3b82f6">1,242</div></div></div>
+<div class="hbar"><span class="hbar-label">Mercado Libre</span><div class="hbar-track"><div class="hbar-fill" style="width:38%;background:#f59e0b">472</div></div></div>
+<div class="hbar"><span class="hbar-label">Instagram</span><div class="hbar-track"><div class="hbar-fill" style="width:25%;background:#ec4899">312</div></div></div>
+<div class="hbar"><span class="hbar-label">Marketplace</span><div class="hbar-track"><div class="hbar-fill" style="width:22%;background:#8b5cf6">272</div></div></div>
+<div class="hbar"><span class="hbar-label">Tienda f&iacute;sica</span><div class="hbar-track"><div class="hbar-fill" style="width:16%;background:#64748b">194</div></div></div>
+<div class="hbar"><span class="hbar-label">WhatsApp</span><div class="hbar-track"><div class="hbar-fill" style="width:13%;background:#10b981">161</div></div></div>
+<div class="hbar"><span class="hbar-label">TikTok</span><div class="hbar-track"><div class="hbar-fill" style="width:15%;background:#06b6d4">113+79</div></div></div>
+<div class="hbar"><span class="hbar-label" style="color:var(--green);font-weight:600">Empretienda</span><div class="hbar-track"><div class="hbar-fill" style="width:7%;background:#10b981;font-weight:700">87</div></div></div>
+<div class="hbar"><span class="hbar-label" style="color:var(--amber);font-weight:600">Shopify</span><div class="hbar-track"><div class="hbar-fill" style="width:5%;background:#f59e0b;font-weight:700">60</div></div></div>
+<div class="hbar"><span class="hbar-label" style="color:var(--blue);font-weight:600">Tienda Negocio</span><div class="hbar-track"><div class="hbar-fill" style="width:4.5%;background:#3b82f6;font-weight:700">52+15</div></div></div>
+<div class="hbar"><span class="hbar-label">Tiendanube</span><div class="hbar-track"><div class="hbar-fill" style="width:6%;background:#6366f1">50+26</div></div></div>
+<div class="hbar"><span class="hbar-label">WooCommerce</span><div class="hbar-track"><div class="hbar-fill" style="width:2.5%;background:#94a3b8">20+10</div></div></div>
+</div>
+
+<div class="insight"><strong>Dato:</strong> La mayor&iacute;a de los trials vienen de canales informales (Facebook, Instagram, WhatsApp). Los competidores D2C (Empretienda, Shopify, Tienda Negocio) representan una fracci&oacute;n menor pero con <strong>mayor intenci&oacute;n de migraci&oacute;n</strong> y potencialmente mayor LTV.</div>
+</section>
+
+<!-- 09 TRIALS POR PLATAFORMA -->
+<section>
+<div class="section-num">09 &mdash; Trials por Plataforma</div>
+<h2>Evoluci&oacute;n de trials por plataforma de origen</h2>
+<p>C&oacute;mo evolucionaron los trials que declaran venir de cada competidor D2C (ago 2025 - feb 2026).</p>
+
+<div class="chart-wrap">
+<canvas id="chartTrials"></canvas>
+</div>
+
+<div class="insight"><strong>Pico de Enero:</strong> En enero 2026 hubo un salto significativo en trials de todas las plataformas, probablemente vinculado a la estacionalidad post-fiestas y al cierre de Mercado Shops. Empretienda lleg&oacute; a 567 trials y Shopify a 318.</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">Squad Competidores &mdash; Parte 1: Diagn&oacute;stico &mdash; Acquisition Growth &mdash; Tiendanube Argentina &mdash; Q1 2026<br>Documento generado el 13 de febrero de 2026. Fuentes: onboarding data, Brand Tracking Offerwise 2025, SEMrush branded searches.</div>
+</footer>
+
+<script>
+const chartFont={family:'Inter',size:11};
+Chart.defaults.color='#94a3b8';
+Chart.defaults.font.family='Inter';
+Chart.defaults.plugins.legend.labels.boxWidth=12;
+Chart.defaults.plugins.legend.labels.padding=16;
+const gridColor='rgba(255,255,255,.06)';
+
+// 02 - Market Share
+new Chart(document.getElementById('chartMarketShare'),{
+type:'line',
+data:{
+labels:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+datasets:[
+{label:'Tiendanube',data:[55.3,51.2,50.5,50.3,51.9,53.5,52.1,49.9,50.0,52.2,54.2,49.8],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,.1)',fill:true,tension:.3,borderWidth:2.5,pointRadius:3},
+{label:'Empretienda',data:[27.1,31.3,33.8,33.6,31.1,28.4,27.7,28.3,28.4,29.6,25.1,28.1],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
+{label:'Shopify',data:[9.9,11.4,8.3,8.3,9.3,10.4,12.4,12.7,12.7,10.8,13.8,15.4],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3},
+{label:'Tienda Negocio',data:[2.0,1.9,3.7,4.5,4.2,4.6,4.5,5.7,5.7,4.0,4.1,3.8],borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3}
+]},
+options:{responsive:true,interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,max:60,grid:{color:gridColor},ticks:{callback:v=>v+'%'}},x:{grid:{color:gridColor}}},plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y+'%'}}}}
+});
+
+// 05 - Billing
+new Chart(document.getElementById('chartBilling'),{
+type:'bar',
+data:{
+labels:['Hasta 1M ARS','1M-10M ARS','10M-30M ARS','+30M ARS'],
+datasets:[
+{label:'Empretienda',data:[56.6,13.6,3.7,3.7],backgroundColor:'rgba(16,185,129,.7)',borderRadius:4},
+{label:'Shopify',data:[39.9,14.5,7.9,8.2],backgroundColor:'rgba(245,158,11,.7)',borderRadius:4}
+]},
+options:{responsive:true,scales:{y:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y+'%'}}}}
+});
+
+// 06 - Products
+new Chart(document.getElementById('chartProducts'),{
+type:'bar',
+data:{
+labels:['Accessories','Clothing','Health&Beauty','Technology','Home&Deco','Gift Items','Children&Toys','Food&Bev','Sports','Books/Art','Pet Supplies','Other'],
+datasets:[
+{label:'Empretienda (Ene 26)',data:[41.1,36.2,18.3,18.9,18.3,17.8,12.2,8.5,10.4,8.1,5.1,20.3],backgroundColor:'rgba(16,185,129,.65)',borderRadius:4},
+{label:'Shopify (Ene 26)',data:[46.2,35.5,26.4,38.7,24.2,21.1,14.5,8.8,19.5,13.2,10.7,10.7],backgroundColor:'rgba(245,158,11,.65)',borderRadius:4}
+]},
+options:{indexAxis:'y',responsive:true,scales:{x:{beginAtZero:true,grid:{color:gridColor},ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.x+'%'}},legend:{position:'top'}}}
+});
+
+// 07 - CVR by Channel
+new Chart(document.getElementById('chartCVR'),{
+type:'bar',
+data:{
+labels:['Online Store','Social Media','Point of Sale','Marketplaces','(Skipped)','(No channel)'],
+datasets:[
+{label:'Q Trials (Ene 26)',data:[27489,21233,8070,12693,2565,7029],backgroundColor:'rgba(99,102,241,.5)',borderRadius:4,yAxisID:'y'},
+{label:'CVR NP/Trial',data:[7.0,6.1,5.8,5.5,10.8,0.0],backgroundColor:'rgba(167,139,250,.8)',borderRadius:4,yAxisID:'y1',type:'line',borderColor:'#a78bfa',pointRadius:5,pointBackgroundColor:'#a78bfa',tension:.3,borderWidth:2}
+]},
+options:{responsive:true,interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,grid:{color:gridColor},position:'left',title:{display:true,text:'Trials',color:'#94a3b8'}},y1:{beginAtZero:true,max:15,grid:{display:false},position:'right',title:{display:true,text:'CVR %',color:'#94a3b8'},ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:ctx=>{if(ctx.datasetIndex===1)return'CVR: '+ctx.parsed.y+'%';return'Trials: '+ctx.parsed.y.toLocaleString()}}}}}
+});
+
+// 09 - Trials evolution
+new Chart(document.getElementById('chartTrials'),{
+type:'line',
+data:{
+labels:['Ago 25','Sep 25','Oct 25','Nov 25','Dic 25','Ene 26','Feb 26'],
+datasets:[
+{label:'Empretienda',data:[179,310,286,2,128,567,206],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.1)',fill:true,tension:.3,borderWidth:2.5,pointRadius:4},
+{label:'Shopify',data:[48,77,66,4,66,318,109],borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:4},
+{label:'WooCommerce',data:[52,119,97,1,50,164,39],borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.1)',fill:true,tension:.3,borderWidth:1.5,pointRadius:3},
+{label:'Wix',data:[12,25,24,0,9,23,5],borderColor:'#ec4899',backgroundColor:'rgba(236,72,153,.05)',fill:false,tension:.3,borderWidth:1.5,pointRadius:3,borderDash:[4,4]}
+]},
+options:{responsive:true,interaction:{mode:'index',intersect:false},scales:{y:{beginAtZero:true,grid:{color:gridColor}},x:{grid:{color:gridColor}}}}
+});
+</script>
+
+</body>
+</html>
