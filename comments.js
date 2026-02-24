@@ -1,14 +1,14 @@
 (function(){
 'use strict';
 
-var cfg = window.FIREBASE_CONFIG;
-if(!cfg || !cfg.projectId || cfg.projectId === 'PLACEHOLDER'){
+var cfg = window.SUPABASE_CONFIG;
+if(!cfg || !cfg.url || cfg.url === 'PLACEHOLDER'){
   document.addEventListener('DOMContentLoaded', function(){
     var mainEl = document.querySelector('main');
     if(!mainEl) return;
     var banner = document.createElement('div');
     banner.style.cssText = 'max-width:960px;margin:2rem auto;padding:1rem 1.5rem;background:#fffbeb;border:1px solid #fbbf24;border-radius:10px;font-size:.85rem;color:#92400e;font-family:Inter,system-ui,sans-serif';
-    banner.innerHTML = '<strong>Sistema de comentarios:</strong> Firebase a\u00fan no est\u00e1 configurado. Configur\u00e1 <code>FIREBASE_CONFIG</code> para habilitar los comentarios.';
+    banner.innerHTML = '<strong>Sistema de comentarios:</strong> Supabase a\u00fan no est\u00e1 configurado. Configur\u00e1 <code>SUPABASE_CONFIG</code> para habilitar los comentarios.';
     mainEl.parentNode.insertBefore(banner, mainEl);
   });
   return;
@@ -47,8 +47,7 @@ css.textContent = [
 ].join('\n');
 document.head.appendChild(css);
 
-firebase.initializeApp(cfg);
-var db = firebase.firestore();
+var sb = window.supabase.createClient(cfg.url, cfg.anonKey);
 var PAGE = location.pathname.split('/').pop().replace('.html','') || 'index';
 var panels = {};
 var savedAuthor = localStorage.getItem('cmt-author') || '';
@@ -72,27 +71,32 @@ function boot(){
     panels[sid] = buildPanel(sec, sid);
   });
 
-  db.collection('comments').where('page','==',PAGE).onSnapshot(function(snap){
-    var grouped = {};
-    snap.forEach(function(doc){
-      var d = doc.data();
-      if(!d.sectionId) return;
-      if(!grouped[d.sectionId]) grouped[d.sectionId] = [];
-      grouped[d.sectionId].push({author:d.author||'An\u00f3nimo',text:d.text||'',ts:d.createdAt});
-    });
-    Object.keys(grouped).forEach(function(k){
-      grouped[k].sort(function(a,b){
-        var ta = a.ts ? a.ts.seconds : 0;
-        var tb = b.ts ? b.ts.seconds : 0;
-        return ta - tb;
+  loadComments();
+
+  sb.channel('public:comments')
+    .on('postgres_changes',
+      {event: 'INSERT', schema: 'public', table: 'comments', filter: 'page=eq.' + PAGE},
+      function(){ loadComments(); }
+    )
+    .subscribe();
+}
+
+function loadComments(){
+  sb.from('comments')
+    .select('*')
+    .eq('page', PAGE)
+    .order('created_at', {ascending: true})
+    .then(function(res){
+      if(res.error){ console.error('[Comments]', res.error); return; }
+      var grouped = {};
+      (res.data || []).forEach(function(row){
+        if(!grouped[row.section_id]) grouped[row.section_id] = [];
+        grouped[row.section_id].push(row);
+      });
+      Object.keys(panels).forEach(function(sid){
+        render(panels[sid], grouped[sid] || []);
       });
     });
-    Object.keys(panels).forEach(function(sid){
-      render(panels[sid], grouped[sid] || []);
-    });
-  }, function(err){
-    console.error('[Comments] Firestore error:', err);
-  });
 }
 
 function buildPanel(section, sectionId){
@@ -130,21 +134,21 @@ function buildPanel(section, sectionId){
     btn.disabled = true;
     btn.textContent = 'Enviando\u2026';
 
-    db.collection('comments').add({
+    sb.from('comments').insert({
       page: PAGE,
-      sectionId: sectionId,
+      section_id: sectionId,
       author: name,
-      text: text,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    }).then(function(){
-      localStorage.setItem('cmt-author', name);
-      savedAuthor = name;
-      ti.value = '';
-      btn.disabled = false;
-      btn.textContent = 'Enviar';
-    }).catch(function(err){
-      console.error('[Comments]', err);
-      alert('Error al enviar el comentario. Intent\u00e1 de nuevo.');
+      body: text
+    }).then(function(res){
+      if(res.error){
+        console.error('[Comments]', res.error);
+        alert('Error al enviar el comentario. Intent\u00e1 de nuevo.');
+      } else {
+        localStorage.setItem('cmt-author', name);
+        savedAuthor = name;
+        ti.value = '';
+        loadComments();
+      }
       btn.disabled = false;
       btn.textContent = 'Enviar';
     });
@@ -173,10 +177,10 @@ function render(p, comments){
     var li = document.createElement('li');
     li.className = 'cmt-item';
     var when = 'Ahora';
-    if(c.ts && c.ts.seconds){
-      when = new Date(c.ts.seconds * 1000).toLocaleDateString('es-AR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    if(c.created_at){
+      when = new Date(c.created_at).toLocaleDateString('es-AR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
     }
-    li.innerHTML = '<div class="cmt-meta"><span class="cmt-author">' + esc(c.author) + '</span><span class="cmt-time">' + when + '</span></div><div class="cmt-body">' + esc(c.text) + '</div>';
+    li.innerHTML = '<div class="cmt-meta"><span class="cmt-author">' + esc(c.author) + '</span><span class="cmt-time">' + when + '</span></div><div class="cmt-body">' + esc(c.body) + '</div>';
     p.list.appendChild(li);
   });
 }

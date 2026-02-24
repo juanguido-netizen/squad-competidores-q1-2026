@@ -1018,17 +1018,12 @@ options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',int
 });
 </script>
 
-<!-- Comments System -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<!-- Comments System (Supabase) -->
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-window.FIREBASE_CONFIG = {
-  apiKey: "AIzaSyDKRkg9WZxfTzH5lCyjtj1GITRk2GjD-II",
-  authDomain: "squad-competidores.firebaseapp.com",
-  projectId: "squad-competidores",
-  storageBucket: "squad-competidores.firebasestorage.app",
-  messagingSenderId: "291750338696",
-  appId: "1:291750338696:web:c7905e11f30f8696b7bf3d"
+window.SUPABASE_CONFIG = {
+  url: "https://xygbxokvtifzeajdresz.supabase.co",
+  anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5Z2J4b2t2dGlmemVhamRyZXN6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5NDYyOTAsImV4cCI6MjA4NzUyMjI5MH0.TBl_72Msvn5ztxg0aCO3wND1Rz0b2WcDPI69sauWQI8"
 };
 </script>
 <script src="comments.js"></script>
