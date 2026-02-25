@@ -892,9 +892,88 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 
 </section>
 
+<!-- 10 CHURN HACIA COMPETIDORES -->
+<section>
+<div class="section-num">10 &mdash; Churn hacia Competidores</div>
+<h2>Tiendas que dejaron Tiendanube: &iquest;a d&oacute;nde se fueron?</h2>
+<p>An&aacute;lisis de <strong>389 tiendas</strong> que churnearon de Tiendanube y migraron a uno de los 4 competidores bajo an&aacute;lisis (ene 2025 &ndash; feb 2026). <em style="color:var(--amber)">Fuente: data interna post-churn.</em></p>
+
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))">
+<div class="stat-card" style="border-top:3px solid var(--amber)">
+<div class="num" style="font-size:1.6rem;color:var(--amber)">138</div>
+<div class="label">Migraron a Shopify<br><span style="font-size:.7rem">35% del total &middot; tendencia creciente</span></div>
+</div>
+<div class="stat-card" style="border-top:3px solid #94a3b8">
+<div class="num" style="font-size:1.6rem;color:#94a3b8">115</div>
+<div class="label">Migraron a WooCommerce<br><span style="font-size:.7rem">30% del total &middot; estable</span></div>
+</div>
+<div class="stat-card" style="border-top:3px solid var(--green)">
+<div class="num" style="font-size:1.6rem;color:var(--green)">73</div>
+<div class="label">Migraron a Empretienda<br><span style="font-size:.7rem">19% del total &middot; tendencia decreciente</span></div>
+</div>
+<div class="stat-card" style="border-top:3px solid var(--blue)">
+<div class="num" style="font-size:1.6rem;color:var(--blue)">63</div>
+<div class="label">Migraron a Tienda Negocio<br><span style="font-size:.7rem">16% del total &middot; estable</span></div>
+</div>
+</div>
+
+<h3>Perfil de las tiendas que se fueron: segmento al momento del churn</h3>
+<div class="card" style="overflow-x:auto">
+<table class="data-table">
+<thead><tr><th>Destino</th><th>no-seller</th><th>struggling</th><th>tiny</th><th>small</th><th>medium+</th><th>Patr&oacute;n</th></tr></thead>
+<tbody>
+<tr><td><strong style="color:var(--amber)">Shopify</strong></td><td>47%</td><td>7%</td><td>13%</td><td>12%</td><td style="font-weight:700;color:var(--red)">17%</td><td style="font-size:.8rem;color:var(--muted)">Mayor proporci&oacute;n de medium/large/top sellers</td></tr>
+<tr><td><strong style="color:#94a3b8">WooCommerce</strong></td><td>37%</td><td>19%</td><td>16%</td><td>10%</td><td style="font-weight:700;color:var(--amber)">15%</td><td style="font-size:.8rem;color:var(--muted)">Segundo en sellers con facturaci&oacute;n real</td></tr>
+<tr><td><strong style="color:var(--green)">Empretienda</strong></td><td>29%</td><td>23%</td><td>23%</td><td>19%</td><td>5%</td><td style="font-size:.8rem;color:var(--muted)">Mayoría tiny/struggling &mdash; bajan por precio</td></tr>
+<tr><td><strong style="color:var(--blue)">Tienda Negocio</strong></td><td>37%</td><td>22%</td><td>14%</td><td>17%</td><td>6%</td><td style="font-size:.8rem;color:var(--muted)">Similar a ET: sellers sin tracci&oacute;n buscan m&aacute;s barato</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Razones de cancelaci&oacute;n declaradas (148 con raz&oacute;n informada)</h3>
+<div class="card" style="overflow-x:auto">
+<table class="data-table">
+<thead><tr><th>Destino</th><th>Raz&oacute;n #1</th><th>Raz&oacute;n #2</th><th>Raz&oacute;n #3</th><th>Patr&oacute;n clave</th></tr></thead>
+<tbody>
+<tr><td><strong style="color:var(--amber)">Shopify</strong></td><td>Cerr&oacute; negocio (9)</td><td>Necesita m&aacute;s dise&ntilde;os (5)</td><td>Necesita features (4)</td><td style="font-size:.8rem;color:var(--muted)"><strong>Buscan sofisticaci&oacute;n y features</strong>, no precio</td></tr>
+<tr><td><strong style="color:#94a3b8">WooCommerce</strong></td><td>Cerr&oacute; negocio (13)</td><td>Necesita features (10)</td><td>Sin ventas (7)</td><td style="font-size:.8rem;color:var(--muted)"><strong>Buscan control y funcionalidades</strong> avanzadas</td></tr>
+<tr><td><strong style="color:var(--green)">Empretienda</strong></td><td style="font-weight:700;color:var(--red)">Caro (11)</td><td>Sin ventas (10)</td><td>Cerr&oacute; negocio (5)</td><td style="font-size:.8rem;color:var(--muted)"><strong>Precio es el driver #1</strong> + no lograron vender</td></tr>
+<tr><td><strong style="color:var(--blue)">Tienda Negocio</strong></td><td style="font-weight:700;color:var(--red)">Caro (20 &mdash; 57%)</td><td>Sin ventas (5)</td><td>Tiene otra tienda (4)</td><td style="font-size:.8rem;color:var(--muted)"><strong>Casi 6 de cada 10 se van por precio</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Verticales de las tiendas churneadas</h3>
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+<div class="card" style="border-left:3px solid var(--amber);padding:1rem">
+<h4 style="font-size:.8rem;color:var(--amber);margin-bottom:.5rem">A Shopify (top 3)</h4>
+<p style="font-size:.82rem;margin:0;color:var(--muted)"><strong>Health &amp; Beauty</strong> (22%), <strong>Clothing</strong> (18%), <strong>Electronics</strong> (12%)</p>
+</div>
+<div class="card" style="border-left:3px solid #94a3b8;padding:1rem">
+<h4 style="font-size:.8rem;color:#64748b;margin-bottom:.5rem">A WooCommerce (top 3)</h4>
+<p style="font-size:.82rem;margin:0;color:var(--muted)"><strong>Clothing</strong> (13%), <strong>Health &amp; Beauty</strong> (12%), <strong>Home &amp; Garden</strong> (11%)</p>
+</div>
+<div class="card" style="border-left:3px solid var(--green);padding:1rem">
+<h4 style="font-size:.8rem;color:var(--green);margin-bottom:.5rem">A Empretienda (top 3)</h4>
+<p style="font-size:.82rem;margin:0;color:var(--muted)"><strong>Clothing</strong> (33%), Health &amp; Beauty (11%), Home &amp; Garden (8%)</p>
+</div>
+<div class="card" style="border-left:3px solid var(--blue);padding:1rem">
+<h4 style="font-size:.8rem;color:var(--blue);margin-bottom:.5rem">A Tienda Negocio (top 3)</h4>
+<p style="font-size:.82rem;margin:0;color:var(--muted)"><strong>Clothing</strong> (32%), Health &amp; Beauty (10%), Electronics (8%)</p>
+</div>
+</div>
+
+<div class="insight"><strong>Patrones clave del churn:</strong><br>
+1. <strong>Shopify es el destino #1</strong> (138 tiendas) y con tendencia creciente. Atrae a los sellers m&aacute;s grandes (17% medium+) que buscan sofisticaci&oacute;n y features, no precio. <strong>Es la p&eacute;rdida m&aacute;s costosa en t&eacute;rminos de GMV.</strong><br>
+2. <strong>Empretienda y Tienda Negocio capturan por precio:</strong> 57% de los que se van a TN y 31% a ET declaran &ldquo;caro&rdquo; como raz&oacute;n. Pero son mayoritariamente no-sellers y struggling-sellers &mdash; tiendas que nunca lograron tracci&oacute;n.<br>
+3. <strong>WooCommerce atrae por features y autonom&iacute;a:</strong> &ldquo;necesita features&rdquo; es la raz&oacute;n #2 (21%), lo que indica sellers que buscan control t&eacute;cnico y personalizaci&oacute;n.<br>
+4. <strong>~60-70% de los churneados son no-seller o struggling-seller</strong> en todas las plataformas. La mayor&iacute;a nunca logr&oacute; vender en TN, lo que sugiere que el problema no es solo la plataforma destino sino la falta de activaci&oacute;n temprana.<br>
+5. <strong>Clothing domina</strong> en todos los destinos (18-33%), con Health &amp; Beauty como segunda vertical consistente.</div>
+</section>
+
 <!-- NUBECOMMERCE DATA -->
 <section>
-<div class="section-num">10 &mdash; El Ecosistema TN</div>
+<div class="section-num">11 &mdash; El Ecosistema TN</div>
 <h2>Tiendanube en n&uacute;meros: NubeCommerce 2026</h2>
 <p>Los sellers que capturemos no migran a un ecosistema en construcci&oacute;n: migran a la plataforma l&iacute;der de e-commerce en Argentina. Los datos del <strong>NubeCommerce 2026</strong> (reporte anual basado en +65K tiendas activas) confirman un crecimiento real por encima de la inflaci&oacute;n.</p>
 
