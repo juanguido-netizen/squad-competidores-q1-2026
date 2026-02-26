@@ -25,7 +25,6 @@ section p{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
 .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.5rem 0}
 .insight{background:rgba(99,102,241,.05);border-left:3px solid var(--accent);border-radius:0 .5rem .5rem 0;padding:1rem 1.25rem;margin:1.5rem 0;font-size:.9rem;color:var(--text)}
 .insight strong{color:var(--accent2)}
-/* Level cards */
 .level-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;position:relative;overflow:hidden}
 .level-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .level-card.l1::before{background:var(--green)}
@@ -34,14 +33,12 @@ section p{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
 .level-card h4{font-size:1rem;font-weight:700;margin-bottom:.25rem}
 .level-card .level-sub{font-size:.8rem;color:var(--muted);margin-bottom:.75rem}
 .level-card p{font-size:.85rem;color:var(--muted)}
-/* Comp blocks */
 .comp-section{margin:2rem 0}
 .comp-header{display:flex;align-items:center;gap:.5rem;margin-bottom:1rem}
 .comp-dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex-shrink:0}
 .dot-green{background:#10b981}
 .dot-amber{background:#f59e0b}
 .dot-blue{background:#3b82f6}
-/* Initiative table */
 .init-table{width:100%;border-collapse:collapse;font-size:.85rem;margin:1rem 0}
 .init-table th{text-align:left;color:var(--muted);font-weight:600;padding:.6rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
 .init-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
@@ -52,20 +49,26 @@ section p{color:var(--muted);margin-bottom:1rem;font-size:.925rem}
 .p2{background:rgba(217,119,6,.12);color:#d97706}
 .p3{background:rgba(99,102,241,.12);color:#6366f1}
 .tag-owner{display:inline-block;font-size:.7rem;font-weight:500;color:var(--muted);background:rgba(0,0,0,.04);padding:.15rem .4rem;border-radius:4px}
-/* Gantt */
+.ei{display:inline-block;font-size:.62rem;font-weight:600;padding:.12rem .32rem;border-radius:3px;letter-spacing:.02em;white-space:nowrap}
+.ei.b{background:rgba(5,150,105,.1);color:#059669}
+.ei.m{background:rgba(217,119,6,.1);color:#d97706}
+.ei.a{background:rgba(220,38,38,.1);color:#dc2626}
+.p1-row{background:rgba(5,150,105,.03)}.p1-row:hover{background:rgba(5,150,105,.06)!important}
+.p2-row{background:rgba(217,119,6,.02)}.p2-row:hover{background:rgba(217,119,6,.05)!important}
+.p3-row{background:rgba(124,58,237,.02)}.p3-row:hover{background:rgba(124,58,237,.05)!important}
+.top5-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;position:relative;overflow:hidden;border-left:4px solid var(--accent2)}
+.top5-card h4{font-size:.88rem;font-weight:700;margin-bottom:.3rem;color:var(--text)}
+.top5-card .desc{font-size:.8rem;color:var(--muted);margin-bottom:.6rem}
+.top5-card .meta{display:flex;gap:.35rem;flex-wrap:wrap;align-items:center}
+.top5-card .kpi{font-size:.7rem;color:var(--muted);margin-top:.4rem}
 .gantt{margin:2rem 0;overflow-x:auto}
-.gantt-table{width:100%;min-width:700px;border-collapse:collapse;font-size:.8rem}
+.gantt-table{width:100%;min-width:800px;border-collapse:collapse;font-size:.8rem}
 .gantt-table th{text-align:center;color:var(--muted);font-weight:600;padding:.5rem .25rem;border-bottom:1px solid var(--border);font-size:.7rem}
 .gantt-table th:first-child{text-align:left;min-width:220px}
 .gantt-table td{padding:.35rem .25rem;border-bottom:1px solid rgba(0,0,0,.04);height:28px;position:relative}
 .gantt-table td:first-child{font-size:.8rem;color:var(--text);padding-left:.5rem}
 .gantt-bar{position:absolute;top:4px;bottom:4px;border-radius:4px;opacity:.75}
 .gantt-cat{font-weight:700;color:var(--accent);font-size:.75rem;padding:.65rem .5rem;background:rgba(99,102,241,.04);border-bottom:1px solid var(--border)}
-/* Next steps */
-.steps-table{width:100%;border-collapse:collapse;font-size:.875rem;margin:1rem 0}
-.steps-table th{text-align:left;color:var(--muted);font-weight:600;padding:.5rem .75rem;border-bottom:1px solid var(--border);font-size:.75rem;text-transform:uppercase}
-.steps-table td{padding:.6rem .75rem;border-bottom:1px solid var(--border);color:var(--text)}
-.steps-table tr:last-child td{border-bottom:none}
 footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opacity:.6}
 @media(max-width:640px){.container{padding:0 1rem}section{padding:3rem 0}.card-grid{grid-template-columns:1fr}}
 </style>
@@ -108,11 +111,121 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 </div>
 </section>
 
-<!-- INICIATIVAS POR COMPETIDOR -->
+<!-- INICIATIVAS -->
 <section>
-<div class="section-num">08 &mdash; Iniciativas por Competidor</div>
+<div class="section-num">08 &mdash; Roadmap y plan de acci&oacute;n</div>
 <h2>Plan de acci&oacute;n detallado</h2>
-<p>Cada competidor tiene un <strong>seller objetivo definido</strong> (madurez, GMV, verticales) y un <strong>dolor central</strong> que gu&iacute;a las iniciativas. Las tablas muestran qu&eacute; dolor ataca cada acci&oacute;n y qu&eacute; producto de Tiendanube lo resuelve.</p>
+<p>Cada competidor tiene un <strong>seller objetivo definido</strong>, dolor central e iniciativas espec&iacute;ficas. <strong>Autom&aacute;gico</strong> y <strong>LitExtension Store Migration</strong> (reci&eacute;n homologada) son las herramientas clave de migraci&oacute;n del ecosistema.</p>
+
+<!-- ============================================ -->
+<!-- TRANSVERSALES - ARRIBA DE TODO              -->
+<!-- ============================================ -->
+<div class="comp-section">
+<div class="comp-header"><span class="comp-dot" style="background:var(--accent2)"></span><h3 style="margin:0">Iniciativas Transversales de Migraci&oacute;n</h3></div>
+<p style="color:var(--muted);font-size:.875rem">Iniciativas que aplican a <strong>todos los competidores</strong> y potencian la capacidad de captura del squad. Las herramientas de migraci&oacute;n <strong>Autom&aacute;gico</strong> + <strong>LitExtension Store Migration</strong> son transversales a todas las acciones.</p>
+
+<h4 style="color:var(--accent2);font-size:.95rem;margin-bottom:1rem;margin-top:1.5rem">Top 5 Iniciativas Prioritarias</h4>
+
+<div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+
+<div class="top5-card">
+<h4>1. Squad de freelancers para migrar cat&aacute;logos</h4>
+<p class="desc">Red de especialistas capacitados para asistir migraci&oacute;n de tiendas con hasta 20 productos v&iacute;a <strong>Autom&aacute;gico</strong> y <strong>LitExtension</strong>. Reduce fricci&oacute;n del paso m&aacute;s cr&iacute;tico del onboarding.</p>
+<div class="meta">
+<span class="priority p1">P1</span>
+<span style="font-size:.72rem;color:var(--muted)">Marzo-Abril</span>
+</div>
+<div style="display:flex;gap:.3rem;margin-top:.45rem;flex-wrap:wrap">
+<span class="ei m">Esf: Medio</span><span class="ei a">Imp: Alto</span><span class="ei a">Dep: Alta</span>
+</div>
+<p class="kpi">KPI: N&ordm; migraciones asistidas</p>
+</div>
+
+<div class="top5-card">
+<h4>2. Campa&ntilde;as TikTok Ads (Search)</h4>
+<p class="desc">Pautar en TikTok Search con foco en keywords de competidores. Audiencia joven y sensible a precio que busca info de plataformas en TikTok.</p>
+<div class="meta">
+<span class="priority p1">P1</span>
+<span style="font-size:.72rem;color:var(--muted)">Marzo-Abril</span>
+</div>
+<div style="display:flex;gap:.3rem;margin-top:.45rem;flex-wrap:wrap">
+<span class="ei b">Esf: Bajo</span><span class="ei a">Imp: Alto</span><span class="ei m">Dep: Media</span>
+</div>
+<p class="kpi">KPI: Impresiones + CTR + Trials</p>
+</div>
+
+<div class="top5-card">
+<h4>3. Bonos especiales para Afiliados</h4>
+<p class="desc">Incentivos diferenciados para afiliados que traigan tiendas que migran desde competidores. Comisi&oacute;n extra por migrador confirmado.</p>
+<div class="meta">
+<span class="priority p1">P1</span>
+<span style="font-size:.72rem;color:var(--muted)">Marzo-Abril</span>
+</div>
+<div style="display:flex;gap:.3rem;margin-top:.45rem;flex-wrap:wrap">
+<span class="ei b">Esf: Bajo</span><span class="ei a">Imp: Alto</span><span class="ei m">Dep: Media</span>
+</div>
+<p class="kpi">KPI: NPs v&iacute;a afiliados migradores</p>
+</div>
+
+<div class="top5-card">
+<h4>4. M&oacute;dulo Maestr&iacute;a Ecodiem</h4>
+<p class="desc">&ldquo;&iquest;C&oacute;mo migrar a Tiendanube?&rdquo; dentro de la Maestr&iacute;a Ecodiem con amplificaci&oacute;n v&iacute;a Performance. M&oacute;dulos por plataforma de origen con <strong>Autom&aacute;gico</strong> + <strong>LitExtension</strong>.</p>
+<div class="meta">
+<span class="priority p1">P1</span>
+<span style="font-size:.72rem;color:var(--muted)">Marzo</span>
+</div>
+<div style="display:flex;gap:.3rem;margin-top:.45rem;flex-wrap:wrap">
+<span class="ei m">Esf: Medio</span><span class="ei a">Imp: Alto</span><span class="ei a">Dep: Alta</span>
+</div>
+<p class="kpi">KPI: Inscripciones + CVR a trial</p>
+</div>
+
+<div class="top5-card">
+<h4>5. Tutorial YouTube &ldquo;C&oacute;mo migrar a Tiendanube&rdquo;</h4>
+<p class="desc">Video con m&oacute;dulos por plataforma de origen (Empretienda, Shopify, WooCommerce, Tienda Negocio). Paso a paso con <strong>Autom&aacute;gico</strong> y <strong>LitExtension</strong>.</p>
+<div class="meta">
+<span class="priority p1">P1</span>
+<span style="font-size:.72rem;color:var(--muted)">Marzo</span>
+</div>
+<div style="display:flex;gap:.3rem;margin-top:.45rem;flex-wrap:wrap">
+<span class="ei m">Esf: Medio</span><span class="ei a">Imp: Alto</span><span class="ei m">Dep: Media</span>
+</div>
+<p class="kpi">KPI: Views + CTR a trial</p>
+</div>
+
+</div>
+
+<!-- SEPARACION VISUAL -->
+<div style="border-top:2px dashed var(--border);margin:2.5rem 0 1.5rem"></div>
+
+<h4 style="color:var(--muted);font-size:.9rem;margin-bottom:1rem">Iniciativas Complementarias (Prioridad 2)</h4>
+
+<div class="card" style="overflow-x:auto">
+<table class="init-table">
+<thead><tr><th>Iniciativa</th><th>Esf.</th><th>Imp.</th><th>Dep.</th><th>Timing</th><th>KPI</th></tr></thead>
+<tbody>
+<tr class="p1-row"><td><strong>Protocolo de activaci&oacute;n 48h:</strong> playbook ante disrupciones competitivas (cambios de pricing, ca&iacute;das, noticias negativas). Activar landing + email + pauta Search + redes</td><td><span class="ei b">Bajo</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td>Marzo</td><td style="color:var(--muted)">&mdash;</td></tr>
+<tr class="p1-row"><td><strong>Kits de migraci&oacute;n always-ready:</strong> paquete prearmado por competidor (LP + checklist + flujo Autom&aacute;gico/LitExtension + onboarding asistido) listo para activar</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td>Marzo-Abril</td><td style="color:var(--muted)">&mdash;</td></tr>
+<tr class="p2-row"><td><strong>Tech partners no exclusivos:</strong> trabajar con partners (ERPs, agencias, integradores) que tengan clientes en otras plataformas para adquisici&oacute;n en conjunto</td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alta</span></td><td>Marzo-Abril</td><td style="color:var(--muted)">NPs v&iacute;a partners</td></tr>
+<tr class="p2-row"><td><strong>Flujos de nurturing por competidor:</strong> secuencias de email/WA espec&iacute;ficas para leads identificados por plataforma de origen. Cada flujo ataca dolores TN vs. su plataforma actual</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei a">Alta</span></td><td>Marzo-Abril</td><td style="color:var(--muted)">CVR nurturing &rarr; NP</td></tr>
+<tr class="p2-row"><td><strong>Base de leads latentes:</strong> trackear merchants que visitaron landing de migraci&oacute;n pero no convirtieron. Retargeting + nurturing personalizado por plataforma de origen</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei a">Alta</span></td><td>Marzo-Abril</td><td style="color:var(--muted)">&mdash;</td></tr>
+<tr class="p2-row"><td><strong>Propuesta de valor por segmento:</strong> messaging diferenciado para Social Sellers, Migrators y Nuevos Ingresantes. Cada arquetipo tiene dolores distintos</td><td><span class="ei b">Bajo</span></td><td><span class="ei m">Medio</span></td><td><span class="ei b">Baja</span></td><td>Marzo</td><td style="color:var(--muted)">&mdash;</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card" style="border-left:3px solid var(--accent);background:rgba(99,102,241,.02);margin-top:1rem">
+<h4 style="font-size:.85rem;color:var(--accent);margin-bottom:.5rem">Actualizar LP de Migradores</h4>
+<p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem"><strong>URL:</strong> <a href="https://www.tiendanube.com/emprendedores/ecommerce" target="_blank" style="color:var(--accent)">tiendanube.com/emprendedores/ecommerce</a> &mdash; Hoy solo compara contra ET y Mercado Shops. Falta Shopify, WooCommerce, narrativa dolor/soluci&oacute;n, datos del ecosistema ($2B, +65K tiendas), CTA a Autom&aacute;gico/LitExtension y testimonios por vertical.</p>
+<div style="display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:.3rem"><span class="ei b">Esf: Bajo</span><span class="ei a">Imp: Alto</span><span class="ei m">Dep: Media</span></div>
+<p style="font-size:.78rem;color:var(--muted);margin:0"><span class="priority p1">P1</span> &middot; Quick Win &middot; Marzo-Abril &middot; Dep: Insti + Performance</p>
+</div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- INICIATIVAS POR COMPETIDOR                  -->
+<!-- ============================================ -->
 
 <!-- EMPRETIENDA -->
 <div class="comp-section">
@@ -120,19 +233,19 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="card" style="border-left:3px solid var(--green);background:rgba(5,150,105,.02);padding:1rem 1.25rem;margin-bottom:1rem">
 <p style="font-size:.82rem;margin:0"><strong style="color:var(--green)">Target:</strong> Emprendedor en escalamiento, GMV &lt;1M creciendo a 1-10M. Verticales: Moda, Belleza. Plan Esencial.<br>
 <strong style="color:var(--green)">Dolor central:</strong> Techo de funcionalidad (10 templates, sin automatizaciones, marketing limitado).<br>
-<strong style="color:var(--green)">Soluci&oacute;n TN:</strong> 65+ dise&ntilde;os, Marketing Nube ($169M USD asistidos), Pago Nube (-21.6% costos), +200 apps.</p>
+<strong style="color:var(--green)">Soluci&oacute;n TN:</strong> 65+ dise&ntilde;os, Marketing Nube ($169M USD asistidos), Pago Nube (-21.6% costos), +200 apps. Migraci&oacute;n con <strong>Autom&aacute;gico</strong> + <strong>LitExtension</strong>.</p>
 </div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Dolor que ataca</th><th>Producto TN</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dolor &rarr; Producto TN</th><th>Esf.</th><th>Imp.</th><th>Dep.</th><th>P</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>Entrevistar 2 merchants churneados y 2 migrados</td><td style="color:var(--muted);font-size:.8rem">Validar dolores reales</td><td style="color:var(--muted);font-size:.8rem">&mdash;</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Actualizar todas las LPs que hablan de Empretienda</td><td style="font-size:.8rem">Techo de funcionalidad</td><td style="font-size:.8rem">65+ dise&ntilde;os, Marketing Nube</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Pautar kws &ldquo;Empretienda ca&iacute;da&rdquo;, &ldquo;no anda&rdquo; (Demand Gen)</td><td style="font-size:.8rem">Frustraci&oacute;n con la plataforma</td><td style="font-size:.8rem">Autom&aacute;gico + Kit migraci&oacute;n</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Checklist descargable &ldquo;c&oacute;mo migrar de ET&rdquo;</td><td style="font-size:.8rem">Miedo a perder datos</td><td style="font-size:.8rem">Autom&aacute;gico</td><td><span class="priority p1">P1 &middot; QW</span></td><td>Febrero</td></tr>
-<tr><td>Comparativa YouTube: tienda paso a paso en ambas</td><td style="font-size:.8rem">Falta de info comparativa</td><td style="font-size:.8rem">UX superior TN</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Comparativa TikTok con afiliados</td><td style="font-size:.8rem">Marketing limitado en ET</td><td style="font-size:.8rem">Ecosistema TN</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Bootcamp &ldquo;C&oacute;mo migrar de ET/Shopify a TN&rdquo;</td><td style="font-size:.8rem">Complejidad percibida</td><td style="font-size:.8rem">Autom&aacute;gico + Soporte</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr class="p1-row"><td>Entrevistar 2 merchants churneados y 2 migrados</td><td style="font-size:.8rem;color:var(--muted)">Validar dolores reales &rarr; &mdash;</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei m">Media</span></td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr class="p1-row"><td>Actualizar todas las LPs que hablan de Empretienda</td><td style="font-size:.8rem;color:var(--muted)">Techo de funcionalidad &rarr; 65+ dise&ntilde;os, Marketing Nube</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Pautar kws &ldquo;Empretienda ca&iacute;da&rdquo;, &ldquo;no anda&rdquo; (Demand Gen)</td><td style="font-size:.8rem;color:var(--muted)">Frustraci&oacute;n con la plataforma &rarr; Autom&aacute;gico + LitExtension + Kit</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Checklist descargable &ldquo;c&oacute;mo migrar de ET&rdquo;</td><td style="font-size:.8rem;color:var(--muted)">Miedo a perder datos &rarr; Autom&aacute;gico + LitExtension</td><td><span class="ei b">Bajo</span></td><td><span class="ei m">Medio</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p2-row"><td>Comparativa YouTube: tienda paso a paso en ambas</td><td style="font-size:.8rem;color:var(--muted)">Falta de info comparativa &rarr; UX superior TN</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td><span class="priority p2">P2</span></td><td>Marzo-Abril</td></tr>
+<tr class="p2-row"><td>Comparativa TikTok con afiliados</td><td style="font-size:.8rem;color:var(--muted)">Marketing limitado en ET &rarr; Ecosistema TN</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td><span class="priority p2">P2</span></td><td>Marzo-Abril</td></tr>
+<tr class="p3-row"><td>Bootcamp &ldquo;C&oacute;mo migrar de ET/Shopify a TN&rdquo;</td><td style="font-size:.8rem;color:var(--muted)">Complejidad percibida &rarr; Autom&aacute;gico + LitExtension + Soporte</td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alta</span></td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
 </tbody>
 </table>
 </div>
@@ -144,20 +257,20 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="card" style="border-left:3px solid var(--amber);background:rgba(217,119,6,.02);padding:1rem 1.25rem;margin-bottom:1rem">
 <p style="font-size:.82rem;margin:0"><strong style="color:var(--amber)">Target:</strong> Seller sofisticado alto GMV (+10M ARS). Verticales: Electr&oacute;nica, Consumo masivo, Moda premium. Plan Impulso/Escala.<br>
 <strong style="color:var(--amber)">Dolor central:</strong> Sin ecosistema local (pagos, env&iacute;os, soporte). Pricing USD con volatilidad cambiaria.<br>
-<strong style="color:var(--amber)">Soluci&oacute;n TN:</strong> Pago Nube (checkout +8% ventas), Env&iacute;o Nube (-16% costo), soporte local, ARS, Autom&aacute;gico.</p>
+<strong style="color:var(--amber)">Soluci&oacute;n TN:</strong> Pago Nube (checkout +8% ventas), Env&iacute;o Nube (-16% costo), soporte local, ARS. Migraci&oacute;n con <strong>Autom&aacute;gico</strong> + <strong>LitExtension</strong>.</p>
 </div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Dolor que ataca</th><th>Producto TN</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dolor &rarr; Producto TN</th><th>Esf.</th><th>Imp.</th><th>Dep.</th><th>P</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>3 meses con precio especial para migradores de Shopify</td><td style="font-size:.8rem">Costo de cambio alto</td><td style="font-size:.8rem">Plan Impulso/Escala bonificado</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Pautar art&iacute;culo Shopify vs TN en TikTok/Meta</td><td style="font-size:.8rem">Falta de info local</td><td style="font-size:.8rem">Pago Nube + Env&iacute;o Nube</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Comparativa Shopify vs TN en YouTube</td><td style="font-size:.8rem">Checkout no localizado</td><td style="font-size:.8rem">Pago Nube acelerado</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Landing espec&iacute;fica para migradores de Shopify</td><td style="font-size:.8rem">Sin soporte/ecosistema local</td><td style="font-size:.8rem">Ecosistema completo AR</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Migraci&oacute;n automatizada con Autom&aacute;gico v&iacute;a API</td><td style="font-size:.8rem">Complejidad de migraci&oacute;n</td><td style="font-size:.8rem">Autom&aacute;gico</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; + B&amp;C (producto, no solo awareness)</td><td style="font-size:.8rem">Percepci&oacute;n de inferioridad local</td><td style="font-size:.8rem">Features SMB + Ecosistema</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
-<tr><td>Historias alto GMV (Havanna, Lucciano&rsquo;s) para sellers cerca de Escala</td><td style="font-size:.8rem">Duda sobre capacidad de TN</td><td style="font-size:.8rem">Plan Escala + cases</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
-<tr><td>Narrativa dolor/soluci&oacute;n por funcionalidad</td><td style="font-size:.8rem">Gap de percepci&oacute;n funcional</td><td style="font-size:.8rem">PagoNube, Env&iacute;oNube, features SMB</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
+<tr class="p1-row"><td>3 meses con precio especial para migradores de Shopify</td><td style="font-size:.8rem;color:var(--muted)">Costo de cambio alto &rarr; Plan Impulso/Escala bonificado</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alta</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Pautar art&iacute;culo Shopify vs TN en TikTok/Meta</td><td style="font-size:.8rem;color:var(--muted)">Falta de info local &rarr; Pago Nube + Env&iacute;o Nube</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Migraci&oacute;n automatizada con Autom&aacute;gico + LitExtension v&iacute;a API</td><td style="font-size:.8rem;color:var(--muted)">Complejidad de migraci&oacute;n &rarr; Autom&aacute;gico + LitExtension</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Narrativa dolor/soluci&oacute;n por funcionalidad</td><td style="font-size:.8rem;color:var(--muted)">Gap de percepci&oacute;n funcional &rarr; PagoNube, Env&iacute;oNube, features SMB</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p2-row"><td>Comparativa Shopify vs TN en YouTube</td><td style="font-size:.8rem;color:var(--muted)">Checkout no localizado &rarr; Pago Nube acelerado</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td><span class="priority p2">P2</span></td><td>Marzo-Abril</td></tr>
+<tr class="p2-row"><td>Landing espec&iacute;fica para migradores de Shopify</td><td style="font-size:.8rem;color:var(--muted)">Sin soporte/ecosistema local &rarr; Ecosistema completo AR</td><td><span class="ei m">Medio</span></td><td><span class="ei a">Alto</span></td><td><span class="ei m">Media</span></td><td><span class="priority p2">P2</span></td><td>Marzo-Abril</td></tr>
+<tr class="p3-row"><td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; + B&amp;C (producto, no solo awareness)</td><td style="font-size:.8rem;color:var(--muted)">Percepci&oacute;n de inferioridad local &rarr; Features SMB + Ecosistema</td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alta</span></td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr class="p3-row"><td>Historias alto GMV (Havanna, Lucciano&rsquo;s) para sellers cerca de Escala</td><td style="font-size:.8rem;color:var(--muted)">Duda sobre capacidad de TN &rarr; Plan Escala + cases</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
 </tbody>
 </table>
 </div>
@@ -173,11 +286,11 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 </div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Dolor que ataca</th><th>Producto TN</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dolor &rarr; Producto TN</th><th>Esf.</th><th>Imp.</th><th>Dep.</th><th>P</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>Test de comparativa con perfiles de TikTok</td><td style="font-size:.8rem">Falta de info real de TN</td><td style="font-size:.8rem">UX superior, ecosistema</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Interactuar en videos de TikTok sobre TN</td><td style="font-size:.8rem">Desinformaci&oacute;n en RRSS</td><td style="font-size:.8rem">Credibilidad de marca</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Investigar cu&aacute;ntas de las 40K tiendas son activas</td><td style="font-size:.8rem">Datos no validados</td><td style="font-size:.8rem">&mdash;</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Test de comparativa con perfiles de TikTok</td><td style="font-size:.8rem;color:var(--muted)">Falta de info real de TN &rarr; UX superior, ecosistema</td><td><span class="ei b">Bajo</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Interactuar en videos de TikTok sobre TN</td><td style="font-size:.8rem;color:var(--muted)">Desinformaci&oacute;n en RRSS &rarr; Credibilidad de marca</td><td><span class="ei b">Bajo</span></td><td><span class="ei b">Bajo</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p2-row"><td>Investigar cu&aacute;ntas de las 40K tiendas son activas</td><td style="font-size:.8rem;color:var(--muted)">Datos no validados &rarr; &mdash;</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei a">Alta</span></td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
 </tbody>
 </table>
 </div>
@@ -190,15 +303,15 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="card" style="border-left:3px solid #94a3b8;background:rgba(148,163,184,.02);padding:1rem 1.25rem;margin-bottom:1rem">
 <p style="font-size:.82rem;margin:0"><strong style="color:#64748b">Target:</strong> T&eacute;cnico agotado del mantenimiento, GMV 1-10M. Verticales diversas. Plan Impulso.<br>
 <strong style="color:#64748b">Dolor central:</strong> Hosting, plugins, parches, horas semanales en infra en vez de ventas.<br>
-<strong style="color:#64748b">Soluci&oacute;n TN:</strong> All-in-one sin hosting, Pago+Env&iacute;o+Marketing Nube integrados, Chat Nube 24/7.</p>
+<strong style="color:#64748b">Soluci&oacute;n TN:</strong> All-in-one sin hosting, Pago+Env&iacute;o+Marketing Nube integrados, Chat Nube 24/7. Migraci&oacute;n con <strong>Autom&aacute;gico</strong> + <strong>LitExtension</strong>.</p>
 </div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Dolor que ataca</th><th>Producto TN</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dolor &rarr; Producto TN</th><th>Esf.</th><th>Imp.</th><th>Dep.</th><th>P</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>Contenido &ldquo;costo real de WooCommerce vs TN&rdquo; (hosting + plugins + dev)</td><td style="font-size:.8rem">Costo oculto &ldquo;gratis&rdquo;</td><td style="font-size:.8rem">Plan all-in-one</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Migraci&oacute;n con Autom&aacute;gico v&iacute;a API desde WooCommerce</td><td style="font-size:.8rem">Complejidad de migraci&oacute;n</td><td style="font-size:.8rem">Autom&aacute;gico</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Narrativa &ldquo;dej&aacute; de mantener, dedicate a vender&rdquo;</td><td style="font-size:.8rem">Tiempo en mantenimiento</td><td style="font-size:.8rem">Chat Nube + uptime garantizado</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr class="p2-row"><td>Contenido &ldquo;costo real de WooCommerce vs TN&rdquo; (hosting + plugins + dev)</td><td style="font-size:.8rem;color:var(--muted)">Costo oculto &ldquo;gratis&rdquo; &rarr; Plan all-in-one</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr class="p2-row"><td>Migraci&oacute;n con Autom&aacute;gico + LitExtension v&iacute;a API desde WooCommerce</td><td style="font-size:.8rem;color:var(--muted)">Complejidad de migraci&oacute;n &rarr; Autom&aacute;gico + LitExtension</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
+<tr class="p3-row"><td>Narrativa &ldquo;dej&aacute; de mantener, dedicate a vender&rdquo;</td><td style="font-size:.8rem;color:var(--muted)">Tiempo en mantenimiento &rarr; Chat Nube + uptime garantizado</td><td><span class="ei b">Bajo</span></td><td><span class="ei m">Medio</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
 </tbody>
 </table>
 </div>
@@ -211,58 +324,27 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <div class="card" style="border-left:3px solid #ffe600;background:rgba(255,230,0,.02);padding:1rem 1.25rem;margin-bottom:1rem">
 <p style="font-size:.82rem;margin:0"><strong style="color:#b8860b">Target:</strong> Seller omnicanal incipiente con tr&aacute;fico propio. Comisiones 13-36% erosionan margen. Verticales: Electr&oacute;nica, Hogar, Belleza.<br>
 <strong style="color:#b8860b">Dolor central:</strong> Sin datos de cliente, sin marca propia, 55% no redirige a tienda D2C.<br>
-<strong style="color:#b8860b">Soluci&oacute;n TN:</strong> Canal propio + integraci&oacute;n ML (Astroselling), Marketing Nube, Pago Nube, branding 65+ dise&ntilde;os.</p>
+<strong style="color:#b8860b">Soluci&oacute;n TN:</strong> Canal propio + integraci&oacute;n ML (Astroselling), Marketing Nube, Pago Nube, branding 65+ dise&ntilde;os. Migraci&oacute;n con <strong>Autom&aacute;gico</strong> + <strong>LitExtension</strong>.</p>
 </div>
 <div class="card" style="overflow-x:auto">
 <table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Dolor que ataca</th><th>Producto TN</th><th>Prioridad</th><th>Timing</th></tr></thead>
+<thead><tr><th>Iniciativa</th><th>Dolor &rarr; Producto TN</th><th>Esf.</th><th>Imp.</th><th>Dep.</th><th>P</th><th>Timing</th></tr></thead>
 <tbody>
-<tr><td>Tutoriales: integrar ML con TN en 2026</td><td style="font-size:.8rem">No sabe integrar canales</td><td style="font-size:.8rem">Integraci&oacute;n Astroselling/Ecomm-App</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Flujo especializado para trials marketplace + beneficio ERP</td><td style="font-size:.8rem">Comisiones altas (13-36%)</td><td style="font-size:.8rem">Canal propio + Pago Nube</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Migraci&oacute;n con Autom&aacute;gico desde Mercado Shops</td><td style="font-size:.8rem">Complejidad de migraci&oacute;n</td><td style="font-size:.8rem">Autom&aacute;gico</td><td><span class="priority p1">P1</span></td><td>Febrero</td></tr>
-<tr><td>Mentores MELI como canal de recomendaci&oacute;n</td><td style="font-size:.8rem">55% no redirige a tienda</td><td style="font-size:.8rem">Marketing Nube</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Entrenamiento Nube sobre omnicanalidad</td><td style="font-size:.8rem">Sin datos del cliente</td><td style="font-size:.8rem">Marketing Nube + CRM</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Fidelizar ERPs que trabajan con ML</td><td style="font-size:.8rem">Gesti&oacute;n dispersa de canales</td><td style="font-size:.8rem">Ecosystem TN + ERPs</td><td><span class="priority p2">P2</span></td><td>Marzo</td></tr>
-<tr><td>Activar Mariano Sirena como afiliado (Omnicanalidad)</td><td style="font-size:.8rem">Awareness de integraci&oacute;n</td><td style="font-size:.8rem">Programa de Afiliados</td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
+<tr class="p1-row"><td>Tutoriales: integrar ML con TN en 2026</td><td style="font-size:.8rem;color:var(--muted)">No sabe integrar canales &rarr; Integraci&oacute;n Astroselling/Ecomm-App</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei m">Media</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Flujo especializado para trials marketplace + beneficio ERP</td><td style="font-size:.8rem;color:var(--muted)">Comisiones altas (13-36%) &rarr; Canal propio + Pago Nube</td><td><span class="ei m">Medio</span></td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alta</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p1-row"><td>Migraci&oacute;n con Autom&aacute;gico + LitExtension desde Mercado Shops</td><td style="font-size:.8rem;color:var(--muted)">Complejidad de migraci&oacute;n &rarr; Autom&aacute;gico + LitExtension</td><td><span class="ei b">Bajo</span></td><td><span class="ei a">Alto</span></td><td><span class="ei b">Baja</span></td><td><span class="priority p1">P1</span></td><td>Marzo</td></tr>
+<tr class="p2-row"><td>Mentores MELI como canal de recomendaci&oacute;n</td><td style="font-size:.8rem;color:var(--muted)">55% no redirige a tienda &rarr; Marketing Nube</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei a">Alta</span></td><td><span class="priority p2">P2</span></td><td>Marzo-Abril</td></tr>
+<tr class="p2-row"><td>Entrenamiento Nube sobre omnicanalidad</td><td style="font-size:.8rem;color:var(--muted)">Sin datos del cliente &rarr; Marketing Nube + CRM</td><td><span class="ei m">Medio</span></td><td><span class="ei m">Medio</span></td><td><span class="ei m">Media</span></td><td><span class="priority p2">P2</span></td><td>Marzo-Abril</td></tr>
+<tr class="p2-row"><td>Fidelizar ERPs que trabajan con ML</td><td style="font-size:.8rem;color:var(--muted)">Gesti&oacute;n dispersa de canales &rarr; Ecosystem TN + ERPs</td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alto</span></td><td><span class="ei a">Alta</span></td><td><span class="priority p2">P2</span></td><td>Marzo-Abril</td></tr>
+<tr class="p3-row"><td>Activar Mariano Sirena como afiliado (Omnicanalidad)</td><td style="font-size:.8rem;color:var(--muted)">Awareness de integraci&oacute;n &rarr; Programa de Afiliados</td><td><span class="ei b">Bajo</span></td><td><span class="ei b">Bajo</span></td><td><span class="ei m">Media</span></td><td><span class="priority p3">P3</span></td><td>Q2</td></tr>
 </tbody>
 </table>
 </div>
-<div class="insight"><strong>Contexto:</strong> El cierre de Mercado Shops (31/12/2025) liber&oacute; 40K+ merchants. &ldquo;Mi P&aacute;gina&rdquo; de MELI tiene comisiones de 13-36%. El &aacute;ngulo es omnicanalidad: TN + ML juntos, no TN en reemplazo de ML.</div>
-</div>
-
-<!-- INICIATIVAS TRANSVERSALES DE MIGRACION -->
-<div class="comp-section">
-<div class="comp-header"><span class="comp-dot" style="background:var(--accent2)"></span><h3 style="margin:0">Capacidades Transversales de Migraci&oacute;n</h3></div>
-<p style="color:var(--muted);font-size:.875rem">Iniciativas que aplican a todos los competidores y potencian la capacidad de captura del squad ante oportunidades del mercado.</p>
-<div class="card" style="overflow-x:auto">
-<table class="init-table">
-<thead><tr><th>Iniciativa</th><th>Dependencia</th><th>Prioridad</th><th>Timing</th><th>KPI / Meta</th></tr></thead>
-<tbody>
-<tr><td><strong>Squad de freelancers (especialistas) para migrar cat&aacute;logos:</strong> red de freelancers capacitados para asistir migraci&oacute;n de tiendas con hasta 20 productos. Reduce fricci&oacute;n del paso m&aacute;s cr&iacute;tico del onboarding</td><td>Ecosystem + Ops</td><td><span class="priority p1">P1</span></td><td>Febrero-Marzo</td><td style="color:var(--muted)">N&ordm; migraciones asistidas</td></tr>
-<tr><td><strong>M&oacute;dulo especial Maestr&iacute;a Ecodiem:</strong> &ldquo;&iquest;C&oacute;mo migrar a Tiendanube?&rdquo; dentro de la Maestr&iacute;a Ecodiem con amplificaci&oacute;n v&iacute;a Performance. M&oacute;dulos por plataforma de origen</td><td>Educaci&oacute;n + Performance</td><td><span class="priority p1">P1</span></td><td>Marzo</td><td style="color:var(--muted)">Inscripciones + CVR a trial</td></tr>
-<tr><td><strong>Bonos especiales para Afiliados:</strong> incentivos diferenciados para afiliados que traigan tiendas que migran desde competidores (comisi&oacute;n extra por migrador confirmado)</td><td>Afiliados + Growth</td><td><span class="priority p1">P1</span></td><td>Febrero-Marzo</td><td style="color:var(--muted)">NPs v&iacute;a afiliados migradores</td></tr>
-<tr><td><strong>Tutorial YouTube &ldquo;C&oacute;mo migrar a Tiendanube&rdquo;:</strong> video con m&oacute;dulos por plataforma de origen (Empretienda, Shopify, WooCommerce, Tienda Negocio). Paso a paso con Autom&aacute;gico</td><td>Content + Ecosystem</td><td><span class="priority p1">P1</span></td><td>Marzo</td><td style="color:var(--muted)">Views + CTR a trial</td></tr>
-<tr><td><strong>Tech partners no exclusivos:</strong> trabajar con partners (ERPs, agencias, integradores) que tengan clientes en otras plataformas para adquisici&oacute;n en conjunto. Foco en partners que trabajan con Shopify y WooCommerce</td><td>Ecosystem + Partnerships</td><td><span class="priority p2">P2</span></td><td>Marzo</td><td style="color:var(--muted)">NPs v&iacute;a partners</td></tr>
-<tr><td><strong>Campa&ntilde;as TikTok Ads (Search):</strong> pautar en TikTok Search con foco en keywords de competidores. Aprovechar que la audiencia que busca info de plataformas en TikTok es m&aacute;s joven y sensible a precio</td><td>Performance + Social</td><td><span class="priority p1">P1</span></td><td>Febrero-Marzo</td><td style="color:var(--muted)">Impresiones + CTR + Trials</td></tr>
-<tr><td><strong>Flujos de nurturing por competidor:</strong> crear secuencias de email/WA espec&iacute;ficas para leads identificados por plataforma de origen. Cada flujo ataca los dolores que resuelve TN vs. su plataforma actual</td><td>Growth + CRM + Data</td><td><span class="priority p2">P2</span></td><td>Marzo</td><td style="color:var(--muted)">CVR nurturing &rarr; NP</td></tr>
-<tr><td><strong>Protocolo de activaci&oacute;n 48h:</strong> playbook documentado que se ejecuta ante disrupciones competitivas (cambios de pricing, ca&iacute;das de servicio, noticias negativas de competidores). Incluye: activar landing + email a base + pauta Search + post en redes</td><td>Growth + Social + Performance</td><td><span class="priority p1">P1</span></td><td>Febrero</td><td style="color:var(--muted)">&mdash;</td></tr>
-<tr><td><strong>Kits de migraci&oacute;n always-ready:</strong> paquete prearmado por competidor (LP dedicada + checklist descargable + flujo Autom&aacute;gico + onboarding asistido) listo para activar instant&aacute;neamente</td><td>Tools + Ecosystem</td><td><span class="priority p1">P1</span></td><td>Febrero-Marzo</td><td style="color:var(--muted)">&mdash;</td></tr>
-<tr><td><strong>Base de leads latentes:</strong> trackear merchants que visitaron landing de migraci&oacute;n pero no convirtieron. Crear flujo de retargeting + nurturing personalizado por plataforma de origen</td><td>Data + Performance</td><td><span class="priority p2">P2</span></td><td>Marzo</td><td style="color:var(--muted)">&mdash;</td></tr>
-<tr><td><strong>Propuesta de valor por segmento:</strong> documentar messaging diferenciado para Social Sellers, Migrators y Nuevos Ingresantes. Cada arquetipo tiene dolores distintos y necesita una narrativa espec&iacute;fica</td><td>Marketing + Producto</td><td><span class="priority p2">P2</span></td><td>Marzo</td><td style="color:var(--muted)">&mdash;</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="card" style="border-left:3px solid var(--accent);background:rgba(99,102,241,.02);margin-top:1rem">
-<h4 style="font-size:.85rem;color:var(--accent);margin-bottom:.5rem">Actualizar LP de Migradores</h4>
-<p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem"><strong>URL:</strong> <a href="https://www.tiendanube.com/emprendedores/ecommerce" target="_blank" style="color:var(--accent)">tiendanube.com/emprendedores/ecommerce</a> &mdash; Hoy solo compara contra ET y Mercado Shops. Falta Shopify, WooCommerce, narrativa dolor/soluci&oacute;n, datos del ecosistema ($2B, +65K tiendas), CTA a Autom&aacute;gico y testimonios por vertical.</p>
-<p style="font-size:.78rem;color:var(--muted);margin:0"><span class="priority p1">P1</span> &middot; Quick Win &middot; Febrero-Marzo &middot; Dep: Insti + Performance</p>
-</div>
-
-<div class="insight"><strong>Contexto:</strong> La ventana post-Mercado Shops se cierra en Q1-Q2 2026. Shopify ofrece cr&eacute;ditos de hasta USD 10,000 para atraer migradores. Tener capacidades de reacci&oacute;n r&aacute;pida y assets prearmados es cr&iacute;tico para no perder oportunidades que se abren y cierran en d&iacute;as.</div>
 </div>
 
 <div class="insight" style="border-left-color:var(--amber);background:rgba(217,119,6,.05)"><strong>Sobre las comparativas:</strong> Son una buena estrategia, pero necesitan una direcci&oacute;n m&aacute;s precisa. Cada comparativa deber&iacute;a estar orientada a un dolor espec&iacute;fico del perfil target y a funcionalidades concretas de nuestro ecosistema que lo resuelven. No alcanza con decir &ldquo;somos mejores&rdquo; &mdash; hay que mostrar <strong>para qu&eacute; tipo de negocio somos mejores y por qu&eacute;</strong>.</div>
+
+<div class="insight"><strong>Contexto competitivo:</strong> Shopify ofrece cr&eacute;ditos de hasta USD 10,000 para atraer migradores. Tener capacidades de reacci&oacute;n r&aacute;pida y assets prearmados es cr&iacute;tico para no perder oportunidades que se abren y cierran en d&iacute;as.</div>
 
 <!-- KPIs GLOBALES DEL SQUAD -->
 <div class="comp-section">
@@ -317,165 +399,177 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 <!-- GANTT -->
 <section>
 <div class="section-num">09 &mdash; Gantt</div>
-<h2>Cronograma Q1 2026</h2>
-<p>Desde el kick-off del squad hasta la implementaci&oacute;n de las primeras acciones.</p>
+<h2>Cronograma Q1-Q2 2026</h2>
+<p>Desde el kick-off del squad hasta la implementaci&oacute;n de las acciones. Todas las iniciativas (excepto entrevistas) arrancan en marzo.</p>
 
 <div class="gantt" style="margin-top:2rem">
 <table class="gantt-table">
 <thead>
 <tr>
 <th style="text-align:left">Actividad</th>
-<th>19/1</th><th>27/1</th><th>3/2</th><th>10/2</th><th>17/2</th><th>24/2</th><th>3/3</th><th>10/3</th><th>17/3</th><th>24/3</th><th>31/3</th>
+<th>20/1</th><th>3/2</th><th>17/2</th><th>3/3</th><th>10/3</th><th>17/3</th><th>24/3</th><th>31/3</th><th>7/4</th><th>14/4</th><th>21/4</th><th>28/4</th>
 </tr>
 </thead>
 <tbody>
 <!-- Discovery -->
-<tr><td colspan="12" class="gantt-cat">A) Discovery</td></tr>
+<tr><td colspan="13" class="gantt-cat">A) Discovery (completado)</td></tr>
 <tr>
-<td>Kick-off + Facts & Assumptions</td>
-<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent);border-radius:4px"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td>Kick-off + Facts &amp; Assumptions</td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>Desk Research (competidores, pricing, ads)</td>
 <td></td>
-<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--accent)"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>An&aacute;lisis de data (trials, CVR, facturaci&oacute;n)</td>
-<td></td><td></td>
+<td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent)"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>Entrevistas merchants churneados/migrados</td>
-<td></td><td></td><td></td>
-<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--accent)"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>Entrega diagn&oacute;stico al l&iacute;der</td>
-<td></td><td></td><td></td><td></td>
-<td style="position:relative"><div class="gantt-bar" style="left:20%;width:60%;background:var(--accent2);border-radius:9999px"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:40%;width:40%;background:var(--accent2);border-radius:9999px"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 
 <!-- Quick Wins -->
-<tr><td colspan="12" class="gantt-cat" style="color:var(--green);background:rgba(5,150,105,.04)">B) Quick Wins (P1)</td></tr>
+<tr><td colspan="13" class="gantt-cat" style="color:var(--green);background:rgba(5,150,105,.04)">B) Quick Wins (P1) &mdash; Marzo</td></tr>
 <tr>
 <td>Actualizar LPs comparativas</td>
 <td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--green)"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>Pautar kws Empretienda + Shopify</td>
-<td></td><td></td><td></td><td></td>
-<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--green)"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--green)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-<td>Checklist migraci&oacute;n descargable</td>
-<td></td><td></td><td></td><td></td>
+<td>Checklist migraci&oacute;n (Autom&aacute;gico + LitExtension)</td>
+<td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--green)"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>Social listening TikTok (Tienda Negocio)</td>
-<td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:500%;background:var(--green)"></div></td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Campa&ntilde;as TikTok Ads Search</td>
+<td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:400%;background:var(--green)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Narrativa dolor/soluci&oacute;n Shopify</td>
+<td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--green)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+
+<!-- Transversales P1 -->
+<tr><td colspan="13" class="gantt-cat" style="color:var(--accent2);background:rgba(124,58,237,.04)">C) Transversales Top 5 &mdash; Marzo-Abril</td></tr>
+<tr>
+<td>Squad freelancers migraci&oacute;n</td>
+<td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:400%;background:var(--accent2)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Bonos especiales Afiliados</td>
+<td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:400%;background:var(--accent2)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>M&oacute;dulo Maestr&iacute;a Ecodiem</td>
+<td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--accent2)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+<td>Tutorial YouTube migraci&oacute;n</td>
+<td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--accent2)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 
 <!-- Extra-BAU -->
-<tr><td colspan="12" class="gantt-cat" style="color:var(--amber);background:rgba(217,119,6,.04)">C) Extra-BAU (P2)</td></tr>
+<tr><td colspan="13" class="gantt-cat" style="color:var(--amber);background:rgba(217,119,6,.04)">D) Extra-BAU (P2) &mdash; Marzo-Abril</td></tr>
 <tr>
-<td>Comparativas YouTube (Empretienda + Shopify)</td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td>Comparativas YouTube (ET + Shopify)</td>
+<td></td><td></td><td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--amber)"></div></td>
-<td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>Comparativas TikTok con afiliados</td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--amber)"></div></td>
-<td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
 <td>Landing espec&iacute;fica Shopify &rarr; TN</td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--amber)"></div></td>
-<td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-<td>Precio especial 3 meses (Shopify migradores)</td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td>Precio especial 3 meses (Shopify)</td>
+<td></td><td></td><td></td><td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:300%;background:var(--amber)"></div></td>
-<td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-<td>Investigar tiendas activas Tienda Negocio</td>
-<td></td><td></td><td></td><td></td><td></td><td></td>
+<td>Investigar tiendas activas T. Negocio</td>
+<td></td><td></td><td></td>
 <td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--amber)"></div></td>
-<td></td><td></td><td></td><td></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
 </tr>
 
 <!-- Propuestas -->
-<tr><td colspan="12" class="gantt-cat" style="color:var(--accent2);background:rgba(124,58,237,.04)">D) Propuestas Estrat&eacute;gicas (P3)</td></tr>
+<tr><td colspan="13" class="gantt-cat" style="color:var(--pink);background:rgba(219,39,119,.04)">E) Propuestas Estrat&eacute;gicas (P3) &mdash; Q2</td></tr>
 <tr>
-<td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo; (pre-Mundial)</td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent2)"></div></td>
+<td>Campa&ntilde;a &ldquo;Pride Nacional&rdquo;</td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--pink)"></div></td>
 <td></td>
 </tr>
 <tr>
 <td>Bootcamp de migraci&oacute;n</td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent2)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--pink)"></div></td>
 <td></td>
 </tr>
 <tr>
 <td>Historias de &eacute;xito grandes marcas</td>
-<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--accent2)"></div></td>
+<td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+<td style="position:relative"><div class="gantt-bar" style="left:0;width:200%;background:var(--pink)"></div></td>
 <td></td>
 </tr>
 </tbody>
 </table>
 </div>
 
-<div class="insight"><strong>Milestones:</strong> Entrega de diagn&oacute;stico al l&iacute;der (sem 17/2) &rarr; Sesi&oacute;n de priorizaci&oacute;n Quick Wins (sem 24/2) &rarr; Ejecuci&oacute;n Quick Wins (marzo) &rarr; Lanzamiento Extra-BAU (marzo) &rarr; Documentaci&oacute;n propuestas P3 (fin de Q1).</div>
-</section>
+<div class="insight"><strong>Milestones:</strong> Diagn&oacute;stico entregado (feb) &rarr; Entrevistas cualitativas (feb) &rarr; Quick Wins P1 (marzo) &rarr; Transversales top 5 (marzo-abril) &rarr; Extra-BAU P2 (marzo-abril) &rarr; Propuestas P3 (Q2).</div>
 
-<!-- PROXIMOS PASOS -->
-<section>
-<div class="section-num">10 &mdash; Pr&oacute;ximos Pasos</div>
-<h2>Lo que viene</h2>
-<p>Acciones transversales y pr&oacute;ximos hitos del squad.</p>
-
-<h3>Transversales Q1</h3>
-<div class="card" style="overflow-x:auto">
-<table class="steps-table">
-<thead><tr><th>Acci&oacute;n</th><th>Timing</th></tr></thead>
-<tbody>
-<tr><td><strong>Tracking UTMs:</strong> Implementar estructura de UTMs espec&iacute;fica (&ldquo;Squad Competidores&rdquo;) para medir sesiones, trials y payments derivados</td><td>Febrero</td></tr>
-<tr><td><strong>Creativos:</strong> Integrar pedidos de piezas comparativas en la planificaci&oacute;n de Q1</td><td>Febrero</td></tr>
-<tr><td><strong>Entrevistas:</strong> Solicitar a Data el listado de usuarios que hicieron churn hacia competidores para entrevistas cualitativas</td><td>Febrero</td></tr>
-<tr><td><strong>Landings:</strong> Actualizar todas las landings de comparativas (incluyendo la de afiliados) antes de fin de febrero</td><td>Feb 28</td></tr>
-<tr><td><strong>Bonificaci&oacute;n:</strong> Evaluar bonificaci&oacute;n del Plan Esencial para igualar Empretienda durante primeros 2-3 meses</td><td>Marzo</td></tr>
-<tr><td><strong>Data:</strong> Dimensionar amenaza real de Tienda Negocio (tiendas activas/pagas vs declaradas)</td><td>Marzo</td></tr>
-<tr><td><strong>LP Ecommerce:</strong> Evaluar oportunidad de actualizar <a href="https://www.tiendanube.com/emprendedores/ecommerce" target="_blank" style="color:var(--accent)">tiendanube.com/emprendedores/ecommerce</a>. Verificar si el tr&aacute;fico org&aacute;nico tiene buen CVR; si lo tiene, hay oportunidad ah&iacute;</td><td>Febrero</td></tr>
-<tr><td><strong>Encuestas TAM:</strong> Complementar entrevistas cuali (4 est&aacute; bien) con data cuanti: encuestas al TAM + datos de Nubecommerce para tener un diagn&oacute;stico m&aacute;s robusto del perfil del merchant</td><td>Marzo</td></tr>
-<tr><td><strong>CAC por canal:</strong> Obtener informaci&oacute;n de CAC por canal de adquisici&oacute;n. Sin esto, podemos estar invirtiendo esfuerzos en iniciativas muy dispersas. Mapear cu&aacute;les canales funcionan mejor para cada competidor</td><td>Marzo</td></tr>
-<tr><td><strong>Segmentaci&oacute;n:</strong> Definir piso de adquisici&oacute;n (por GMV u otro criterio). Diferenciar inversi&oacute;n en merchants de alto potencial vs. estrategia always-on / AI in the loop para los m&aacute;s peque&ntilde;os</td><td>Marzo</td></tr>
-<tr><td><strong>Dolores por plataforma:</strong> Mapear dolores espec&iacute;ficos que resuelve cada competidor y por qu&eacute; un seller con experiencia elegir&iacute;a Shopify sobre TN. Base para la narrativa dolor/soluci&oacute;n</td><td>Febrero</td></tr>
-<tr><td><strong>Protocolo 48h:</strong> Documentar playbook de activaci&oacute;n r&aacute;pida ante disrupciones competitivas. Definir triggers, responsables, assets y canales de ejecuci&oacute;n</td><td>Febrero</td></tr>
-</tbody>
-</table>
-</div>
-
-<h3>Blockers identificados</h3>
+<!-- BLOCKERS -->
+<h3 style="margin-top:2.5rem">Blockers identificados</h3>
 <div class="card-grid" style="grid-template-columns:repeat(auto-fit,minmax(250px,1fr))">
 <div class="card" style="border-color:rgba(220,38,38,.15)">
 <h4 style="color:var(--red);font-size:.9rem;margin-bottom:.5rem">Empretienda</h4>
@@ -496,7 +590,7 @@ footer{padding:3rem 0;text-align:center;font-size:.75rem;color:var(--muted);opac
 </main>
 
 <footer>
-<div class="container">Squad Competidores &mdash; Acquisition Growth &mdash; Tiendanube Argentina &mdash; Q1 2026<br>Documento generado el 13 de febrero de 2026.</div>
+<div class="container">Squad Competidores &mdash; Acquisition Growth &mdash; Tiendanube Argentina &mdash; Q1 2026<br>Documento generado el 13 de febrero de 2026. &Uacute;ltima actualizaci&oacute;n: 26 de febrero de 2026.</div>
 </footer>
 
 <!-- Comments System (Supabase) -->
