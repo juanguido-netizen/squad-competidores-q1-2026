@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Squads Acquisition Growth &mdash; Presentaci&oacute;n</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f172a;--surface:rgba(255,255,255,.06);--border:rgba(255,255,255,.1);--text:#f1f5f9;--muted:#94a3b8;--accent:#818cf8;--accent2:#a78bfa;--green:#34d399;--amber:#fbbf24;--red:#f87171;--blue:#60a5fa;--pink:#f472b6}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;height:100vh;width:100vw}
+.deck{position:relative;height:100vh;width:100vw}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:4rem 6rem;opacity:0;pointer-events:none;transition:opacity .4s ease}
+.slide.active{opacity:1;pointer-events:auto}
+.slide-num{position:absolute;top:2rem;right:3rem;font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.1em}
+.badge{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;padding:.3rem .6rem;border:1px solid rgba(129,140,248,.3);border-radius:4px}
+h1{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;line-height:1.15;margin-bottom:.75rem}
+h2{font-size:clamp(1.5rem,3.5vw,2.2rem);font-weight:800;line-height:1.2;margin-bottom:.75rem}
+h3{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+p,.desc{color:var(--muted);font-size:.95rem;line-height:1.6;margin-bottom:.75rem}
+.highlight{color:var(--accent)}
+.highlight-green{color:var(--green)}
+.highlight-amber{color:var(--amber)}
+.highlight-red{color:var(--red)}
+.highlight-blue{color:var(--blue)}
+.highlight-pink{color:var(--pink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:1.5rem}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1rem;margin-top:1rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem}
+.card h3{font-size:.9rem}
+.card p{font-size:.82rem;margin-bottom:.25rem}
+.stat{font-size:2.5rem;font-weight:900;line-height:1}
+.stat-sm{font-size:1.5rem;font-weight:800}
+.stat-label{font-size:.72rem;color:var(--muted);margin-top:.25rem}
+.pill{display:inline-block;font-size:.6rem;font-weight:600;padding:.15rem .4rem;border-radius:3px;margin-right:.25rem}
+.pill-green{background:rgba(52,211,153,.15);color:var(--green)}
+.pill-amber{background:rgba(251,191,36,.15);color:var(--amber)}
+.pill-red{background:rgba(248,113,113,.15);color:var(--red)}
+.pill-blue{background:rgba(96,165,250,.15);color:var(--blue)}
+.pill-purple{background:rgba(167,139,250,.15);color:var(--accent2)}
+.tag{display:inline-block;font-size:.68rem;font-weight:600;color:var(--muted);margin-right:.5rem}
+.q-card{background:rgba(248,113,113,.06);border:1px solid rgba(248,113,113,.2);border-radius:.75rem;padding:1.25rem;margin-bottom:1rem}
+.q-card h3{color:var(--red);font-size:.85rem;margin-bottom:.4rem}
+.q-card p{font-size:.82rem;color:var(--muted);margin:0}
+.mini-table{width:100%;border-collapse:collapse;font-size:.78rem;margin-top:.75rem}
+.mini-table th{text-align:left;color:var(--muted);font-weight:600;padding:.4rem .5rem;border-bottom:1px solid var(--border);font-size:.65rem;text-transform:uppercase;letter-spacing:.05em}
+.mini-table td{padding:.4rem .5rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text)}
+.mini-table tr:last-child td{border-bottom:none}
+.nav{position:fixed;bottom:2rem;right:3rem;display:flex;gap:.5rem;z-index:10}
+.nav button{background:var(--surface);border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:8px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.nav button:hover{background:rgba(255,255,255,.12)}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);transition:width .3s ease;z-index:10}
+.authors{position:fixed;bottom:2rem;left:3rem;font-size:.7rem;color:var(--muted);opacity:.5}
+ul{margin:.5rem 0 .5rem 1.2rem}
+li{font-size:.85rem;color:var(--muted);margin-bottom:.35rem;line-height:1.5}
+li strong{color:var(--text)}
+.funnel{display:flex;align-items:center;gap:.5rem;margin:1rem 0}
+.funnel-step{text-align:center;flex:1}
+.funnel-step .stat-sm{margin-bottom:.15rem}
+.funnel-arrow{color:var(--muted);font-size:1.2rem}
+@media(max-width:900px){.slide{padding:2rem 2.5rem}.grid2,.grid3{grid-template-columns:1fr}.grid4{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<div class="deck" id="deck">
+
+<!-- SLIDE 1: TITLE -->
+<div class="slide active" data-slide="0">
+<span class="badge">Acquisition Growth &middot; Argentina &middot; Q1 2026</span>
+<h1>Squads<br><span class="highlight">Merchant &amp; Social Sellers</span></h1>
+<p style="font-size:1.1rem;max-width:600px">Diagn&oacute;stico, iniciativas principales y preguntas clave para la sesi&oacute;n de alineamiento.</p>
+<div style="margin-top:2rem;display:flex;gap:1.5rem">
+<div class="card" style="flex:1;border-left:3px solid var(--amber)">
+<h3 style="color:var(--amber)">ICP1 &mdash; Merchant Sellers</h3>
+<p>Merchants que ya venden en otra plataforma y podr&iacute;an migrar a Tiendanube.</p>
+</div>
+<div class="card" style="flex:1;border-left:3px solid var(--pink)">
+<h3 style="color:var(--pink)">ICP2 &mdash; Social Sellers</h3>
+<p>Vendedores por RRSS sin plataforma que podr&iacute;an profesionalizarse con TN.</p>
+</div>
+</div>
+<p style="font-size:.8rem;color:var(--muted);margin-top:1.5rem">No son dos silos &mdash; son dos tramos del mismo recorrido de adopci&oacute;n.</p>
+</div>
+
+<!-- SLIDE 2: CONTEXT -->
+<div class="slide" data-slide="1">
+<div class="slide-num">02 / 10</div>
+<span class="badge">Contexto</span>
+<h2>El mercado y lo que encontramos</h2>
+<div class="grid3" style="margin-top:1rem">
+<div class="card" style="text-align:center">
+<div class="stat highlight-green">65K</div>
+<div class="stat-label">Tiendas activas TN (l&iacute;der)</div>
+<p style="font-size:.72rem;margin-top:.5rem">Shopify 7.1K &middot; Empretienda 6.2K &middot; WooCommerce 25.8K</p>
+</div>
+<div class="card" style="text-align:center">
+<div class="stat highlight-amber">325-430K</div>
+<div class="stat-label">Social sellers potenciales en Argentina</div>
+<p style="font-size:.72rem;margin-top:.5rem">Captamos ~3,800 trials/mes = &lt;2% del TAM estimado</p>
+</div>
+<div class="card" style="text-align:center">
+<div class="stat highlight">53%</div>
+<div class="stat-label">Share branded searches TN (2025)</div>
+<p style="font-size:.72rem;margin-top:.5rem">Shopify creci&oacute; +55% (de 9.9% a 15.4%)</p>
+</div>
+</div>
+<div class="grid2" style="margin-top:1.5rem">
+<div class="card" style="border-left:3px solid var(--amber)">
+<h3>Merchant Sellers</h3>
+<ul>
+<li><strong>2,394 trials</strong> desde competidores D2C en H2 2025 &rarr; <strong>540 NPs</strong></li>
+<li>WooCommerce tiene el mejor CVR (33.1%), Empretienda el mayor volumen (1,489 trials)</li>
+<li><strong>Shopify es el destino #1 del churn</strong> (35%, tendencia creciente). Pierde sellers grandes.</li>
+<li>60-70% de los churneados nunca vendieron en TN &mdash; falla de activaci&oacute;n temprana</li>
+</ul>
+</div>
+<div class="card" style="border-left:3px solid var(--pink)">
+<h3>Social Sellers</h3>
+<ul>
+<li><strong>22,865 trials</strong> desde RRSS &mdash; pero solo <strong>1% llega a primera venta</strong></li>
+<li>El que dice &ldquo;ya vendo en redes&rdquo; es el que <strong>peor convierte</strong> (3.9% a pago)</li>
+<li>84% de los trials SS son &ldquo;Fantasma&rdquo; o &ldquo;Curioso&rdquo; en QL</li>
+<li>Los dolores no son t&eacute;cnicos &mdash; son de <strong>percepci&oacute;n, miedo y desconocimiento</strong></li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 3: ICP1 DISCOVERY -->
+<div class="slide" data-slide="2">
+<div class="slide-num">03 / 10</div>
+<span class="badge" style="border-color:rgba(251,191,36,.3);color:var(--amber)">ICP1 &mdash; Merchant Sellers</span>
+<h2>Discovery: seller objetivo por competidor</h2>
+<div style="overflow-x:auto;margin-top:1rem">
+<table class="mini-table">
+<thead><tr><th>Competidor</th><th>Target</th><th>Dolor central</th><th>Soluci&oacute;n TN clave</th><th>Trials H2</th><th>CVR</th></tr></thead>
+<tbody>
+<tr><td><strong style="color:var(--green)">Empretienda</strong></td><td>Principiante, &lt;1M ARS, Moda</td><td>Techo funcional (10 templates)</td><td>65+ dise&ntilde;os, Marketing Nube, +200 apps</td><td>1,489</td><td>19.1%</td></tr>
+<tr><td><strong style="color:var(--amber)">Shopify</strong></td><td>Sofisticado, +10M ARS, Premium</td><td>Sin ecosistema local, USD</td><td>Pago Nube, Env&iacute;o Nube, soporte AR</td><td>394</td><td>22.1%</td></tr>
+<tr><td><strong style="color:var(--muted)">WooCommerce</strong></td><td>T&eacute;cnico agotado, 1-10M ARS</td><td>Hosting, plugins, mantenimiento</td><td>All-in-one sin infra, Chat Nube 24/7</td><td>511</td><td style="color:var(--green);font-weight:700">33.1%</td></tr>
+<tr><td><strong style="color:var(--blue)">Tienda Negocio</strong></td><td>Principiante, bajo GMV</td><td>Calidad dudosa, &ldquo;clon&rdquo;</td><td>+65K tiendas, soporte, track record</td><td>&mdash;</td><td>&mdash;</td></tr>
+<tr><td><strong style="color:#fbbf24">Mercado Libre</strong></td><td>Omnicanal, comisiones 13-36%</td><td>Sin datos cliente, sin marca</td><td>Canal propio + integraci&oacute;n ML</td><td>&mdash;</td><td>&mdash;</td></tr>
+</tbody>
+</table>
+</div>
+<div class="grid3" style="margin-top:1.5rem">
+<div class="card" style="border-top:2px solid var(--red)">
+<h3>Churn: a d&oacute;nde se van</h3>
+<p><strong style="color:var(--text)">389 tiendas</strong> churnearon a competidores (ene 2025 &ndash; feb 2026)</p>
+<p><span class="pill pill-amber">Shopify 138 (35%)</span> <span class="pill pill-blue">WC 115 (30%)</span><br><span class="pill pill-green">ET 73 (19%)</span> <span class="pill pill-purple">TN 63 (16%)</span></p>
+</div>
+<div class="card" style="border-top:2px solid var(--amber)">
+<h3>Patr&oacute;n clave</h3>
+<p>Shopify atrae sellers <strong style="color:var(--text)">m&aacute;s grandes</strong> (17% medium+). Es la p&eacute;rdida m&aacute;s costosa en GMV.</p>
+<p>ET y T.Negocio capturan por <strong style="color:var(--text)">precio</strong>: 57% declara &ldquo;caro&rdquo;.</p>
+</div>
+<div class="card" style="border-top:2px solid var(--green)">
+<h3>Insight cr&iacute;tico</h3>
+<p><strong style="color:var(--text)">60-70% de churneados son no-seller/struggling</strong> en todas las plataformas. El problema no es solo el destino &mdash; es la falta de activaci&oacute;n.</p>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 4: ICP1 INITIATIVES -->
+<div class="slide" data-slide="3">
+<div class="slide-num">04 / 10</div>
+<span class="badge" style="border-color:rgba(251,191,36,.3);color:var(--amber)">ICP1 &mdash; Merchant Sellers</span>
+<h2>Iniciativas principales</h2>
+<p>Herramientas clave de migraci&oacute;n: <strong style="color:var(--text)">Autom&aacute;gico</strong> + <strong style="color:var(--text)">LitExtension Store Migration</strong></p>
+<div class="grid2" style="margin-top:1rem">
+<div>
+<h3 style="color:var(--accent2);margin-bottom:.75rem">Top 5 Transversales</h3>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem"><p style="margin:0"><span class="pill pill-green">P1</span> <strong>Squad freelancers</strong> para migrar cat&aacute;logos (hasta 20 productos)</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem"><p style="margin:0"><span class="pill pill-green">P1</span> <strong>Campa&ntilde;as TikTok/Meta</strong> con keywords de competidores</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem"><p style="margin:0"><span class="pill pill-green">P1</span> <strong>Bonos especiales Afiliados</strong> por migrador confirmado</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem"><p style="margin:0"><span class="pill pill-green">P1</span> <strong>M&oacute;dulo Maestr&iacute;a Ecodiem</strong> &ldquo;C&oacute;mo migrar a TN&rdquo;</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem"><p style="margin:0"><span class="pill pill-green">P1</span> <strong>Tech partners no exclusivos</strong> con clientes en otras plataformas</p></div>
+</div>
+<div>
+<h3 style="color:var(--amber);margin-bottom:.75rem">Por competidor (highlights)</h3>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--green)"><p style="margin:0;font-size:.82rem"><strong>Empretienda:</strong> Actualizar LPs, pautar kws &ldquo;ca&iacute;da/no anda&rdquo;, checklist migraci&oacute;n</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--amber)"><p style="margin:0;font-size:.82rem"><strong>Shopify:</strong> Precio especial 3 meses, narrativa dolor/soluci&oacute;n, migraci&oacute;n API</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--muted)"><p style="margin:0;font-size:.82rem"><strong>WooCommerce:</strong> Contenido &ldquo;costo real WC vs TN&rdquo;, migraci&oacute;n v&iacute;a API</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--blue)"><p style="margin:0;font-size:.82rem"><strong>Tienda Negocio:</strong> Intervenir en TikTok (sin dar entidad), investigar tiendas activas</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid #fbbf24"><p style="margin:0;font-size:.82rem"><strong>Mercado Libre:</strong> Tutoriales omnicanalidad, flujo trials marketplace, ERPs</p></div>
+<h3 style="margin-top:1rem;margin-bottom:.5rem">KPI: <span style="color:var(--green)">631+ NPs</span> <span style="font-weight:400;font-size:.85rem;color:var(--muted)">meta H1 2026 (+20% ET/Shopify, +10% WC/TN)</span></h3>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 5: ICP2 TARGET -->
+<div class="slide" data-slide="4">
+<div class="slide-num">05 / 10</div>
+<span class="badge" style="border-color:rgba(244,114,182,.3);color:var(--pink)">ICP2 &mdash; Social Sellers</span>
+<h2>Discovery: qui&eacute;n es el social seller</h2>
+<div class="grid2" style="margin-top:1rem">
+<div>
+<div class="card" style="margin-bottom:1rem;border-left:3px solid var(--pink)">
+<h3>Perfil</h3>
+<p>Instagram como vidriera + WhatsApp para cerrar + transferencia/link MP. Mobile-first, opera sola, modo &ldquo;pulpo&rdquo;.</p>
+<p><strong style="color:var(--text)">76%</strong> usa IG como canal &middot; <strong style="color:var(--text)">66%</strong> usa WA &middot; <strong style="color:var(--text)">52%</strong> opera sola</p>
+</div>
+<div class="card" style="margin-bottom:1rem">
+<h3>2 arquetipos de entrada</h3>
+<p><strong class="highlight-amber">La que ya vende:</strong> Showroom, vecinos, madres del colegio. Emprender ES su actividad. Desaf&iacute;o: que la tienda le sume sin romper lo que funciona.</p>
+<p><strong class="highlight-blue">La que quiere salir:</strong> Empleo + venta por redes como 2do ingreso. Desaf&iacute;o: que entienda que emprender requiere m&aacute;s de lo que IG muestra.</p>
+</div>
+<div class="card" style="border-top:2px solid var(--red)">
+<h3>El competidor invisible: el status quo</h3>
+<p>No compite contra otra plataforma. Compite contra <strong style="color:var(--text)">seguir vendiendo informal</strong>.</p>
+<p style="font-size:.78rem;margin:0">Umbral de motivaci&oacute;n: ~2 ventas/d&iacute;a (~15/semana). Por debajo, se desmotivan.</p>
+</div>
+</div>
+<div>
+<h3 style="margin-bottom:.75rem">Funnel del Social Seller</h3>
+<div class="card" style="text-align:center;margin-bottom:1rem">
+<div style="display:flex;justify-content:space-around;align-items:center">
+<div><div class="stat-sm" style="color:var(--text)">22,865</div><div class="stat-label">trials</div></div>
+<div style="color:var(--muted)">&rarr;</div>
+<div><div class="stat-sm highlight-amber">1,862</div><div class="stat-label">pagan (8.1%)</div></div>
+<div style="color:var(--muted)">&rarr;</div>
+<div><div class="stat-sm highlight-red">227</div><div class="stat-label">venden (1.0%)</div></div>
+</div>
+</div>
+<h3 style="margin-bottom:.75rem">4 estadios vs. la tienda</h3>
+<div class="card" style="padding:.75rem 1rem;margin-bottom:.35rem"><p style="margin:0;font-size:.82rem"><span class="pill pill-red">1</span> <strong>No lo considera.</strong> Le funciona vender por redes.</p></div>
+<div class="card" style="padding:.75rem 1rem;margin-bottom:.35rem"><p style="margin:0;font-size:.82rem"><span class="pill pill-amber">2</span> <strong>Se interesa pero no arranca.</strong> Lo percibe dif&iacute;cil o innecesario.</p></div>
+<div class="card" style="padding:.75rem 1rem;margin-bottom:.35rem"><p style="margin:0;font-size:.82rem"><span class="pill pill-blue">3</span> <strong>Prob&oacute; pero no le encuentra la vuelta.</strong> Trial/pago, sin ventas.</p></div>
+<div class="card" style="padding:.75rem 1rem"><p style="margin:0;font-size:.82rem"><span class="pill pill-green">4</span> <strong>Migr&oacute; y es un &eacute;xito.</strong> Integr&oacute; la tienda, usa ecosistema, crece.</p></div>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 6: ICP2 PAINS -->
+<div class="slide" data-slide="5">
+<div class="slide-num">06 / 10</div>
+<span class="badge" style="border-color:rgba(244,114,182,.3);color:var(--pink)">ICP2 &mdash; Social Sellers</span>
+<h2>6 dolores del Social Seller</h2>
+<p>Cada dolor formulado en su lenguaje, con evidencia de entrevistas y data.</p>
+<div class="grid3" style="margin-top:1rem">
+<div class="card" style="border-top:2px solid var(--red)">
+<p style="font-size:.65rem;color:var(--red);font-weight:700;margin-bottom:.35rem">DOLOR 1 &mdash; PRE-CONSIDERACI&Oacute;N</p>
+<h3 style="font-size:.85rem">&ldquo;Una p&aacute;gina? A m&iacute; no me sirve, yo vendo por Instagram&rdquo;</h3>
+<p style="font-size:.78rem">La tienda no es percibida como soluci&oacute;n. CVR a pago de &ldquo;ya vendo en redes&rdquo;: <strong style="color:var(--red)">3.9%</strong> (el peor).</p>
+</div>
+<div class="card" style="border-top:2px solid var(--amber)">
+<p style="font-size:.65rem;color:var(--amber);font-weight:700;margin-bottom:.35rem">DOLOR 2 &mdash; ACTIVACI&Oacute;N</p>
+<h3 style="font-size:.85rem">&ldquo;Es dif&iacute;cil / No tengo tiempo&rdquo;</h3>
+<p style="font-size:.78rem">No pueden parar de vender para armar la tienda. Solo 14-18% completa onboarding. 15% vuelve al admin d&iacute;a 2.</p>
+</div>
+<div class="card" style="border-top:2px solid var(--blue)">
+<p style="font-size:.65rem;color:var(--blue);font-weight:700;margin-bottom:.35rem">DOLOR 3 &mdash; POST-ACTIVACI&Oacute;N</p>
+<h3 style="font-size:.85rem">&ldquo;Puse la tienda y no entra nadie&rdquo;</h3>
+<p style="font-size:.78rem">No entienden que deben llevar tr&aacute;fico activamente. 55% de merchants reporta dificultad para generar tr&aacute;fico.</p>
+</div>
+<div class="card" style="border-top:2px solid var(--accent2)">
+<p style="font-size:.65rem;color:var(--accent2);font-weight:700;margin-bottom:.35rem">DOLOR 4 &mdash; TRANSVERSAL</p>
+<h3 style="font-size:.85rem">&ldquo;No s&eacute; cu&aacute;nto gano, no s&eacute; cu&aacute;nto me cuesta&rdquo;</h3>
+<p style="font-size:.78rem">No saben calcular m&aacute;rgenes. La tienda se percibe como costo, no inversi&oacute;n. 11% &ldquo;no genera ganancia a&uacute;n&rdquo;.</p>
+</div>
+<div class="card" style="border-top:2px solid var(--pink)">
+<p style="font-size:.65rem;color:var(--pink);font-weight:700;margin-bottom:.35rem">DOLOR 5 &mdash; PRE-CONSIDERACI&Oacute;N</p>
+<h3 style="font-size:.85rem">&ldquo;Me da miedo formalizar&rdquo;</h3>
+<p style="font-size:.78rem">Terror a AFIP/ARCA, blanqueo. La tienda expone facturaci&oacute;n. Muchos abandonan antes de configurar medios de pago.</p>
+</div>
+<div class="card" style="border-top:2px solid var(--green)">
+<p style="font-size:.65rem;color:var(--green);font-weight:700;margin-bottom:.35rem">DOLOR 6 &mdash; TRANSVERSAL</p>
+<h3 style="font-size:.85rem">&ldquo;Aprendo a los ponchazos, nadie me ense&ntilde;&oacute;&rdquo;</h3>
+<p style="font-size:.78rem">No saben manejar un negocio. No conocen Pago/Env&iacute;o/Marketing Nube. TN tiene el conocimiento pero no llega.</p>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 7: ICP2 INITIATIVES -->
+<div class="slide" data-slide="6">
+<div class="slide-num">07 / 10</div>
+<span class="badge" style="border-color:rgba(244,114,182,.3);color:var(--pink)">ICP2 &mdash; Social Sellers</span>
+<h2>Iniciativas principales</h2>
+<p>Foco: hablarle al SS en su lenguaje, activar trials existentes, reducir el gap pago &rarr; primera venta.</p>
+<div class="grid2" style="margin-top:.75rem">
+<div>
+<h3 style="color:var(--green);margin-bottom:.75rem">Priorizadas</h3>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--green)"><p style="margin:0;font-size:.8rem"><span class="pill pill-green">QW</span> <strong>Reposicionar comunicaci&oacute;n de adquisici&oacute;n</strong> hacia el dolor del SS. Ads Meta enfocados en dolores, no features.</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--green)"><p style="margin:0;font-size:.8rem"><span class="pill pill-green">QW</span> <strong>Contenido que legitime el modelo h&iacute;brido</strong> (tienda + WA). &ldquo;Cat&aacute;logo + WA para cerrar ventas.&rdquo;</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--green)"><p style="margin:0;font-size:.8rem"><span class="pill pill-green">QW</span> <strong>Reframear ecosistema TN desde dolores.</strong> Reescribir descripciones en lenguaje del merchant.</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--amber)"><p style="margin:0;font-size:.8rem"><span class="pill pill-amber">EB</span> <strong>Serie historias de &eacute;xito reales</strong> (Experiencia Sabia, CeCe Piume) en video y podcast.</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--amber)"><p style="margin:0;font-size:.8rem"><span class="pill pill-amber">EB</span> <strong>Entrenamientos y workshops</strong> presenciales y virtuales. Negocios, tr&aacute;fico, finanzas, primeras ventas.</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--amber)"><p style="margin:0;font-size:.8rem"><span class="pill pill-amber">EB</span> <strong>Nurturing diferenciado</strong> + reactivaci&oacute;n tiendas sin setup. &ldquo;&iquest;Segu&iacute;s contestando mensajes uno por uno?&rdquo;</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--amber)"><p style="margin:0;font-size:.8rem"><span class="pill pill-amber">EB</span> <strong>Red de asistentes para armado de tiendas SS.</strong> Freelancers + afiliados capacitados.</p></div>
+</div>
+<div>
+<h3 style="color:var(--accent2);margin-bottom:.75rem">Propuestas estrat&eacute;gicas (P3)</h3>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--accent2)"><p style="margin:0;font-size:.8rem"><span class="pill pill-purple">PE</span> <strong>Modalidad cat&aacute;logo + puente WA</strong> para ventas consultivas. Tienda sin checkout obligatorio.</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--accent2)"><p style="margin:0;font-size:.8rem"><span class="pill pill-purple">PE</span> <strong>Plan/pricing que reduzca barrera</strong> de entrada. Cupones, &ldquo;no pagar hasta vender&rdquo;, loja pronta.</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--accent2)"><p style="margin:0;font-size:.8rem"><span class="pill pill-purple">PE</span> <strong>Onboarding adaptado al SS.</strong> Flujo &ldquo;&iquest;ya vend&eacute;s por redes?&rdquo;, mobile-first, c&aacute;psulas video en admin.</p></div>
+<div class="card" style="margin-bottom:.5rem;padding:.75rem 1rem;border-left:2px solid var(--accent2)"><p style="margin:0;font-size:.8rem"><span class="pill pill-purple">PE</span> <strong>Inteligencia en admin:</strong> detecci&oacute;n apps faltantes, chat IA, simulador Chat Nube.</p></div>
+<div style="margin-top:1.5rem">
+<h3 style="margin-bottom:.5rem">KPIs (baselines)</h3>
+<table class="mini-table">
+<thead><tr><th>M&eacute;trica</th><th>Actual</th></tr></thead>
+<tbody>
+<tr><td>CVR trial &rarr; pago (SS)</td><td style="font-weight:700">8.1%</td></tr>
+<tr><td>CVR pago &rarr; 1ra venta</td><td style="font-weight:700">12.2%</td></tr>
+<tr><td>% &ldquo;Determinados&rdquo; en QL</td><td style="font-weight:700">5.6%</td></tr>
+<tr><td>Retorno admin d&iacute;a 2</td><td style="font-weight:700">15%</td></tr>
+</tbody>
+</table>
+<p style="font-size:.72rem;color:var(--muted);margin-top:.5rem">Targets num&eacute;ricos se definir&aacute;n en fase de ejecuci&oacute;n con Data.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 8: TIMELINE -->
+<div class="slide" data-slide="7">
+<div class="slide-num">08 / 10</div>
+<span class="badge">Cronograma unificado</span>
+<h2>Timeline Q1-Q2 2026</h2>
+<div style="margin-top:1.5rem">
+<div class="grid3">
+<div class="card" style="border-top:3px solid var(--accent);text-align:center">
+<h3 style="color:var(--accent)">Ene-Feb</h3>
+<p style="font-size:.85rem;font-weight:600;color:var(--text)">Discovery</p>
+<p style="font-size:.78rem">Desk research, an&aacute;lisis data onboarding, entrevistas en profundidad, brainstorming accionables</p>
+<p style="font-size:.68rem;color:var(--green);font-weight:600">COMPLETADO</p>
+</div>
+<div class="card" style="border-top:3px solid var(--green);text-align:center">
+<h3 style="color:var(--green)">Marzo</h3>
+<p style="font-size:.85rem;font-weight:600;color:var(--text)">Quick Wins + Transversales</p>
+<p style="font-size:.78rem">LPs comparativas, kws competidores, checklists migraci&oacute;n, reposicionar comunicaci&oacute;n SS, modelo h&iacute;brido, bonos afiliados</p>
+</div>
+<div class="card" style="border-top:3px solid var(--amber);text-align:center">
+<h3 style="color:var(--amber)">Abril+</h3>
+<p style="font-size:.85rem;font-weight:600;color:var(--text)">Extra-BAU + Propuestas</p>
+<p style="font-size:.78rem">Comparativas YouTube/TikTok, landing Shopify, nurturing, workshops SS, historias &eacute;xito, propuestas producto Q2</p>
+</div>
+</div>
+<div class="card" style="margin-top:1.5rem;border-left:3px solid var(--accent2)">
+<p style="margin:0;font-size:.85rem"><strong style="color:var(--accent2)">Discovery continuo:</strong> El discovery no se frena. Encuesta Panel Admin, entrevistas adicionales SS, an&aacute;lisis de retenci&oacute;n y mapas de empat&iacute;a corren en paralelo con la ejecuci&oacute;n.</p>
+</div>
+</div>
+<div class="grid2" style="margin-top:1.5rem">
+<div class="card" style="text-align:center">
+<h3 style="color:var(--amber)">ICP1 &mdash; Merchants</h3>
+<div class="stat-sm" style="color:var(--green);margin:.5rem 0">631+ NPs</div>
+<p style="font-size:.78rem">Meta H1 2026. +20% ET/Shopify, +10% WC/TN vs. H2 2025.</p>
+</div>
+<div class="card" style="text-align:center">
+<h3 style="color:var(--pink)">ICP2 &mdash; Social Sellers</h3>
+<div class="stat-sm" style="color:var(--pink);margin:.5rem 0">Baselines definidas</div>
+<p style="font-size:.78rem">CVR trial&rarr;pago 8.1%, CVR pago&rarr;venta 12.2%. Targets con Data en ejecuci&oacute;n.</p>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 9: BLOCKERS -->
+<div class="slide" data-slide="8">
+<div class="slide-num">09 / 10</div>
+<span class="badge">Riesgos y blockers</span>
+<h2>Lo que puede salir mal</h2>
+<div class="grid2" style="margin-top:1.5rem">
+<div>
+<h3 style="color:var(--amber);margin-bottom:.75rem">ICP1 &mdash; Merchants</h3>
+<div class="card" style="margin-bottom:.75rem;border-left:2px solid var(--red)">
+<h3 style="font-size:.82rem;color:var(--red)">Shopify</h3>
+<p style="font-size:.8rem">CPC alt&iacute;simo para &ldquo;Shopify&rdquo;. Presupuesto agresivo (~USD 60K/mes AR). Cr&eacute;ditos hasta USD 10K para migradores. Restricciones legales para nombrarlos en pauta.</p>
+</div>
+<div class="card" style="margin-bottom:.75rem;border-left:2px solid var(--red)">
+<h3 style="font-size:.82rem;color:var(--red)">Empretienda</h3>
+<p style="font-size:.8rem">Riesgo de atraer sellers muy peque&ntilde;os que terminan en churn r&aacute;pido. &iquest;Cu&aacute;l es el piso de calidad de adquisici&oacute;n?</p>
+</div>
+<div class="card" style="border-left:2px solid var(--red)">
+<h3 style="font-size:.82rem;color:var(--red)">Tienda Negocio</h3>
+<p style="font-size:.8rem">Efecto Visibilidad: contenido comparativo les da entidad. Mejor intervenir en hilos existentes.</p>
+</div>
+</div>
+<div>
+<h3 style="color:var(--pink);margin-bottom:.75rem">ICP2 &mdash; Social Sellers</h3>
+<div class="card" style="margin-bottom:.75rem;border-left:2px solid var(--red)">
+<h3 style="font-size:.82rem;color:var(--red)">Activaci&oacute;n</h3>
+<p style="font-size:.8rem">84% son Fantasma/Curioso. Solo 15% vuelve al admin d&iacute;a 2. Si no logramos activarlos temprano, los perdemos.</p>
+</div>
+<div class="card" style="margin-bottom:.75rem;border-left:2px solid var(--red)">
+<h3 style="font-size:.82rem;color:var(--red)">Producto</h3>
+<p style="font-size:.8rem">Las propuestas estrat&eacute;gicas (cat&aacute;logo+WA, pricing, onboarding) requieren priorizaci&oacute;n de Producto y son de alto esfuerzo.</p>
+</div>
+<div class="card" style="border-left:2px solid var(--red)">
+<h3 style="font-size:.82rem;color:var(--red)">El competidor invisible</h3>
+<p style="font-size:.8rem">El status quo (seguir vendiendo informal) no se combate con features &mdash; se combate con educaci&oacute;n, empat&iacute;a y casos reales. Requiere un cambio de narrativa.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- SLIDE 10: QUESTIONS -->
+<div class="slide" data-slide="9">
+<div class="slide-num">10 / 10</div>
+<span class="badge" style="border-color:rgba(248,113,113,.3);color:var(--red)">Sesi&oacute;n de alineamiento</span>
+<h2>Preguntas clave para discutir</h2>
+<div style="margin-top:1.5rem">
+<div class="q-card">
+<h3>1. Confiabilidad de los datos del TAM</h3>
+<p>Los datos que tenemos del TAM son de una <strong>muestra de onboarding</strong> (preguntas declarativas) y podr&iacute;an no ser confiables. &iquest;Cu&aacute;nto podemos confiar en estos n&uacute;meros para dimensionar inversiones? &iquest;Necesitamos una validaci&oacute;n cuantitativa adicional (encuesta Panel Admin, data de Data Science)?</p>
+</div>
+<div class="q-card">
+<h3>2. Atribuci&oacute;n de adquisici&oacute;n</h3>
+<p>&iquest;C&oacute;mo nos aseguramos de que la adquisici&oacute;n generada por estas iniciativas est&eacute; <strong>correctamente identificada y atribuida</strong>? Necesitamos estructura de UTMs espec&iacute;fica (&ldquo;Squad Competidores&rdquo; / &ldquo;Squad SS&rdquo;), tracking end-to-end de trial a NP, y claridad sobre qu&eacute; cuenta como &ldquo;&eacute;xito del squad&rdquo; vs. BAU.</p>
+</div>
+<div class="q-card">
+<h3>3. Beneficios/Pricing especial para migradores</h3>
+<p>&iquest;Es <strong>realmente posible</strong> ofrecer precios especiales a migradores, o podr&iacute;a afectar la reputaci&oacute;n de marca? (Ej: &ldquo;&iquest;por qu&eacute; a ellos les dan descuento y a m&iacute; no?&rdquo;). En caso de hacerlo, &iquest;c&oacute;mo <strong>validamos que sean active sellers</strong> en otras plataformas y no simplemente trials buscando descuento?</p>
+</div>
+<div class="q-card">
+<h3>4. Target de mayor oportunidad y conexi&oacute;n con agencias SMB</h3>
+<p>Identificamos patrones de segmento/GMV por competidor. &iquest;Qu&eacute; target tenemos <strong>m&aacute;s posibilidad real de adquirir</strong> desde las acciones del squad? Empretienda da volumen pero bajo GMV. Shopify da GMV pero es caro de captar. &iquest;C&oacute;mo se conecta esto con el <strong>plan de agencias SMBs</strong>? &iquest;Hay sinergias entre ambas estrategias?</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<!-- NAVIGATION -->
+<div class="nav">
+<button onclick="prev()" aria-label="Anterior">&larr;</button>
+<button onclick="next()" aria-label="Siguiente">&rarr;</button>
+</div>
+<div class="authors">Squads Acquisition Growth &middot; Tiendanube Argentina &middot; Q1 2026</div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+const bar=document.getElementById('progress');
+function show(n){slides.forEach(s=>s.classList.remove('active'));slides[n].classList.add('active');bar.style.width=((n+1)/total*100)+'%'}
+function next(){if(current<total-1){current++;show(current)}}
+function prev(){if(current>0){current--;show(current)}}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')next();if(e.key==='ArrowLeft')prev()});
+show(0);
+</script>
+
+</body>
+</html>
